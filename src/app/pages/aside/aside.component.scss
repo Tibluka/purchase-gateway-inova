@@ -1,0 +1,67 @@
+.page-aside {
+    background-color: var(--background-color);
+    width: 25%;
+    min-height: 80vh;
+    border-radius: 4px;
+    box-shadow: 1px 1px 10px 0 black;
+}
+
+.page-aside .asblock1 header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    line-height: 30px;
+    hr {
+        width: 70%;
+        opacity: 0.3;
+        margin: 30px 0;
+    }
+    .item-image img {
+        width: 80px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: white;
+    }
+}
+
+.page-aside .asblock1 main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 30px;
+    margin-bottom: 20px;
+    hr {
+        width: 70%;
+        opacity: 0.3;
+        margin: 30px 0;
+    }
+    .payment-type,
+    .installments-qty,
+    .cards-qty,
+    .paid-amount {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 400px;
+        margin: 5px 20px;
+        span {
+            font-weight: bold;
+        }
+    }
+}
+
+.page-aside .asblock2
+.price,.final-price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 20px;
+    span{
+        font-weight: bold;
+        font-size: 16pt;
+    }
+    p{
+        font-size: 16pt;
+    }
+}
