@@ -1,0 +1,44 @@
+.page-installments header .title {
+    height: 50px;
+    margin-bottom: 40px;
+}
+
+.page-installments main {
+    hr {
+        width: 90%;
+        opacity: 0.3;
+    }
+    .cards-qty {
+        display: flex;
+        align-items: center;
+        select {
+            height: 30px;
+            margin-left: 15px;
+        }
+    }
+    .cards-add {
+        display: flex;
+        justify-content: center;
+        .container {
+            display: flex;
+            align-items: center;
+            img {
+                width: 60px;
+                height: 60px;
+                margin: 0 20px;
+            }
+        }
+    }
+    .installments {
+        display: flex;
+        flex-direction: column;
+        .s1 {
+            margin: 4px 0;
+            background-color: white;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            border-radius: 4px;
+        }
+    }
+}
