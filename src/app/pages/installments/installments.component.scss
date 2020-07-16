@@ -1,3 +1,7 @@
+.w-100 {
+    width: 100% !important;
+}
+
 .page-installments header .title {
     height: 50px;
     margin-bottom: 40px;
@@ -14,6 +18,7 @@
         select {
             height: 30px;
             margin-left: 15px;
+            border: 1px solid rgb(211, 208, 208);
         }
     }
     .cards-add {
@@ -29,16 +34,79 @@
             }
         }
     }
-    .installments {
+    .cards-added {
         display: flex;
         flex-direction: column;
-        .s1 {
-            margin: 4px 0;
-            background-color: white;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            border-radius: 4px;
+        .cards-container {
+            margin-top: 20px;
+            background-color: var(--lighterBackground-color);
+            padding: 5px 20px;
+            border-radius: 8px;
+            select {
+                height: 30px;
+                margin-left: 15px;
+                border: 1px solid rgb(211, 208, 208);
+            }
+            input {
+                height: 25px;
+                width: 200px;
+                border: 1px solid rgb(211, 208, 208);
+                border-radius: 4px;
+            }
+
+            .card-name {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                .cvc {
+                    display: flex;
+                    .validate {
+                        margin-right: -7px;
+                        margin-left: 2px;
+                    }
+                }
+            }
+            img {
+                width: 60px;
+                height: 40px;
+            }
+
+            .line2 {
+                display: flex;
+                align-items: center;
+                input {
+                    height: 25px;
+                    margin-left: 10px;
+                    padding-left: 15px;
+                }
+            }
+            .btn {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                button {
+                    height: 35px;
+                    width: 120px;
+                    background-color: rgb(80, 211, 80);
+                    border: none;
+                    border-radius: 4px;
+                    color: white;
+                }
+                img {
+                    width: 80px;
+                    height: 45px;
+                }
+            }
+        }
+        .new-card {
+            text-align: end;
+            margin-top: 20px;
+            img {
+                background-color: white;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+            }
         }
     }
 }

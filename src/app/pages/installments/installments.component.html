@@ -1,13 +1,15 @@
 <div class="page-installments">
     <header>
-        <div class="title"><h1>Como deseja dividir o pagamento?</h1></div>
+        <div class="title">
+            <h1>Como deseja dividir o pagamento?</h1>
+        </div>
     </header>
 
     <main>
 
         <div class="cards-qty">
             <h4>Quantos cartões você utilizará?</h4>
-            <select name="cards" id="cards">
+            <select (change)="selectChangeHandler($event)" name="cards" id="cards">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -19,57 +21,146 @@
         <div class="cards-add">
             <div class="container">
                 <img src="../../../assets/images/virtual-card.png" alt="Cartão 1">
-                <img src="../../../assets/images/virtual-card.png" alt="Cartão 2">
-                <img src="../../../assets/images/virtual-card.png" alt="Cartão 3">
-                <img src="../../../assets/images/virtual-card.png" alt="Cartão 4">
-                <img src="../../../assets/images/virtual-card.png" alt="Cartão 5">
+                <img *ngIf="qtdCard == 2 || qtdCard == 3" src="../../../assets/images/virtual-card.png" alt="Cartão 2">
+                <img *ngIf="qtdCard == 3" src="../../../assets/images/virtual-card.png" alt="Cartão 3">
             </div>
         </div>
 
         <hr>
 
-        <div class="installments">
-            <h4>Quantas parcelas?</h4>
-                <label class="s1">
-                    <input type="radio" name="radio">1x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">2x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">3x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">4x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">5x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">6x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">7x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">8x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">9x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">10x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">11x
-                </label>
-                <label class="s1">
-                    <input type="radio" name="radio">12x
-                </label>
-                
+        <div class="cards-added">
+            <h4>Cartões adicionados</h4>
+            <div class="cards-container">
+                <div class="card-name">
+                    <div class="item">
+                        <input class="w-100" type="text" placeholder="Número do cartão">
+                    </div>
+                    <div class="item">
+                        <input class="w-100" type="text" placeholder="Nome no cartão">
+                    </div>
+                    <div class="item">
+                        <input class="w-100" type="text" placeholder="CPF/CNPJ do titular">
+                    </div>
+                    <div class="cvc">
+                        <input class="w-100" type="text" placeholder="CVC">
+                        <input class="w-100 validate" type="text" placeholder="Validade (MM/AAAA)">
+                    </div>
+                </div>
+                <div class="installments">
+                    Parcelas:
+                    <select name="values">
+                        <option value="1">1x</option>
+                        <option value="2">2x</option>
+                        <option value="3">3x</option>
+                        <option value="4">4x</option>
+                        <option value="5">5x</option>
+                        <option value="6">6x</option>
+                        <option value="7">7x</option>
+                        <option value="8">8x</option>
+                        <option value="9">9x</option>
+                        <option value="10">10x</option>
+                        <option value="11">11x</option>
+                        <option value="12">12x</option>
+                    </select>
+                </div>
+                <div class="line2">
+                    <h4>Valor cobrado nesse cartão:</h4>
+                    <input type="text">
+                </div>
+                <div class="btn">
+                    <button>Confirmar</button>
+                    <img src="../../../assets/images/checked.png" alt="Cartão Confirmado">
+                </div>
+            </div>
+            <div class="cards-container" *ngIf="qtdCard == 2 || qtdCard == 3">
+                <div class="card-name">
+                    <div class="item">
+                        <input type="text" placeholder="Número do cartão">
+                    </div>
+                    <div class="item">
+                        <input type="text" placeholder="Nome no cartão">
+                        <div class="installments">
+                            Parcelas:
+                            <select name="values">
+                                <option value="1">1x</option>
+                                <option value="2">2x</option>
+                                <option value="3">3x</option>
+                                <option value="4">4x</option>
+                                <option value="5">5x</option>
+                                <option value="6">6x</option>
+                                <option value="7">7x</option>
+                                <option value="8">8x</option>
+                                <option value="9">9x</option>
+                                <option value="10">10x</option>
+                                <option value="11">11x</option>
+                                <option value="12">12x</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="text" placeholder="CPF/CNPJ do titular">
+                    </div>
+                    <div class="cvc">
+                        <input type="text" placeholder="CVC">
+                        <input type="text" placeholder="Validade (MM/AAAA)">
+                    </div>
+
+
+                </div>
+                <div class="line2">
+                    <h4>Valor cobrado nesse cartão:</h4>
+                    <input type="text">
+                </div>
+                <div class="btn">
+                    <button>Confirmar</button>
+                    <img src="../../../assets/images/checked.png" alt="Cartão Confirmado">
+                </div>
+            </div>
+            <div class="cards-container" *ngIf="qtdCard == 3">
+
+                <div class="card-name">
+                    <div class="item">
+                        <input type="text" placeholder="Número do cartão">
+                    </div>
+                    <div class="item">
+                        <input type="text" placeholder="Nome no cartão">
+                        <div class="installments">
+                            Parcelas:
+                            <select name="values">
+                                <option value="1">1x</option>
+                                <option value="2">2x</option>
+                                <option value="3">3x</option>
+                                <option value="4">4x</option>
+                                <option value="5">5x</option>
+                                <option value="6">6x</option>
+                                <option value="7">7x</option>
+                                <option value="8">8x</option>
+                                <option value="9">9x</option>
+                                <option value="10">10x</option>
+                                <option value="11">11x</option>
+                                <option value="12">12x</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <input type="text" placeholder="CPF/CNPJ do titular">
+                    </div>
+                    <div class="cvc">
+                        <input type="text" placeholder="CVC">
+                        <input type="text" placeholder="Validade (MM/AAAA)">
+                    </div>
+
+
+                </div>
+                <div class="line2">
+                    <h4>Valor cobrado nesse cartão:</h4>
+                    <input type="text">
+                </div>
+                <div class="btn">
+                    <button>Confirmar</button>
+                    <img src="../../../assets/images/checked.png" alt="Cartão Confirmado">
+                </div>
+            </div>
         </div>
-
-
-
     </main>
 </div>
