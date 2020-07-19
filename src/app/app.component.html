@@ -1,5 +1,10 @@
 <div class="container">
- <!--    <app-payment></app-payment> -->
-    <app-installments></app-installments>
-    <app-aside></app-aside>
-</div>
+<!-- <app-payment></app-payment> -->
+    <!-- <app-installments [count]="teste"></app-installments> -->
+    
+   <app-installments (asideInstallments)="setInstallments($event)"></app-installments>
+  <app-aside [qdtCard]="cardsReview"></app-aside>
+<!--     <button (click)="somar(2)">click</button>
+ --></div>
+
+<!--  <router-outlet></router-outlet> -->

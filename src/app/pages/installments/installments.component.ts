@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 class formCardClass {
   cardNumber: number;
   cardName: string;
   cardCPF: number;
-  cardCVC: number;
+  cardCVV: number;
   cardValidityPeriod: string;
+  cardInstallments: number = 1;
+  cardPayValue: number;
 }
 
 @Component({
@@ -15,13 +17,18 @@ class formCardClass {
 })
 export class InstallmentsComponent implements OnInit {
 
+  /* @Input() count = 0 */
   qtdCard: number = 1
+
+  @Output() asideInstallments = new EventEmitter()
+
   formCards: Array<formCardClass> = []
 
   constructor() { }
 
   ngOnInit(): void {
     this.formCards.push(new formCardClass())
+    this.asideInstallments.emit(1)
   }
 
   cardQty() {
@@ -40,6 +47,10 @@ export class InstallmentsComponent implements OnInit {
     this.qtdCard = event.target.value
     this.cardQty()
     console.log(this.formCards)
+  }
+
+  setInstallments(cardInstallments) {
+    this.asideInstallments.emit(cardInstallments)
   }
 
 }

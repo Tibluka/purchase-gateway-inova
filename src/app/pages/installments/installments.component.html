@@ -2,12 +2,16 @@
     <header>
         <div class="title">
             <h1>Como deseja dividir o pagamento?</h1>
+            <div>
+                <h4>Gostaria de efetuar o pagamento com mais de um cartão de crédito?</h4>
+                <button>Sim</button>
+                <button>Não</button>
+            </div>
         </div>
+
     </header>
-
     <main>
-
-        <div class="cards-qty">
+        <!--   <div class="cards-qty">
             <h4>Quantos cartões você utilizará?</h4>
             <select (change)="selectChangeHandler($event)" name="cards" id="cards">
                 <option value="1">1</option>
@@ -17,38 +21,36 @@
                 <option value="5">5</option>
             </select>
         </div>
-
         <div class="cards-add">
-            <div class="container">
+            <div class="container" *ngFor="let cardImage of formCards">
                 <img src="../../../assets/images/virtual-card.png" alt="Cartão 1">
-                <img *ngIf="qtdCard == 2 || qtdCard == 3" src="../../../assets/images/virtual-card.png" alt="Cartão 2">
-                <img *ngIf="qtdCard == 3" src="../../../assets/images/virtual-card.png" alt="Cartão 3">
             </div>
-        </div>
-
-        <hr>
+        </div> -->
 
         <div class="cards-added">
             <h4>Cartões adicionados</h4>
-            <div class="cards-container">
+            <div class="cards-container" *ngFor="let card of formCards; let i = index">
                 <div class="card-name">
                     <div class="item">
-                        <input class="w-100" type="text" placeholder="Número do cartão">
+                        <input [(ngModel)]="card.cardNumber" class="w-100" type="text" placeholder="Número do cartão">
                     </div>
                     <div class="item">
-                        <input class="w-100" type="text" placeholder="Nome no cartão">
+                        <input [(ngModel)]="card.cardName" class="w-100" type="text" placeholder="Nome no cartão">
                     </div>
                     <div class="item">
-                        <input class="w-100" type="text" placeholder="CPF/CNPJ do titular">
+                        <input [(ngModel)]="card.cardCPF" class="w-100" type="text" placeholder="CPF/CNPJ do titular">
                     </div>
-                    <div class="cvc">
-                        <input class="w-100" type="text" placeholder="CVC">
-                        <input class="w-100 validate" type="text" placeholder="Validade (MM/AAAA)">
+                    <div class="cvv">
+                        <input [(ngModel)]="card.cardCVV" class="w-100" type="text" placeholder="CVV">
+                        <input [(ngModel)]="card.cardValidityPeriod" class="w-100 validate" type="text"
+                            placeholder="Validade (MM/AAAA)">
                     </div>
                 </div>
                 <div class="installments">
                     Parcelas:
-                    <select name="values">
+                    <!--Passando os valores dos options por parametro porque é um ngFor!!! -->
+                    <select (change)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments"
+                        name="values">
                         <option value="1">1x</option>
                         <option value="2">2x</option>
                         <option value="3">3x</option>
@@ -65,102 +67,13 @@
                 </div>
                 <div class="line2">
                     <h4>Valor cobrado nesse cartão:</h4>
-                    <input type="text">
+                    <input [(ngModel)]="card.cardPayValue" type="text">
                 </div>
                 <div class="btn">
                     <button>Confirmar</button>
-                    <img src="../../../assets/images/checked.png" alt="Cartão Confirmado">
                 </div>
             </div>
-            <div class="cards-container" *ngIf="qtdCard == 2 || qtdCard == 3">
-                <div class="card-name">
-                    <div class="item">
-                        <input type="text" placeholder="Número do cartão">
-                    </div>
-                    <div class="item">
-                        <input type="text" placeholder="Nome no cartão">
-                        <div class="installments">
-                            Parcelas:
-                            <select name="values">
-                                <option value="1">1x</option>
-                                <option value="2">2x</option>
-                                <option value="3">3x</option>
-                                <option value="4">4x</option>
-                                <option value="5">5x</option>
-                                <option value="6">6x</option>
-                                <option value="7">7x</option>
-                                <option value="8">8x</option>
-                                <option value="9">9x</option>
-                                <option value="10">10x</option>
-                                <option value="11">11x</option>
-                                <option value="12">12x</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <input type="text" placeholder="CPF/CNPJ do titular">
-                    </div>
-                    <div class="cvc">
-                        <input type="text" placeholder="CVC">
-                        <input type="text" placeholder="Validade (MM/AAAA)">
-                    </div>
 
-
-                </div>
-                <div class="line2">
-                    <h4>Valor cobrado nesse cartão:</h4>
-                    <input type="text">
-                </div>
-                <div class="btn">
-                    <button>Confirmar</button>
-                    <img src="../../../assets/images/checked.png" alt="Cartão Confirmado">
-                </div>
-            </div>
-            <div class="cards-container" *ngIf="qtdCard == 3">
-
-                <div class="card-name">
-                    <div class="item">
-                        <input type="text" placeholder="Número do cartão">
-                    </div>
-                    <div class="item">
-                        <input type="text" placeholder="Nome no cartão">
-                        <div class="installments">
-                            Parcelas:
-                            <select name="values">
-                                <option value="1">1x</option>
-                                <option value="2">2x</option>
-                                <option value="3">3x</option>
-                                <option value="4">4x</option>
-                                <option value="5">5x</option>
-                                <option value="6">6x</option>
-                                <option value="7">7x</option>
-                                <option value="8">8x</option>
-                                <option value="9">9x</option>
-                                <option value="10">10x</option>
-                                <option value="11">11x</option>
-                                <option value="12">12x</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <input type="text" placeholder="CPF/CNPJ do titular">
-                    </div>
-                    <div class="cvc">
-                        <input type="text" placeholder="CVC">
-                        <input type="text" placeholder="Validade (MM/AAAA)">
-                    </div>
-
-
-                </div>
-                <div class="line2">
-                    <h4>Valor cobrado nesse cartão:</h4>
-                    <input type="text">
-                </div>
-                <div class="btn">
-                    <button>Confirmar</button>
-                    <img src="../../../assets/images/checked.png" alt="Cartão Confirmado">
-                </div>
-            </div>
         </div>
     </main>
 </div>

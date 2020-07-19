@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-aside',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AsideComponent implements OnInit {
 
+  /*   @Output() filhoPpai = new EventEmitter() */
+
+  @Input() qdtCard = 0
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
+  /*  somar(){
+     this.filhoPpai.emit('2')
+   } */
 
 }
