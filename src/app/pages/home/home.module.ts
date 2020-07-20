@@ -3,18 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-/* import { AsideComponent } from '../aside/aside.component';
-import { InstallmentsComponent } from '../installments/installments.component'; */
 import { FormsModule } from '@angular/forms';
-import { PaymentComponent } from '../payment/payment.component';
-import { AsideComponent } from '../aside/aside.component';
+import { PaymentComponent } from 'src/app/components/payment/payment.component';
+import { AsideModule } from 'src/app/components/aside/aside.module';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    PaymentComponent,
-    AsideComponent
+    PaymentComponent
+    
   /*   AsideComponent,
     InstallmentsComponent */
   ],
@@ -23,6 +21,9 @@ import { AsideComponent } from '../aside/aside.component';
     CommonModule,
     HomeRoutingModule,
     FormsModule,
+    AsideModule
   ]
 })
-export class HomeModule { }
+export class HomeModule { 
+
+}
