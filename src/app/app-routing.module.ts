@@ -7,14 +7,13 @@ import { PurchaseReviewComponent } from './pages/purchase-review/purchase-review
 
 
 const routes: Routes = [
-  {path: 'aside', component: AsideComponent},
-  {path: 'installments', component: InstallmentsComponent},
-  {path: 'payment', component: PaymentComponent},
-  {path: 'purchase-review', component: PurchaseReviewComponent}
+  { path: '', loadChildren: './pages/home/home.module#HomeModule' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}

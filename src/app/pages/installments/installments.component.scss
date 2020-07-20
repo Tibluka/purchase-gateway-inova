@@ -3,10 +3,19 @@
 }
 
 .page-installments header .title {
-    height: 100px;
     margin-bottom: 40px;
-    max-width: 574.56px;
-    min-width: 574.56px;
+
+    div {
+        margin: 30px 0 20px 0;
+    }
+    button {
+        border: none;
+        margin-right: 5px;
+    }
+}
+
+.page-installments main {
+    padding-top: 30px;
 }
 
 .page-installments main {
@@ -28,7 +37,6 @@
         display: flex;
         flex-direction: column;
         .cards-container {
-            margin-top: 20px;
             background-color: var(--lighterBackground-color);
             padding: 20px;
             border-radius: 8px;
@@ -41,14 +49,14 @@
                 height: 40px;
                 margin: 10px 0;
                 border: none;
-                font-size: 15pt;
+                font-size: 13pt;
                 border-radius: 8px;
             }
             .card-name {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-            
+
                 .cvv {
                     display: flex;
                     .validate {
@@ -64,12 +72,14 @@
             .line2 {
                 display: flex;
                 align-items: center;
+                margin-top: 10px;
             }
             .btn {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 button {
+                    margin-top: 10px;
                     height: 35px;
                     width: 120px;
                     background-color: rgb(80, 211, 80);
@@ -80,4 +90,15 @@
             }
         }
     }
+}
+
+.page-installments main #accordion {
+    margin: 20px 0;
+    .card .card-header .mb-0 button h6 {
+        text-decoration: none !important;
+    }
+}
+
+.page-installments main #carouselExampleControls a {
+    margin: 0 -35px;
 }

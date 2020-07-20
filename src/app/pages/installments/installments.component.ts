@@ -18,7 +18,11 @@ class formCardClass {
 export class InstallmentsComponent implements OnInit {
 
   /* @Input() count = 0 */
-  qtdCard: number = 1
+  showCardsInfo = false
+  moreThanOneCard = false
+  notMoreThanOneCard = false
+  qtdCard: number = 5
+  fillCardsInfo = 'Inserir os dados do seu cartão'
 
   @Output() asideInstallments = new EventEmitter()
 
@@ -51,6 +55,16 @@ export class InstallmentsComponent implements OnInit {
 
   setInstallments(cardInstallments) {
     this.asideInstallments.emit(cardInstallments)
+  }
+
+  isMoreThanOneCard(){
+    this.moreThanOneCard = !this.moreThanOneCard
+    this.showCardsInfo = !this.showCardsInfo
+  }
+
+  isNotMoreThanOneCard(){
+    this.notMoreThanOneCard = !this.notMoreThanOneCard
+    this.showCardsInfo = !this.showCardsInfo
   }
 
 }

@@ -1,7 +1,7 @@
 .page-aside {
     background-color: var(--lighterBackground-color);
     min-height: 100vh;
-    margin: 0 100px;
+    margin: 0 70px;
 }
 
 .page-aside .asblock1 header {
@@ -21,11 +21,11 @@
         border-radius: 50%;
         background-color: white;
     }
-    .item-description{
+    .item-description {
         max-width: 300px;
         text-align: center;
     }
-    .item-qty{
+    .item-qty {
         font-weight: bold;
     }
 }
@@ -56,17 +56,18 @@
     }
 }
 
-.page-aside .asblock2
-.price,.final-price{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 5px 20px;
-    span{
-        font-weight: bold;
-        font-size: 16pt;
-    }
-    p{
-        font-size: 15pt;
+.page-aside .asblock2 {
+    .price,
+    .final-price {
+        display: flex;
+        margin: 5px 20px;
+        justify-content: space-between;
+        span {
+            font-weight: bold;
+            font-size: 15pt;
+        }
+        p {
+            font-size: 15pt;
+        }
     }
 }
