@@ -8,6 +8,7 @@ class formCardClass {
   cardValidityPeriod: string;
   cardInstallments: number = 1;
   cardPayValue: number;
+  accordionOpen: boolean;
 }
 
 @Component({
@@ -21,7 +22,7 @@ export class InstallmentsComponent implements OnInit {
   showCardsInfo = false
   moreThanOneCard = false
   notMoreThanOneCard = false
-  qtdCard: number = 5
+  qtdCard: number = 1
   fillCardsInfo = 'Inserir os dados do seu cartão'
 
   @Output() asideInstallments = new EventEmitter()
@@ -32,18 +33,25 @@ export class InstallmentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCards.push(new formCardClass())
+    this.formCards[0].accordionOpen = true
     this.asideInstallments.emit(1)
   }
 
   cardQty() {
-    if (this.qtdCard < this.formCards.length) {
-      for (let index = 0; this.qtdCard < this.formCards.length; index++) {
-        this.formCards.pop()
-      }
-    } else {
-      for (let index = 0; this.formCards.length < this.qtdCard; index++) {
-        this.formCards.push(new formCardClass())
-      }
+    this.qtdCard++
+    for (let index = 0; this.formCards.length < this.qtdCard; index++) {
+      this.formCards.push(new formCardClass())
+    }
+    this.formCards.forEach((card, index) => {
+      card.accordionOpen = index === this.formCards.length - 1 ? true : false
+    })
+  }
+
+  removeCard(index) {
+    console.log(index)
+    if (this.qtdCard > 1) {
+      this.formCards.splice(index, 1)
+      this.qtdCard--
     }
   }
 
@@ -57,12 +65,12 @@ export class InstallmentsComponent implements OnInit {
     this.asideInstallments.emit(cardInstallments)
   }
 
-  isMoreThanOneCard(){
+  isMoreThanOneCard() {
     this.moreThanOneCard = !this.moreThanOneCard
     this.showCardsInfo = !this.showCardsInfo
   }
 
-  isNotMoreThanOneCard(){
+  isNotMoreThanOneCard() {
     this.notMoreThanOneCard = !this.notMoreThanOneCard
     this.showCardsInfo = !this.showCardsInfo
   }

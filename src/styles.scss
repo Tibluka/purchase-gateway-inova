@@ -1,14 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;1,100;1,200;1,400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&display=swap');
 body{
     font-family: 'Montserrat', sans-serif;
-    background-color: var(--background-color);
 }
 
 :root{
     --background-color: rgb(233, 235, 235);
-    --lighterBackground-color: rgb(245, 245, 245);
+    --lighterBackground-color: #f8f9fa;
     --button-color: rgb(80, 211, 80);
     --buttonHover-color: rgb(60, 173, 60);
+    --buttonDisabled-color: rgb(216, 216, 216);
+    --title-color: #686969;
+    --border-color: #b9bcbe;
+    --newCardButton-color: #f8f9fa;
+    --newCardButtonFont-color:#686969;
+    --newCardButtonHover-color:#ebe9e9;
 }
+
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+

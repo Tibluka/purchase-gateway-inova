@@ -1,34 +1,49 @@
 <div class="page-installments">
     <header>
-        <h1>Como deseja dividir o pagamento?</h1>
         <div class="title" *ngIf="!showCardsInfo">
-            <div>
-                <h5>Gostaria de efetuar o pagamento com mais de um cartão de crédito?</h5>
-            </div>
+            <h5>Gostaria de efetuar o pagamento com mais de um cartão de crédito?</h5>
+
+
             <div class="question">
-                <button (click)="isMoreThanOneCard()">Sim</button>
                 <button (click)="isNotMoreThanOneCard()">Não</button>
+                <button (click)="isMoreThanOneCard()">Sim</button>
             </div>
         </div>
     </header>
     <main *ngIf="showCardsInfo">
-        <h4>Cartões</h4>
-        <div id="accordion">
+        <h5>Preencha os dados do cartão</h5>
+        <h5 class="add-card">
+            <button (click)="cardQty()">Adicionar novo cartão</button>
+        </h5>
+        <div id="accordion{{i}}" *ngFor="let card of formCards; let i = index">
             <div class="card">
+
                 <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                    <h5 class="mb-0 " style="text-align: right;">
+                        <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapseOne'+i"
                             aria-expanded="true" aria-controls="collapseOne">
-                            <h6>{{fillCardsInfo}}</h6>
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash-circle"
+                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path fill-rule="evenodd"
+                                    d="M3.5 8a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.5-.5z" />
+                            </svg>
                         </button>
+
                     </h5>
+                    <div class="">
+                        <button>asds</button>
+                    </div>
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+
+                <div id="collapseOne{{i}}" [ngClass]="card.accordionOpen ? 'show':'' " class="collapse"
+                    aria-labelledby="headingOne" [attr.data-parent]="'#accordion'+i">
                     <div class="card-body">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
-                                <div class="carousel-item active" *ngFor="let card of formCards; let i = index">
+                                <div class="carousel-item active">
                                     <div class="cards-added">
                                         <div class="cards-container">
                                             <div class="card-name">
@@ -48,32 +63,36 @@
                                                     <input [(ngModel)]="card.cardCVV" class="w-100" type="text"
                                                         placeholder="CVV">
                                                     <input [(ngModel)]="card.cardValidityPeriod" class="w-100 validate"
-                                                        type="text" placeholder="Validade (MM/AAAA)">
+                                                        type="text" placeholder="(MM/AAAA)">
                                                 </div>
                                             </div>
-                                            <div class="installments">
-                                                Parcelas:
-                                                <select (change)="setInstallments(card.cardInstallments)"
-                                                    [(ngModel)]="card.cardInstallments" name="values">
-                                                    <option value="1">1x</option>
-                                                    <option value="2">2x</option>
-                                                    <option value="3">3x</option>
-                                                    <option value="4">4x</option>
-                                                    <option value="5">5x</option>
-                                                    <option value="6">6x</option>
-                                                    <option value="7">7x</option>
-                                                    <option value="8">8x</option>
-                                                    <option value="9">9x</option>
-                                                    <option value="10">10x</option>
-                                                    <option value="11">11x</option>
-                                                    <option value="12">12x</option>
-                                                </select>
-                                            </div>
-                                            <div class="line2" *ngIf="moreThanOneCard">
-                                                <h6>Valor cobrado nesse cartão:</h6>
-                                                <input [(ngModel)]="card.cardPayValue" type="text">
+                                            <div class="line3">
+                                                <div class="line2 w-100" *ngIf="moreThanOneCard">
+                                                    <input [(ngModel)]="card.cardPayValue" type="text"
+                                                        placeholder="Valor a cobrar nesse cartão">
+                                                </div>
+                                                <div class="w-100 installments">
+                                                    Parcelas:
+                                                    <select (change)="setInstallments(card.cardInstallments)"
+                                                        [(ngModel)]="card.cardInstallments" name="values">
+                                                        <option value="1">1x</option>
+                                                        <option value="2">2x</option>
+                                                        <option value="3">3x</option>
+                                                        <option value="4">4x</option>
+                                                        <option value="5">5x</option>
+                                                        <option value="6">6x</option>
+                                                        <option value="7">7x</option>
+                                                        <option value="8">8x</option>
+                                                        <option value="9">9x</option>
+                                                        <option value="10">10x</option>
+                                                        <option value="11">11x</option>
+                                                        <option value="12">12x</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div class="btn">
+                                                <button (click)="removeCard(i)" class="desativar"
+                                                    [disabled]="qtdCard == 1">Remover cartão</button>
                                                 <button>Confirmar</button>
                                             </div>
                                         </div>
@@ -96,6 +115,7 @@
                 </div>
             </div>
         </div>
+
         <button class="btn" routerLink="/">Voltar</button>
         <!--   <div class="cards-qty">
             <h4>Quantos cartões você utilizará?</h4>
@@ -113,8 +133,5 @@
             </div>
         </div> -->
 
-
-
     </main>
-</div> 
-
+</div>

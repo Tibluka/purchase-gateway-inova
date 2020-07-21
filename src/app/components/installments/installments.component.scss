@@ -16,89 +16,160 @@
 
 .page-installments main {
     padding-top: 30px;
-}
-
-.page-installments main {
-    hr {
-        width: 90%;
-        opacity: 0.3;
-    }
-    .cards-qty {
+    #accordion .card-header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        select {
-            height: 30px;
-            margin-left: 15px;
-            border: 1px solid rgb(211, 208, 208);
+    }
+    .add-card {
+        text-align: right;
+        button {
+            margin-top: 10px;
+            height: 35px;
+            width: 180px !important;
+            background-color: var(--newCardButton-color);
+            border: 1px solid var(--border-color);
+            font-size: 10pt;
+            border-radius: 4px;
+            color: var(--newCardButtonFont-color);
+            width: fit-content;
+            cursor: pointer;
+        }
+        button:hover {
+            font-size: 9.8t;
+            transition: 200ms;
+            background-color: var(--newCardButtonHover-color);
         }
     }
+}
 
-    .cards-added {
-        display: flex;
-        flex-direction: column;
-        .cards-container {
-            background-color: var(--lighterBackground-color);
-            padding: 20px;
-            border-radius: 8px;
+.page-installments {
+    margin-top: 30px;
+    min-width: 500px;
+    max-width: 500px;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+        font-weight: normal;
+    }
+
+    main {
+        hr {
+            width: 90%;
+            opacity: 0.3;
+        }
+        .cards-qty {
+            display: flex;
+            align-items: center;
             select {
                 height: 30px;
                 margin-left: 15px;
                 border: 1px solid rgb(211, 208, 208);
             }
-            input {
-                height: 40px;
-                margin: 10px 0;
-                border: none;
-                font-size: 13pt;
-                border-radius: 8px;
-            }
-            .card-name {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+        }
 
-                .cvv {
+        .cards-added {
+            display: flex;
+            flex-direction: column;
+            .cards-container {
+                border-radius: 8px;
+                .line3 {
                     display: flex;
-                    .validate {
-                        margin-left: 8px;
+                    align-items: center;
+                    justify-content: center;
+                    .installments {
+                        text-align: center;
+                        margin-top: 10px;
                     }
                 }
-            }
-            img {
-                width: 60px;
-                height: 40px;
-            }
-
-            .line2 {
-                display: flex;
-                align-items: center;
-                margin-top: 10px;
-            }
-            .btn {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                button {
-                    margin-top: 10px;
-                    height: 35px;
-                    width: 120px;
-                    background-color: rgb(80, 211, 80);
+                select {
+                    height: 30px;
+                    margin-left: 15px;
+                    border: 1px solid rgb(211, 208, 208);
+                    border-radius: 8px;
+                }
+                input {
+                    height: 40px;
+                    margin: 10px 0;
                     border: none;
-                    border-radius: 4px;
-                    color: white;
+                    border-bottom: 1px solid grey;
+                    border-width: thin;
+                    font-size: 13pt;
+                    border-radius: 8px;
+                    text-align: center;
+                    width: 100% !important;
+                }
+                input[type="text"] {
+                    font-size: 11pt;
+
+                }
+                .card-name {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .cvv {
+                        display: flex;
+                        .validate {
+                            margin-left: 8px;
+                        }
+                    }
+                }
+                img {
+                    width: 60px;
+                    height: 40px;
+                }
+
+                .line2 {
+                    display: flex;
+                    align-items: center;
+                    margin-top: 10px;
+                }
+                .btn {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    button {
+                        margin-top: 10px;
+                        height: 35px;
+                        width: 120px;
+                        background-color: rgb(80, 211, 80);
+                        border: none;
+                        border-radius: 4px;
+                        color: white;
+                        width: fit-content;
+                        cursor: pointer;
+                    }
+                    button:hover {
+                        font-size: 11.5pt;
+                        transition: 100ms;
+                        background-color: var(--buttonHover-color);
+                    }
                 }
             }
         }
     }
-}
 
-.page-installments main #accordion {
-    margin: 20px 0;
-    .card .card-header .mb-0 button h6 {
-        text-decoration: none !important;
+    .page-installments main #accordion {
+        margin: 20px 0;
+        .card .card-header .mb-0 button h6 {
+            text-decoration: none !important;
+        }
     }
-}
 
-.page-installments main #carouselExampleControls a {
-    margin: 0 -35px;
+    .page-installments main #carouselExampleControls a {
+        margin: 0 -35px;
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .desativar:disabled {
+        cursor: not-allowed !important;
+        background-color: var(--buttonDisabled-color) !important;
+    }
 }
