@@ -1,4 +1,10 @@
 .page-payment {
+    header{
+        width: 100%;
+        h4{
+            text-align: left;
+        }
+    }
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,6 +22,7 @@
         }
     }
     main {
+    
         width: 100%;
         .container {
             display: flex;
@@ -24,7 +31,7 @@
             padding: 0;
             .credit-card,
             .bank-split {
-                height: 100px;
+                height: 80px;
                 width: 100%;
                 border-radius: 8px;
                 display: flex;

@@ -3,29 +3,28 @@
 
     </div>
     <div class="asblock1">
-        <header>
-
+        <header *ngFor="let item of cardItems; let i = index">
             <div class="item-image">
-                <img src="../../../assets/images/item.png" alt="Item">
+                <img src="../../../assets/images/item.png" alt="Imagem do item">
             </div>
             <div class="item-description">
-                Joystick Sem Fio Para Ps1 Ps2 Ps3 Pc Tv Android Tv Box
+                {{item[i].descricao}}
             </div>
             <div class="item-qty">
-                Quantidade: 1
+                <p>Quantidade: {{item.length}}</p>
             </div>
             <hr>
         </header>
         <main>
             <div class="purchase">
                 <div class="payment-type">
-                    <p>Vai pagar no crédito</p>
+                    <p>Crédito</p>
                 </div>
                 <div class="installments-qty">
-                    <p>Pagamento em 10 cartões</p>
+                    <p>Parcelado em 10 vezes</p>
                 </div>
                 <div class="cards-qty">
-                    <p>Parcelado em 10 vezes</p>
+                    <p>Pagamento em 10 cartões</p>
                 </div>
                 <div class="paid-amount">
                     <p>Já foi pago R$3.000,00</p>
@@ -34,10 +33,11 @@
             <hr>
         </main>
     </div>
+    
 
     <div class="asblock2">
-        <div class="price">
-            <span>Ainda faltam R$2.000,00 para finalizar a compra</span>
+        <div class="price" *ngFor="let item of cardItems; let i = index">
+            <span>Ainda faltam {{item[i].valor_unitario}} para finalizar a compra</span>
         </div>
 
         <div class="btn">

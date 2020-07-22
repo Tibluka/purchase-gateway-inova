@@ -23,7 +23,7 @@ export class InstallmentsComponent implements OnInit {
   moreThanOneCard = false
   notMoreThanOneCard = false
   qtdCard: number = 1
-  fillCardsInfo = 'Inserir os dados do seu cartão'
+  fillCardsInfo = 'Mastercard **** 8300'
 
   @Output() asideInstallments = new EventEmitter()
 
@@ -45,6 +45,7 @@ export class InstallmentsComponent implements OnInit {
     this.formCards.forEach((card, index) => {
       card.accordionOpen = index === this.formCards.length - 1 ? true : false
     })
+
   }
 
   removeCard(index) {
@@ -56,8 +57,7 @@ export class InstallmentsComponent implements OnInit {
   }
 
   selectChangeHandler(event: any) {
-    this.qtdCard = event.target.value
-    this.cardQty()
+    this.formCards = event.target.value
     console.log(this.formCards)
   }
 

@@ -17,10 +17,10 @@ margin-left: 70px;
     }
     .item-image img {
         margin-top: 20px;
-        width: 80px;
+        width: 60px;
         height: 60px;
-        border-radius: 50%;
         background-color: white;
+        margin-bottom: 10px;
     }
     .item-description {
         max-width: 300px;
@@ -61,13 +61,13 @@ margin-left: 70px;
     .price {
         display: flex;
         margin: 5px 20px;
-        justify-content: space-between;
+        justify-content: center;
         span {
             font-weight: normal;
-            font-size: 15pt;
+            font-size: 13pt;
         }
         p {
-            font-size: 15pt;
+            font-size: 13pt;
         }
     }
     .btn {
@@ -89,7 +89,7 @@ margin-left: 70px;
         }
         button:disabled{
             background-color: var(--buttonDisabled-color);
-         
+            cursor: not-allowed;
         }
     }
 }
