@@ -49,6 +49,9 @@
                         margin-top: 7px;
                     }
                 }
+          /*       input:checked~label{
+                    background-color: var(--lighterBackground-color);
+                } */
             }
             .credit-card:hover,
             .bank-split:hover{
@@ -77,3 +80,8 @@
         }
     }
 }
+
+
+
+
+

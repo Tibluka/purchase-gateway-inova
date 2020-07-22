@@ -31,7 +31,7 @@
                 <div class="card-header" id="headingOne"
                     style="display: flex; justify-content: space-between; align-items: center;">
                     <div class="delete-button">
-                        <button (click)="removeCard(i)" class="desativar" [disabled]="qtdCard == 1">
+                        <!-- <button (click)="removeCard(i)" class="desativar" [disabled]="qtdCard == 1">
                             <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -39,7 +39,7 @@
                                 <path fill-rule="evenodd"
                                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                             </svg>
-                        </button>
+                        </button> -->
                         <p>{{fillCardsInfo}}</p>
                     </div>
                     <span>
@@ -52,7 +52,6 @@
                                     <path fill-rule="evenodd"
                                         d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
                                 </svg>
-
                             </button>
                         </h5>
                     </span>
@@ -90,19 +89,9 @@
                                     <div class="w-100 installments">
                                         Parcelas:
                                         <select (change)="setInstallments(card.cardInstallments)"
-                                            [(ngModel)]="card.cardInstallments" name="values">
-                                            <option value="1">1x</option>
-                                            <option value="2">2x</option>
-                                            <option value="3">3x</option>
-                                            <option value="4">4x</option>
-                                            <option value="5">5x</option>
-                                            <option value="6">6x</option>
-                                            <option value="7">7x</option>
-                                            <option value="8">8x</option>
-                                            <option value="9">9x</option>
-                                            <option value="10">10x</option>
-                                            <option value="11">11x</option>
-                                            <option value="12">12x</option>
+                                            [(ngModel)]="card.cardInstallments" name="values" >
+                                            <option value="1" *ngFor="let o of options">{{o}}</option>
+                                            
                                         </select>
                                     </div>
                                 </div>

@@ -1,5 +1,8 @@
-<nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#"><h4>Ofício de Registro Civil Tucuruvi</h4></a>
+<nav class="navbar navbar-light bg-light" *ngFor="let cartorio of cartItems">
+    <a class="navbar-brand" href="#" style="display: flex; align-items: center;">
+        <img src="{{cartorio.logo_url}}" alt="img" style="margin-right: 10px;">
+        <h4>{{cartorio.nome_cartorio}}</h4>
+    </a>
 </nav>
 <div class="container">
     <router-outlet></router-outlet>

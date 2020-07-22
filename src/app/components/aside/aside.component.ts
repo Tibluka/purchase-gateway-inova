@@ -3,10 +3,9 @@ import { ApiService } from 'src/app/services/api.service';
 
 interface obterInformacoesPedido {
   pagseguro_session: string;
-  id_comprador: string;
-  id_cartorio: string;
-  email_cartorio: string;
-  token_cartorio_pagseguro: string;
+  nome_cartorio: string;
+  logo_url: string;
+  cor_cartorio: string;
   documento: {
     tipo: string;
     valor: string;
@@ -16,6 +15,8 @@ interface obterInformacoesPedido {
     qtd: number;
     valor_unitario: number;
   }];
+  qtd_max_parcelamento: number;
+  permite_multi_cartao: boolean;
   valor_total_pedido: number;
   url_callback: string;
   chave: string;
@@ -34,7 +35,7 @@ export class AsideComponent implements OnInit {
 
   cardItems = []
  
-  idDoComprador = 'e4155eaf-0813-4d5c-94ba-c53aae422ccf'
+  idDoComprador = 'c479593e-b208-45d0-b153-90e2f1c49f54'
 
   constructor(private apiService: ApiService) {
 
@@ -48,7 +49,6 @@ export class AsideComponent implements OnInit {
     this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/'+ this.idDoComprador).subscribe(carts => {
       console.log(carts)
       this.cardItems.push(carts.items)
-      console.log(carts.items)
     })
   }
 }

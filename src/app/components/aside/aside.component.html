@@ -33,13 +33,12 @@
             <hr>
         </main>
     </div>
-    
 
-    <div class="asblock2">
-        <div class="price" *ngFor="let item of cardItems; let i = index">
+
+    <div class="asblock2" *ngFor="let item of cardItems; let i = index">
+        <div class="price">
             <span>Ainda faltam {{item[i].valor_unitario}} para finalizar a compra</span>
         </div>
-
         <div class="btn">
             <button type="button" disabled>Finalizar</button>
         </div>
