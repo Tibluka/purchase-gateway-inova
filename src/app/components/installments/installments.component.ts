@@ -41,9 +41,9 @@ interface obterInformacoesPedido {
 export class InstallmentsComponent implements OnInit {
 
   /* @Input() count = 0 */
-  showCardsInfo = false
+  showCardsInfo = true
   moreThanOneCard = false
-  notMoreThanOneCard = false
+  notMoreThanOneCard = true
   qtdCard: number = 1
   fillCardsInfo = 'Mastercard **** 8300'
 

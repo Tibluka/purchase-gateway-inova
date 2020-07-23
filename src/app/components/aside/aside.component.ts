@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { OrderInfoService } from 'src/app/services/order-info.service';
+import { Router } from '@angular/router';
 
 interface obterInformacoesPedido {
   pagseguro_session: string;
@@ -10,7 +12,7 @@ interface obterInformacoesPedido {
     tipo: string;
     valor: string;
   };
-  items:[{
+  items: [{
     descricao: string;
     qtd: number;
     valor_unitario: number;
@@ -31,24 +33,20 @@ export class AsideComponent implements OnInit {
 
   /*   @Output() filhoPpai = new EventEmitter() */
 
-  @Input() qdtCard = 0
+  @Input() qtdCard: number;
+  
 
-  cardItems = []
- 
-  idDoComprador = 'c479593e-b208-45d0-b153-90e2f1c49f54'
-
-  constructor(private apiService: ApiService) {
-
+  constructor(
+    private apiService: ApiService,
+    public orderInfoService: OrderInfoService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
-    this.getCartInfo()
   }
 
-  getCartInfo() {
-    this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/'+ this.idDoComprador).subscribe(carts => {
-      console.log(carts)
-      this.cardItems.push(carts.items)
-    })
-  }
+  finish(){
+    this.router.navigate(['/finish'])
+    }
+
 }

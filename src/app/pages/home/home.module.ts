@@ -12,9 +12,6 @@ import { AsideModule } from 'src/app/components/aside/aside.module';
   declarations: [
     HomeComponent,
     PaymentComponent
-    
-  /*   AsideComponent,
-    InstallmentsComponent */
   ],
 
   imports: [

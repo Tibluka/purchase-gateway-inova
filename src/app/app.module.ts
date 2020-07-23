@@ -8,18 +8,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PurchaseReviewComponent } from './components/purchase-review/purchase-review.component';
 import { PaymentConfigModule } from './pages/payment-config/payment-config.module';
+import { FinishModule } from './pages/finish/finish.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PurchaseReviewComponent
+       
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HomeModule,
+    FinishModule,
     PaymentConfigModule,
     HttpClientModule,
 

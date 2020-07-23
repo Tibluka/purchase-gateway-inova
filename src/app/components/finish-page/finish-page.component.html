@@ -1,0 +1,33 @@
+<div class="container">
+    <main>
+        <div class="success-case" *ngIf="certo">
+            <h3>COMPRA FINALIZADA COM SUCESSO!</h3>
+            <div class="success-img">
+                <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-check2-circle" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M15.354 2.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L8 9.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                    <path fill-rule="evenodd"
+                        d="M8 2.5A5.5 5.5 0 1 0 13.5 8a.5.5 0 0 1 1 0 6.5 6.5 0 1 1-3.25-5.63.5.5 0 1 1-.5.865A5.472 5.472 0 0 0 8 2.5z" />
+                </svg>
+            </div>
+        </div>
+        <div>
+            <div class="failed-to-complete" *ngIf="errado">
+                <h3>OCORREU UM ERRO AO PROCESSAR O PAGAMENTO</h3>
+                <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-emoji-dizzy" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path fill-rule="evenodd"
+                        d="M9.146 5.146a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708zm-5 0a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 1 1 .708.708l-.647.646.647.646a.5.5 0 1 1-.708.708L5.5 7.207l-.646.647a.5.5 0 1 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 0-.708z" />
+                    <path d="M10 11a2 2 0 1 1-4 0 2 2 0 0 1 4 0z" />
+                </svg>
+            </div>
+        </div>
+    </main>    
+    <footer>
+        <div class="back-button">
+            <button routerLink="/payment">Voltar</button>
+        </div>
+    </footer>
+</div>

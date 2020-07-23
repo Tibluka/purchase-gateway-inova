@@ -1,6 +1,6 @@
 <div class="page-installments">
     <header>
-        <div class="title" *ngIf="!showCardsInfo">
+    <!--     <div class="title" *ngIf="!showCardsInfo">
             <h5>Gostaria de efetuar o pagamento com mais de um cartão de crédito?</h5>
 
 
@@ -8,7 +8,7 @@
                 <button (click)="isNotMoreThanOneCard()">Não</button>
                 <button (click)="isMoreThanOneCard()">Sim</button>
             </div>
-        </div>
+        </div> -->
     </header>
     <main *ngIf="showCardsInfo">
         <h4 class="title">Preencha os dados do cartão</h4>
@@ -47,7 +47,7 @@
                             <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapseOne'+i"
                                 aria-expanded="true" aria-controls="collapseOne">
                                 <svg width="1.5em" height="1.5em" viewBox="0 0 16 16"
-                                    style="opacity: 0.6; margin-bottom: 8px;" class="bi bi-chevron-down"
+                                    style="opacity: 0.6;" class="bi bi-chevron-down"
                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                         d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
@@ -91,18 +91,16 @@
                                         <select (change)="setInstallments(card.cardInstallments)"
                                             [(ngModel)]="card.cardInstallments" name="values" >
                                             <option value="1" *ngFor="let o of options">{{o}}</option>
-                                            
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="btn">
+        <div class="back-button">
             <button routerLink="/">Voltar</button>
         </div>
 

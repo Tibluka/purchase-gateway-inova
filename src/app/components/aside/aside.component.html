@@ -3,15 +3,17 @@
 
     </div>
     <div class="asblock1">
-        <header *ngFor="let item of cardItems; let i = index">
+        <header>
             <div class="item-image">
                 <img src="../../../assets/images/item.png" alt="Imagem do item">
             </div>
-            <div class="item-description">
-                {{item[i].descricao}}
+
+            <div class="item-description" *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
+                {{item.descricao}}
             </div>
+
             <div class="item-qty">
-                <p>Quantidade: {{item.length}}</p>
+                <p>Quantidade: {{orderInfoService.obterInformacoesPedido.items?.length}}</p>
             </div>
             <hr>
         </header>
@@ -21,11 +23,12 @@
                     <p>Crédito</p>
                 </div>
                 <div class="installments-qty">
-                    <p>Parcelado em 10 vezes</p>
+                    <p>0</p>
                 </div>
-                <div class="cards-qty">
+           <!--      <div class="cards-qty">
                     <p>Pagamento em 10 cartões</p>
-                </div>
+                </div> 
+            Essa funcionalidade ainda será implementada-->
                 <div class="paid-amount">
                     <p>Já foi pago R$3.000,00</p>
                 </div>
@@ -35,12 +38,12 @@
     </div>
 
 
-    <div class="asblock2" *ngFor="let item of cardItems; let i = index">
+    <div class="asblock2" >
         <div class="price">
-            <span>Ainda faltam {{item[i].valor_unitario}} para finalizar a compra</span>
+            <span><p>O total do pedido ficou {{orderInfoService.obterInformacoesPedido.valor_total_pedido}}</p></span>
         </div>
         <div class="btn">
-            <button type="button" disabled>Finalizar</button>
+            <button (click)="finish()">Finalizar</button>
         </div>
     </div>
 
