@@ -1,6 +1,6 @@
 <div class="page-installments">
     <header>
-    <!--     <div class="title" *ngIf="!showCardsInfo">
+        <!--     <div class="title" *ngIf="!showCardsInfo">
             <h5>Gostaria de efetuar o pagamento com mais de um cartão de crédito?</h5>
 
 
@@ -26,12 +26,15 @@
                 <p style="margin: 0 0 3px 0; padding-left: 5px;">Adicionar novo cartão</p>
             </button>
         </h5>
-        <div id="accordion{{i}}" *ngFor="let card of formCards; let i = index">
+        <!--   <div id="accordion{{i}}" *ngFor="let card of formCards; let i = index">
             <div class="card">
                 <div class="card-header" id="headingOne"
                     style="display: flex; justify-content: space-between; align-items: center;">
-                    <div class="delete-button">
-                        <!-- <button (click)="removeCard(i)" class="desativar" [disabled]="qtdCard == 1">
+                    <div class="delete-button"> -->
+
+
+
+        <!-- <button (click)="removeCard(i)" class="desativar" [disabled]="qtdCard == 1">
                             <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -40,7 +43,10 @@
                                     d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
                             </svg>
                         </button> -->
-                        <p>{{fillCardsInfo}}</p>
+
+
+
+        <!--         <p>{{fillCardsInfo}}</p>
                     </div>
                     <span>
                         <h5 class="mb-0 " style="text-align: right; margin: 0;">
@@ -99,7 +105,65 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+
+        <mat-accordion class="example-headers-align" >
+            <mat-expansion-panel *ngFor="let card of formCards; let i = index" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Self aware panel
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                    <mat-label>Número do cartão</mat-label>
+                    <input matInput [(ngModel)]="card.cardNumber">
+                </mat-form-field>
+                <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                    <mat-label>Nome no cartão</mat-label>
+                    <input matInput [(ngModel)]="card.cardName">
+                </mat-form-field>
+                <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                    <mat-label>CPF/CNPJ do titular</mat-label>
+                    <input matInput [(ngModel)]="card.cardCPF">
+                </mat-form-field>
+                <div style="display: flex;">
+                    <mat-form-field class="item" appearance="fill" style="width: 100%; margin-right: 5px;">
+                        <mat-label>CVV</mat-label>
+                        <input matInput [(ngModel)]="card.cardCVV">
+                    </mat-form-field>
+                    <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                        <mat-label>Validade</mat-label>
+                        <input matInput [(ngModel)]="card.cardValidityPeriod">
+                    </mat-form-field>
+                </div>
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>Valor a cobrar nesse cartão</mat-label>
+                    <input matInput [(ngModel)]="card.cardPayValue">
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Select</mat-label>
+                    <mat-select (change)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments">
+                      <mat-option value="1" *ngFor="let o of options">{{o}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                <div class="line3">
+                    <div class="line2 w-100" *ngIf="moreThanOneCard">
+                        <input [(ngModel)]="card.cardPayValue" type="text" placeholder="Valor a cobrar nesse cartão">
+                    </div>
+                    <div class="w-100 installments">
+                        Parcelas:
+                        <select (change)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments"
+                            name="values">
+                            <option value="1" *ngFor="let o of options">{{o}}</option>
+                        </select>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+
         <div class="back-button">
             <button routerLink="/">Voltar</button>
         </div>

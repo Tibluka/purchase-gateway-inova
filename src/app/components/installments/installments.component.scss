@@ -50,7 +50,7 @@
         }
     }
 
-    #accordion .card .card-header {
+    .card .card-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -143,32 +143,6 @@
                     border: 1px solid rgb(211, 208, 208);
                     border-radius: 8px;
                 }
-                input {
-                    height: 40px;
-                    margin: 10px 0;
-                    border: 0;
-                    outline: 0;
-                    background: transparent;
-                    border-bottom: 1px solid rgb(179, 177, 177);
-                    font-size: 13pt;
-                    text-align: center;
-                    width: 100% !important;
-                }
-                input[type="text"] {
-                    font-size: 11pt;
-                }
-                .card-name {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    .cvv {
-                        display: flex;
-                        .validate {
-                            margin-left: 8px;
-                        }
-                    }
-                }
                 img {
                     width: 60px;
                     height: 40px;
@@ -232,5 +206,32 @@
         cursor: not-allowed !important;
         background-color: none;
         border: none;
+    }
+}
+
+.card-name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    input {
+        height: 40px;
+        margin: 10px 0;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        border-bottom: 1px solid rgb(179, 177, 177);
+        font-size: 13pt;
+        text-align: center;
+        width: 100% !important;
+    }
+    input[type="text"] {
+        font-size: 11pt;
+    }
+
+    .cvv {
+        display: flex;
+        .validate {
+            margin-left: 8px;
+        }
     }
 }

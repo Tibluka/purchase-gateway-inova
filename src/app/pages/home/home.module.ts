@@ -6,6 +6,7 @@ import { HomeComponent } from './home.component';
 import { FormsModule } from '@angular/forms';
 import { PaymentComponent } from 'src/app/components/payment/payment.component';
 import { AsideModule } from 'src/app/components/aside/aside.module';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AsideModule } from 'src/app/components/aside/aside.module';
     CommonModule,
     HomeRoutingModule,
     FormsModule,
-    AsideModule
+    AsideModule,
+    MatSliderModule
   ]
 })
 export class HomeModule { 

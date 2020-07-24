@@ -5,6 +5,11 @@ import { PaymentConfigComponent } from './payment-config.component';
 import { InstallmentsComponent } from 'src/app/components/installments/installments.component';
 import { FormsModule } from '@angular/forms';
 import { AsideModule } from 'src/app/components/aside/aside.module';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
 
 
 @NgModule({
@@ -16,7 +21,12 @@ import { AsideModule } from 'src/app/components/aside/aside.module';
     CommonModule,
     PaymentConfigRoutingModule,
     FormsModule,
-    AsideModule
+    AsideModule,
+    MatExpansionModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ]
 })
 export class PaymentConfigModule { }

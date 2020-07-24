@@ -18,7 +18,7 @@ export class ApiService {
     console.log(params)
     return this.http.get<T>(environment.url + params)
   }
-
+  
   postApi<T>(params, body): Observable<T>{
     return this.http.post<T>(environment.url + params, body)
   }

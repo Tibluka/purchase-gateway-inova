@@ -1,6 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 
+
+
+
 class formCardClass {
   cardNumber: number;
   cardName: string;
@@ -41,6 +44,7 @@ interface obterInformacoesPedido {
 export class InstallmentsComponent implements OnInit {
 
   /* @Input() count = 0 */
+  panelOpenState = true
   showCardsInfo = true
   moreThanOneCard = false
   notMoreThanOneCard = true
