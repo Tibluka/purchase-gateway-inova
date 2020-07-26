@@ -15,7 +15,6 @@ export class ApiService {
   }
 
   getApi<T>(params): Observable<T> {
-    console.log(params)
     return this.http.get<T>(environment.url + params)
   }
   

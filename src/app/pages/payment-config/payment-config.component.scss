@@ -1,4 +1,10 @@
-.container{
+.payment-config{
     display: flex;
+}
 
+app-installments{
+    flex: 1 1;
+}
+app-aside{
+    flex: 1 1;
 }

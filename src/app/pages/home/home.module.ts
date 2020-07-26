@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { PaymentComponent } from 'src/app/components/payment/payment.component';
 import { AsideModule } from 'src/app/components/aside/aside.module';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatCardModule} from '@angular/material/card';
+
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { MatSliderModule } from '@angular/material/slider';
     HomeRoutingModule,
     FormsModule,
     AsideModule,
-    MatSliderModule
+    MatSliderModule,
+    MatCardModule
   ]
 })
 export class HomeModule { 

@@ -28,10 +28,10 @@ class obterInformacoesPedido {
 })
 export class OrderInfoService {
 
-  idDoComprador = 'c479593e-b208-45d0-b153-90e2f1c49f54'
+  idDoComprador = '6d124e85-160f-4e6b-a0f5-252d9fa87f5a'
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
-  compraFinalizada = false
-  compraNaoFinalizada = false
+  compraFinalizada = true
+  installments = []
 
   constructor(private apiService: ApiService) {
     this.getInfo()

@@ -10,8 +10,7 @@
     align-items: center;
     margin: 10px 0;
     min-height: 75vh;
-    min-width: 500px;
-    max-width: 500px;
+   
     h2, h3, h4{
         font-weight: normal;
     } 
@@ -23,7 +22,6 @@
     }
     main {
     
-        width: 100%;
         .container {
             display: flex;
             flex-direction: column;

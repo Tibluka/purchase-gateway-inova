@@ -1,9 +1,19 @@
+.m-250 {
+    padding: 0 250px;
+}
+.routes{
+margin: 0 250px;
+}
+
+.page{
+    margin: 10px;
+}
 nav{
-    height: 80px;
-    border-bottom: 1px solid var(--border-color);
-   h1, h2, h3, h4{
+    height: 90px;
+    box-shadow: 1px 1px 1px 1px black;
+    h1, h2, h3, h4{
        font-weight: normal;
-       color: var(--title-color);
+       color: white;
    }
    a{
     img{
@@ -13,8 +23,3 @@ nav{
    }
 }
 
-.container{
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-}

@@ -1,7 +1,13 @@
+mat-card{
+    margin: 30px 0 0 30px;
+    border-bottom: none;
+}
+
 .page-aside {
-    background-color: var(--lighterBackground-color);
-    min-height: 100vh;
-    margin-left: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
 }
 
 .page-aside .asblock1 header {
@@ -36,12 +42,7 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    .purchase {
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+  
     hr {
         width: 70%;
         opacity: 0.3;

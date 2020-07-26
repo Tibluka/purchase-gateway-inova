@@ -1,50 +1,39 @@
-<div class="page-aside">
-    <div class="title">
-
-    </div>
-    <div class="asblock1">
-        <header>
-            <div class="item-image">
-                <img src="../../../assets/images/item.png" alt="Imagem do item">
-            </div>
-
-            <div class="item-description" *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
-                {{item.descricao}}
-            </div>
-
-            <div class="item-qty">
-                <p>Quantidade: {{orderInfoService.obterInformacoesPedido.items?.length}}</p>
-            </div>
-            <hr>
-        </header>
-        <main>
-            <div class="purchase">
-                <div class="payment-type">
-                    <p>Crédito</p>
+<mat-card>
+    <div class="page-aside ">
+        <div class="asblock1">
+            <header>
+                <div class="item-image">
+                    <img src="../../../assets/images/item.png" alt="Imagem do item">
                 </div>
-                <div class="installments-qty">
-                    <p>0</p>
-                </div>
-           <!--      <div class="cards-qty">
-                    <p>Pagamento em 10 cartões</p>
-                </div> 
-            Essa funcionalidade ainda será implementada-->
-                <div class="paid-amount">
-                    <p>Já foi pago R$3.000,00</p>
-                </div>
-            </div>
-            <hr>
-        </main>
-    </div>
 
+                <div class="item-description"
+                    *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
+                    {{item.descricao}}
+                </div>
 
-    <div class="asblock2" >
-        <div class="price">
-            <span><p>O total do pedido ficou {{orderInfoService.obterInformacoesPedido.valor_total_pedido}}</p></span>
+                <div class="item-qty">
+                    <p>Quantidade: {{orderInfoService.obterInformacoesPedido.items?.length}}</p>
+                </div>
+                <hr>
+            </header>
+            <main>
+                <div class="purchase">
+          
+                </div>
+            </main>
         </div>
-        <div class="btn">
-            <button (click)="finish()">Finalizar</button>
-        </div>
-    </div>
 
-</div>
+
+        <div class="asblock2">
+            <div class="price">
+                <span>
+                    <p>O total do pedido ficou {{orderInfoService.obterInformacoesPedido.valor_total_pedido}}</p>
+                </span>
+            </div>
+            <div class="btn">
+                <button (click)="finish()">Finalizar</button>
+            </div>
+        </div>
+
+    </div>
+</mat-card>

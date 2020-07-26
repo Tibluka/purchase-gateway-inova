@@ -108,67 +108,47 @@
         </div> -->
 
 
-        <mat-accordion class="example-headers-align" >
-            <mat-expansion-panel *ngFor="let card of formCards; let i = index" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel *ngFor="let card of formCards; let i = index" (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        Self aware panel
-                    </mat-panel-title>
+                        Mastercard **** 8300 </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                <mat-form-field class="item" appearance="fill">
                     <mat-label>Número do cartão</mat-label>
                     <input matInput [(ngModel)]="card.cardNumber">
                 </mat-form-field>
-                <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                <mat-form-field class="item" appearance="fill">
                     <mat-label>Nome no cartão</mat-label>
                     <input matInput [(ngModel)]="card.cardName">
                 </mat-form-field>
-                <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                <mat-form-field class="item" appearance="fill">
                     <mat-label>CPF/CNPJ do titular</mat-label>
                     <input matInput [(ngModel)]="card.cardCPF">
                 </mat-form-field>
                 <div style="display: flex;">
-                    <mat-form-field class="item" appearance="fill" style="width: 100%; margin-right: 5px;">
+                    <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
                         <mat-label>CVV</mat-label>
                         <input matInput [(ngModel)]="card.cardCVV">
                     </mat-form-field>
-                    <mat-form-field class="item" appearance="fill" style="width: 100%;">
+                    <mat-form-field class="item" appearance="fill">
                         <mat-label>Validade</mat-label>
                         <input matInput [(ngModel)]="card.cardValidityPeriod">
                     </mat-form-field>
                 </div>
-                <mat-form-field appearance="fill" style="width: 100%;">
+                <mat-form-field *ngIf="moreThanOneCard" appearance="fill" style="width: 100%;">
                     <mat-label>Valor a cobrar nesse cartão</mat-label>
                     <input matInput [(ngModel)]="card.cardPayValue">
                 </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Select</mat-label>
+                <mat-form-field style="margin-top: 5px;" appearance="fill">
+                    <mat-label>Opções de parcelamento</mat-label>
                     <mat-select (change)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments">
-                      <mat-option value="1" *ngFor="let o of options">{{o}}</mat-option>
+                        <mat-option value="1" *ngFor="let o of options">{{o}}</mat-option>
                     </mat-select>
-                  </mat-form-field>
-
-                <div class="line3">
-                    <div class="line2 w-100" *ngIf="moreThanOneCard">
-                        <input [(ngModel)]="card.cardPayValue" type="text" placeholder="Valor a cobrar nesse cartão">
-                    </div>
-                    <div class="w-100 installments">
-                        Parcelas:
-                        <select (change)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments"
-                            name="values">
-                            <option value="1" *ngFor="let o of options">{{o}}</option>
-                        </select>
-                    </div>
-                </div>
+                </mat-form-field>
             </mat-expansion-panel>
         </mat-accordion>
-
-        <div class="back-button">
-            <button routerLink="/">Voltar</button>
-        </div>
-
-
-
     </main>
 </div>

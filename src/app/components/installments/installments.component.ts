@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { OrderInfoService } from 'src/app/services/order-info.service';
 
 
 
@@ -44,43 +49,48 @@ interface obterInformacoesPedido {
 export class InstallmentsComponent implements OnInit {
 
   /* @Input() count = 0 */
+  
+
   panelOpenState = true
   showCardsInfo = true
   moreThanOneCard = false
   notMoreThanOneCard = true
   qtdCard: number = 1
   fillCardsInfo = 'Mastercard **** 8300'
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   @Output() asideInstallments = new EventEmitter()
+
+
 
   formCards: Array<formCardClass> = []
 
   cartItems = []
 
-  idDoComprador = 'c479593e-b208-45d0-b153-90e2f1c49f54'
+  idDoComprador = '6d124e85-160f-4e6b-a0f5-252d9fa87f5a'
   options = []
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, public orderInfoService: OrderInfoService, private _snackBar: MatSnackBar) {
 
   }
+
 
   ngOnInit(): void {
     this.formCards.push(new formCardClass())
     this.formCards[0].accordionOpen = true
     this.asideInstallments.emit(1)
     this.getCartInfo()
+    this.setInstallments(1)
   }
 
   getCartInfo() {
     this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/' + this.idDoComprador).subscribe(cartorio => {
       this.cartItems.push(cartorio)
-      const installments = cartorio.qtd_max_parcelamento
-      
+      const installments = 8
       for (let index = 1; index <= installments; index++) {
         this.options.push(index + 'x')
       }
-      console.log(cartorio)
-      console.log(this.options)
     })
   }
 
@@ -105,11 +115,11 @@ export class InstallmentsComponent implements OnInit {
 
   selectChangeHandler(event: any) {
     this.formCards = event.target.value
-    console.log(this.formCards)
   }
 
   setInstallments(cardInstallments) {
     this.asideInstallments.emit(cardInstallments)
+    console.log(this.formCards)
   }
 
   isMoreThanOneCard() {
@@ -120,6 +130,22 @@ export class InstallmentsComponent implements OnInit {
   isNotMoreThanOneCard() {
     this.notMoreThanOneCard = !this.notMoreThanOneCard
     this.showCardsInfo = !this.showCardsInfo
+  }
+
+  openSnackBar() {
+    if (this.orderInfoService.compraFinalizada) {
+      this._snackBar.open('Eba!! Deu tudo certo', 'Fechar', {
+        duration: 10000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    } else {
+      this._snackBar.open('OOPS!! Algo deu errado', 'Fechar', {
+        duration: 10000,
+        horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,
+      });
+    }
   }
 
 }
