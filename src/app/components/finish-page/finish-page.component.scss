@@ -1,46 +1,32 @@
-.container {
+mat-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+    h4{
+        margin-bottom: 15px;
+    }
+   
+}
 
+.back-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: left;
     padding: 0;
-    main {
-        margin-top: 30px;
-        .success-img {
-            text-align: center;
-            svg {
-                margin-top: 20px;
-                color: var(--successfulPurchase-color);
-            }
-        }
-        .failed-to-complete {
-            text-align: center;
-            svg {
-                margin-top: 20px;
-                color: var(--failedPurchase-color);
-            }
-        }
-        .success-case,
-        .failed-to-complete {
-            h3 {
-                color: var(--title-color);
-            }
-        }
-    }
-    .back-button {
-        display: flex;
-        justify-content: left;
-        padding: 0;
-        height: 50px;
-        width: 190px;
-        background-color: var(--button-color);
-        border: none;
-        border-radius: 4px;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    button:hover {
-        font-size: 11.5pt;
-        transition: 100ms;
-        background-color: var(--buttonHover-color);
-    }
+    height: 50px;
+    width: 190px;
+    background-color: var(--button-color);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+button:hover {
+    font-size: 11.5pt;
+    transition: 100ms;
+    background-color: var(--buttonHover-color);
 }

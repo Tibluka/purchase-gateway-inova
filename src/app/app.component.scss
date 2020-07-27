@@ -1,8 +1,7 @@
-.m-250 {
-    padding: 0 250px;
-}
+
 .routes{
-margin: 0 250px;
+margin: 30px 250px 0 250px;
+
 }
 
 .page{
@@ -22,4 +21,29 @@ nav{
     }
    }
 }
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: left;
+    padding: 0;
+    nav{
+        background-color: white !important;
+    }
+    .footer{
+        font-size: 10pt;
+        line-height: 19pt;
+        p{
+            margin: 0;
+        }
+        a{
+            margin-right: 20px;
+            font-weight: bold;
+        }
+    }
+    
+ }
 

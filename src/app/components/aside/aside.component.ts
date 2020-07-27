@@ -2,12 +2,9 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { OrderInfoService } from 'src/app/services/order-info.service';
 import { Router } from '@angular/router';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
-
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressBarMode } from '@angular/material/progress-bar';
 
 interface obterInformacoesPedido {
   pagseguro_session: string;
@@ -43,6 +40,10 @@ export class AsideComponent implements OnInit {
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
+  color: ThemePalette = 'primary';
+  mode: ProgressBarMode = 'determinate';
+  value = 0;
+  bufferValue = 75;
 
 
   constructor(
@@ -56,14 +57,11 @@ export class AsideComponent implements OnInit {
   }
 
   finish() {
-    if (this.orderInfoService.compraFinalizada) {
-      this.router.navigate(['/finish'])
-    } else {
-      this._snackBar.open('OOPS!! Algo deu errado', 'Fechar', {
-        duration: 10000,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    }
+    if (this.orderInfoService.compraFinalizada == true) {
+      this.mode = 'indeterminate';
+      setTimeout(navigate => {
+        navigate = this.router.navigate((['/finish']))
+      }, 3000);
+    } 
   }
 }

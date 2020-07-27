@@ -2,38 +2,39 @@
     <div class="page-aside ">
         <div class="asblock1">
             <header>
-                <div class="item-image">
-                    <img src="../../../assets/images/item.png" alt="Imagem do item">
-                </div>
-
+                <p style="margin-top: 38px !important; ">Lucas Gomes</p>
                 <div class="item-description"
-                    *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
-                    {{item.descricao}}
-                </div>
-
-                <div class="item-qty">
-                    <p>Quantidade: {{orderInfoService.obterInformacoesPedido.items?.length}}</p>
-                </div>
+                *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
+                <p>{{item.descricao}} </p>
+            </div>
                 <hr>
             </header>
             <main>
                 <div class="purchase">
-          
+                    <div class="payment-type">
+                        <p>Crédito</p>
+                    </div>
+                    <div class="installments-qty">
+                        <p>Parcelado em {{orderInfoService.installments}}</p>
+                    </div>
                 </div>
+                <hr>
             </main>
         </div>
-
-
         <div class="asblock2">
             <div class="price">
                 <span>
-                    <p>O total do pedido ficou {{orderInfoService.obterInformacoesPedido.valor_total_pedido}}</p>
+                    <p>Você pagará {{orderInfoService.obterInformacoesPedido.valor_total_pedido | currency:'BRL'}}</p>
                 </span>
             </div>
             <div class="btn">
-                <button (click)="finish()">Finalizar</button>
+                <button disabled (click)="finish()">Finalizar</button>
+            </div>
+            <div class="load-bar">
+                <mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="value"
+                    [bufferValue]="bufferValue">
+                </mat-progress-bar>
             </div>
         </div>
-
     </div>
 </mat-card>

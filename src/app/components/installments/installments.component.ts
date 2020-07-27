@@ -7,15 +7,13 @@ import {
 } from '@angular/material/snack-bar';
 import { OrderInfoService } from 'src/app/services/order-info.service';
 
-
-
 class formCardClass {
   cardNumber: number;
   cardName: string;
   cardCPF: number;
   cardCVV: number;
   cardValidityPeriod: string;
-  cardInstallments: number = 1;
+  cardInstallments: number = null;
   cardPayValue: number;
   accordionOpen: boolean;
 }
@@ -68,7 +66,7 @@ export class InstallmentsComponent implements OnInit {
 
   cartItems = []
 
-  idDoComprador = '6d124e85-160f-4e6b-a0f5-252d9fa87f5a'
+  idDoComprador = 'ad9f4365-8e78-46e4-8d7c-274bb2dfa067'
   options = []
 
   constructor(private apiService: ApiService, public orderInfoService: OrderInfoService, private _snackBar: MatSnackBar) {
@@ -81,13 +79,12 @@ export class InstallmentsComponent implements OnInit {
     this.formCards[0].accordionOpen = true
     this.asideInstallments.emit(1)
     this.getCartInfo()
-    this.setInstallments(1)
   }
 
   getCartInfo() {
     this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/' + this.idDoComprador).subscribe(cartorio => {
       this.cartItems.push(cartorio)
-      const installments = 8
+      const installments = cartorio.qtd_max_parcelamento
       for (let index = 1; index <= installments; index++) {
         this.options.push(index + 'x')
       }
@@ -113,13 +110,9 @@ export class InstallmentsComponent implements OnInit {
     }
   }
 
-  selectChangeHandler(event: any) {
-    this.formCards = event.target.value
-  }
-
   setInstallments(cardInstallments) {
-    this.asideInstallments.emit(cardInstallments)
-    console.log(this.formCards)
+    this.orderInfoService.installments = cardInstallments
+    console.log(cardInstallments)
   }
 
   isMoreThanOneCard() {

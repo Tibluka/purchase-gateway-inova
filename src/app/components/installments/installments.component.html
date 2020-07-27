@@ -1,154 +1,52 @@
-<div class="page-installments">
-    <header>
-        <!--     <div class="title" *ngIf="!showCardsInfo">
-            <h5>Gostaria de efetuar o pagamento com mais de um cartão de crédito?</h5>
+<main *ngIf="showCardsInfo">
+    <h5 class="title">Olá! Essa ordem de pagamento foi gerada às 12:12, no dia 27/07/2020 e refere-se a Escritura.
+        <br>
+        Por favor, insira os dados para pagamento e finalize a compra
+    </h5>
+    <mat-card style="min-height: 463px; display: flex; flex-direction: column; justify-content: center;"
+        *ngFor="let card of formCards; let i = index">
 
-
-            <div class="question">
-                <button (click)="isNotMoreThanOneCard()">Não</button>
-                <button (click)="isMoreThanOneCard()">Sim</button>
-            </div>
-        </div> -->
-    </header>
-    <main *ngIf="showCardsInfo">
-        <h4 class="title">Preencha os dados do cartão</h4>
-        <h5 class="add-card">
-            <button (click)="cardQty()" [hidden]="notMoreThanOneCard == true"
-                style="display: flex; align-items: center; justify-content: center;">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
-                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
-                    <path fill-rule="evenodd"
-                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                </svg>
-                <p style="margin: 0 0 3px 0; padding-left: 5px;">Adicionar novo cartão</p>
-            </button>
-        </h5>
-        <!--   <div id="accordion{{i}}" *ngFor="let card of formCards; let i = index">
-            <div class="card">
-                <div class="card-header" id="headingOne"
-                    style="display: flex; justify-content: space-between; align-items: center;">
-                    <div class="delete-button"> -->
-
-
-
-        <!-- <button (click)="removeCard(i)" class="desativar" [disabled]="qtdCard == 1">
-                            <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                <path fill-rule="evenodd"
-                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                            </svg>
-                        </button> -->
-
-
-
-        <!--         <p>{{fillCardsInfo}}</p>
-                    </div>
-                    <span>
-                        <h5 class="mb-0 " style="text-align: right; margin: 0;">
-                            <button class="btn btn-link" data-toggle="collapse" [attr.data-target]="'#collapseOne'+i"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16"
-                                    style="opacity: 0.6;" class="bi bi-chevron-down"
-                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                                </svg>
-                            </button>
-                        </h5>
-                    </span>
-                </div>
-
-                <div id="collapseOne{{i}}" [ngClass]="card.accordionOpen ? 'show':'' " class="collapse"
-                    aria-labelledby="headingOne" [attr.data-parent]="'#accordion'+i">
-                    <div class="card-body">
-                        <div class="cards-added">
-                            <div class="cards-container">
-                                <div class="card-name">
-                                    <div class="item">
-                                        <input [(ngModel)]="card.cardNumber" class="w-100" type="text"
-                                            placeholder="Número do cartão">
-                                    </div>
-                                    <div class="item">
-                                        <input [(ngModel)]="card.cardName" class="w-100" type="text"
-                                            placeholder="Nome no cartão">
-                                    </div>
-                                    <div class="item">
-                                        <input [(ngModel)]="card.cardCPF" class="w-100" type="text"
-                                            placeholder="CPF/CNPJ do titular">
-                                    </div>
-                                    <div class="cvv">
-                                        <input [(ngModel)]="card.cardCVV" class="w-100" type="text" placeholder="CVV">
-                                        <input [(ngModel)]="card.cardValidityPeriod" class="w-100 validate" type="text"
-                                            placeholder="(MM/AAAA)">
-                                    </div>
-                                </div>
-                                <div class="line3">
-                                    <div class="line2 w-100" *ngIf="moreThanOneCard">
-                                        <input [(ngModel)]="card.cardPayValue" type="text"
-                                            placeholder="Valor a cobrar nesse cartão">
-                                    </div>
-                                    <div class="w-100 installments">
-                                        Parcelas:
-                                        <select (change)="setInstallments(card.cardInstallments)"
-                                            [(ngModel)]="card.cardInstallments" name="values" >
-                                            <option value="1" *ngFor="let o of options">{{o}}</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-
-        <mat-accordion class="example-headers-align">
-            <mat-expansion-panel *ngFor="let card of formCards; let i = index" (opened)="panelOpenState = true"
-                (closed)="panelOpenState = false">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Mastercard **** 8300 </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <mat-form-field class="item" appearance="fill">
-                    <mat-label>Número do cartão</mat-label>
-                    <input matInput [(ngModel)]="card.cardNumber">
-                </mat-form-field>
-                <mat-form-field class="item" appearance="fill">
-                    <mat-label>Nome no cartão</mat-label>
-                    <input matInput [(ngModel)]="card.cardName">
-                </mat-form-field>
-                <mat-form-field class="item" appearance="fill">
-                    <mat-label>CPF/CNPJ do titular</mat-label>
-                    <input matInput [(ngModel)]="card.cardCPF">
-                </mat-form-field>
-                <div style="display: flex;">
-                    <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
-                        <mat-label>CVV</mat-label>
-                        <input matInput [(ngModel)]="card.cardCVV">
-                    </mat-form-field>
-                    <mat-form-field class="item" appearance="fill">
-                        <mat-label>Validade</mat-label>
-                        <input matInput [(ngModel)]="card.cardValidityPeriod">
-                    </mat-form-field>
-                </div>
-                <mat-form-field *ngIf="moreThanOneCard" appearance="fill" style="width: 100%;">
-                    <mat-label>Valor a cobrar nesse cartão</mat-label>
-                    <input matInput [(ngModel)]="card.cardPayValue">
-                </mat-form-field>
-                <mat-form-field style="margin-top: 5px;" appearance="fill">
-                    <mat-label>Opções de parcelamento</mat-label>
-                    <mat-select (change)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments">
-                        <mat-option value="1" *ngFor="let o of options">{{o}}</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </main>
-</div>
+        <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
+            <mat-label>Número do cartão</mat-label>
+            <input mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$" matInput
+                [(ngModel)]="card.cardNumber">
+        </mat-form-field>
+        <mat-form-field class="item" appearance="fill">
+            <mat-label>Nome no cartão</mat-label>
+            <input type="text" required pattern="[a-z\s]+$" matInput [(ngModel)]="card.cardName">
+        </mat-form-field>
+        <mat-form-field class="item" appearance="fill">
+            <mat-label>CPF/CNPJ do titular</mat-label>
+            <input required pattern="[0-9]+$" mask="000.000.000-00" matInput [(ngModel)]="card.cardCPF">
+        </mat-form-field>
+        <div style="display: flex;">
+            <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
+                <mat-label>CVV</mat-label>
+                <input mask="000" maxlength="3" type="text" required pattern="[0-9]+$" matInput
+                    [(ngModel)]="card.cardCVV">
+            </mat-form-field>
+            <mat-form-field class="item" appearance="fill">
+                <mat-label>Validade</mat-label>
+                <input type="text" required="required" maxlength="10" name="date"
+                    pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" min="2012-01-01" max="2014-02-18" matInput
+                    [(ngModel)]="card.cardValidityPeriod">
+            </mat-form-field>
+        </div>
+        <mat-form-field *ngIf="moreThanOneCard" appearance="fill" style="width: 100%;">
+            <mat-label>Valor a cobrar nesse cartão</mat-label>
+            <input matInput [(ngModel)]="card.cardPayValue">
+        </mat-form-field>
+        <div>
+            <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
+                <mat-label>Opções de parcelamento</mat-label>
+                <mat-select required (selectionChange)="setInstallments(card.cardInstallments)"
+                    [(ngModel)]="card.cardInstallments">
+                    <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </mat-card>
+    <div *ngIf="!orderInfoService.compraFinalizada" class="alert alert-danger" role="alert" style="margin-top: 10px;">
+        OOPS! Algo deu errado com o pagamento.
+    </div>
+</main>
