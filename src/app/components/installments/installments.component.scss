@@ -6,7 +6,6 @@ main {
     h5 {
         margin-bottom: 20px;
         color: black !important;
-        
     }
 }
 
@@ -23,4 +22,15 @@ h5 {
     height: 70px;
     margin: 0;
     background-color: white !important;
+}
+
+@media (max-width: 970px) {
+    .cvv {
+        flex-direction: column;
+    }
+    .installment-options {
+        mat-form-field {
+            width: 100% !important;
+        }
+    }
 }

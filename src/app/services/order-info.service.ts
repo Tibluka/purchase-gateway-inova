@@ -30,7 +30,7 @@ export class OrderInfoService {
 
   idDoComprador = 'ad9f4365-8e78-46e4-8d7c-274bb2dfa067'
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
-  compraFinalizada = false
+  compraFinalizada = true
   installments: number
 
   constructor(private apiService: ApiService) {

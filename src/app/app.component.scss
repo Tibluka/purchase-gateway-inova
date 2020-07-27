@@ -1,25 +1,26 @@
-
-.routes{
-margin: 30px 250px 0 250px;
-
+.routes {
+    margin: 30px 250px 0 250px;
 }
 
-.page{
+.page {
     margin: 10px;
 }
-nav{
+nav {
     height: 90px;
     box-shadow: 1px 1px 1px 1px black;
-    h1, h2, h3, h4{
-       font-weight: normal;
-       color: white;
-   }
-   a{
-    img{
-        width: 80px;
-        height: 60px;
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-weight: normal;
+        color: white;
     }
-   }
+    a {
+        img {
+            width: 80px;
+            height: 60px;
+        }
+    }
 }
 
 footer {
@@ -27,23 +28,88 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-    color: white;
     text-align: left;
     padding: 0;
-    nav{
+    nav {
         background-color: white !important;
     }
-    .footer{
-        font-size: 10pt;
-        line-height: 19pt;
-        p{
+    .footer {
+        padding: 0 250px;
+        p {
             margin: 0;
         }
-        a{
+        a {
             margin-right: 20px;
-            font-weight: bold;
+            line-height: 30px;
         }
     }
-    
- }
+}
 
+
+@media(max-width: 1290px){
+     footer {
+        nav {
+            display: flex;
+            justify-content: center;
+           a{
+               font-size: 8pt;
+           }
+        }
+    }
+}
+@media (max-width: 970px) {
+    .routes {
+        margin: auto 15%;
+    }
+    footer {
+        nav {
+            display: flex;
+            justify-content: center;
+            a{
+               font-size: 8pt;
+           }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .routes {
+        margin: auto 5%;
+    }
+    footer{
+        nav{
+            padding: 0 !important;
+            a{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 6pt;
+            }
+        }
+    }
+}
+@media (max-width: 375px) {
+    .routes {
+        margin: auto;
+    }
+    .page{
+        nav{
+            a{
+                h4{
+                    font-size: 14pt;
+                }
+            }
+        }
+    }
+    footer{
+        nav{
+            padding: 0 !important;
+            a{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                font-size: 5pt;
+            }
+        }
+    }
+}

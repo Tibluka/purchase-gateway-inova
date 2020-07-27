@@ -1,7 +1,6 @@
 mat-card {
     margin-left: 30px;
     border-bottom: none;
-    margin-top: 65px;
 }
 
 .page-aside {
@@ -62,7 +61,7 @@ mat-card {
         justify-content: center;
         span {
             p {
-                font-size: 17pt;
+                font-size: 15pt;
             }
         }
     }
@@ -102,5 +101,11 @@ p{
     margin-top: 12px;
     mat-progress-bar{
        margin: 0 13px;
+    }
+}
+
+@media(max-width: 1475px){
+    mat-card{
+        margin: 0;
     }
 }

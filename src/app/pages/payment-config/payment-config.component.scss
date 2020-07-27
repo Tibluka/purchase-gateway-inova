@@ -1,3 +1,8 @@
+.title{
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
 .payment-config{
     display: flex;
 }
@@ -7,4 +12,12 @@ app-installments{
 }
 app-aside{
     flex: 0.5 0.5;
+}
+
+@media(max-width: 1475px){
+    .payment-config{
+        flex-direction: column;
+        justify-content: center;
+       
+    }
 }
