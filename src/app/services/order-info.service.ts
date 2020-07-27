@@ -32,6 +32,7 @@ export class OrderInfoService {
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
   compraFinalizada = true
   installments: number
+  progressBarInit = false
 
   constructor(private apiService: ApiService) {
     this.getInfo()

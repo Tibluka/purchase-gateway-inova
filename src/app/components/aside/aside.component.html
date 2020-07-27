@@ -28,10 +28,10 @@
                 </span>
             </div>
             <div class="btn">
-                <button  (click)="finish()">Finalizar</button>
+                <button [disabled]="!orderInfoService.compraFinalizada" (click)="finish()">Finalizar</button>
             </div>
             <div class="load-bar">
-                <mat-progress-bar class="example-margin" [color]="color" [mode]="mode" [value]="value"
+                <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin" [color]="color" [mode]="mode" [value]="value"
                     [bufferValue]="bufferValue">
                 </mat-progress-bar>
             </div>

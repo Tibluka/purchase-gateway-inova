@@ -58,6 +58,7 @@ export class AsideComponent implements OnInit {
 
   finish() {
     if (this.orderInfoService.compraFinalizada == true) {
+      this.orderInfoService.progressBarInit = true
       this.mode = 'indeterminate';
       setTimeout(navigate => {
         navigate = this.router.navigate((['/finish']))

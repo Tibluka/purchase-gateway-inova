@@ -1,6 +1,7 @@
 mat-card {
     margin-left: 30px;
     border-bottom: none;
+    min-height: 462px;
 }
 
 .page-aside {
@@ -106,6 +107,6 @@ p{
 
 @media(max-width: 1475px){
     mat-card{
-        margin: 0;
+        margin: 16px 0 0 0;
     }
 }

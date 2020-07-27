@@ -1,6 +1,6 @@
 <main *ngIf="showCardsInfo">
 
-    <mat-card style="min-height: 463px; display: flex; flex-direction: column; justify-content: center;"
+    <mat-card style="min-height: 462px; display: flex; flex-direction: column; justify-content: center;"
         *ngFor="let card of formCards; let i = index">
 
         <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
@@ -43,7 +43,7 @@
             </mat-form-field>
         </div>
     </mat-card>
-    <div *ngIf="!orderInfoService.compraFinalizada" class="alert alert-danger" role="alert" style="margin: 16px 0;">
+    <div *ngIf="!orderInfoService.compraFinalizada" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
         OOPS! Algo deu errado com o pagamento.
     </div>
 </main>

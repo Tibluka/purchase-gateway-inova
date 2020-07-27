@@ -1,9 +1,14 @@
+.global{
+    position: relative;
+}
+
 .routes {
     margin: 30px 250px 0 250px;
 }
 
 .page {
     margin: 10px;
+    min-height: 90vh;
 }
 nav {
     height: 90px;
@@ -24,9 +29,9 @@ nav {
 }
 
 footer {
-    position: fixed;
+    position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: -100px;
     width: 100%;
     text-align: left;
     padding: 0;
