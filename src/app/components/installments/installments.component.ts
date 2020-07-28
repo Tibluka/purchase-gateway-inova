@@ -66,7 +66,7 @@ export class InstallmentsComponent implements OnInit {
 
   cartItems = []
 
-  idDoComprador = 'ad9f4365-8e78-46e4-8d7c-274bb2dfa067'
+  idDoComprador = '4066945e-bbda-419a-8f20-bf0e5690e3c4'
   options = []
 
   constructor(private apiService: ApiService, public orderInfoService: OrderInfoService, private _snackBar: MatSnackBar) {
