@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-
+declare let PagSeguroDirectPayment: any;
+declare var success: any
+declare var error: any
 
 class obterInformacoesPedido {
   pagseguro_session: string;
@@ -28,19 +30,24 @@ class obterInformacoesPedido {
 })
 export class OrderInfoService {
 
-  idDoComprador = '4066945e-bbda-419a-8f20-bf0e5690e3c4'
+
+  idDoComprador = 'fc5479b8-b19e-4a2f-967a-9ef451788c2d'
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
   compraFinalizada = true
   installments: number
   progressBarInit = false
+
 
   constructor(private apiService: ApiService) {
     this.getInfo()
   }
 
   async getInfo() {
+
     if (this.obterInformacoesPedido.nome_cartorio != '') {
+      console.log('antes' + PagSeguroDirectPayment)
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
+      PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
     }
   }
 }

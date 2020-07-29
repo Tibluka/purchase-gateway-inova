@@ -7,6 +7,7 @@ import {
 } from '@angular/material/snack-bar';
 import { OrderInfoService } from 'src/app/services/order-info.service';
 
+
 class formCardClass {
   cardNumber: number;
   cardName: string;
@@ -66,7 +67,7 @@ export class InstallmentsComponent implements OnInit {
 
   cartItems = []
 
-  idDoComprador = '4066945e-bbda-419a-8f20-bf0e5690e3c4'
+  idDoComprador = 'fc5479b8-b19e-4a2f-967a-9ef451788c2d'
   options = []
 
   constructor(private apiService: ApiService, public orderInfoService: OrderInfoService, private _snackBar: MatSnackBar) {
