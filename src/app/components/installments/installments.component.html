@@ -1,48 +1,52 @@
 <main *ngIf="showCardsInfo">
+        <mat-card style="min-height: 462px; display: flex; flex-direction: column; justify-content: center;"
+            *ngFor="let card of formCards; let i = index">
+            {{orderInfoService.cardData.brand?.name}}
+            <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
 
-    <mat-card style="min-height: 462px; display: flex; flex-direction: column; justify-content: center;"
-        *ngFor="let card of formCards; let i = index">
+                <mat-label>Número do cartão</mat-label>
+                <input name="card-number" mask="0000 0000 0000 0000" maxlength="20" type="text" required
+                    pattern="[0-9]+$" matInput [(ngModel)]="orderInfoService.cardData.cardNumber"
+                    (keyup)="orderInfoService.getBrand()">
+            </mat-form-field>
 
-        <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
-            <mat-label>Número do cartão</mat-label>
-            <input mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$" matInput
-                [(ngModel)]="card.cardNumber">
-        </mat-form-field>
-        <mat-form-field class="item" appearance="fill">
-            <mat-label>Nome no cartão</mat-label>
-            <input type="text" required pattern="[a-z\s]+$" matInput [(ngModel)]="card.cardName">
-        </mat-form-field>
-        <mat-form-field class="item" appearance="fill">
-            <mat-label>CPF/CNPJ do titular</mat-label>
-            <input required pattern="[0-9]+$" mask="000.000.000-00" matInput [(ngModel)]="card.cardCPF">
-        </mat-form-field>
-        <div class="cvv"style="display: flex;">
-            <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
-                <mat-label>CVV</mat-label>
-                <input mask="000" maxlength="3" type="text" required pattern="[0-9]+$" matInput
-                    [(ngModel)]="card.cardCVV">
+            <mat-form-field class="item" appearance="fill">
+                <mat-label>Nome no cartão</mat-label>
+                <input name="card-name" type="text" required pattern="[a-z\s]+$" matInput
+                    [(ngModel)]="orderInfoService.cardData.userFullName">
             </mat-form-field>
             <mat-form-field class="item" appearance="fill">
-                <mat-label>Validade</mat-label>
-                <input type="text" required="required" maxlength="10" name="date"
-                    pattern="[0-9]{2}\/[0-9]{2}\/[0-9]{4}$" min="2012-01-01" max="2014-02-18" matInput
-                    [(ngModel)]="card.cardValidityPeriod">
+                <mat-label>CPF/CNPJ do titular</mat-label>
+                <input name="card-CPF" required pattern="[0-9]+$" mask="000.000.000-00" matInput
+                    [(ngModel)]="orderInfoService.cardData.userCPF">
             </mat-form-field>
-        </div>
-      <!--   <mat-form-field *ngIf="moreThanOneCard" appearance="fill" style="width: 100%;">
+            <div class="cvv" style="display: flex;">
+                <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
+                    <mat-label>CVV</mat-label>
+                    <input name="card-cvv" mask="000" maxlength="3" type="text" required pattern="[0-9]+$" matInput
+                        [(ngModel)]="orderInfoService.cardData.cvv">
+                </mat-form-field>
+                <mat-form-field class="item" appearance="fill">
+                    <mat-label>Validade</mat-label>
+                    <input name="card-validity" type="text" required="required" maxlength="10" name="date"
+                        mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
+                </mat-form-field>
+            </div>
+            <!--   <mat-form-field *ngIf="moreThanOneCard" appearance="fill" style="width: 100%;">
             <mat-label>Valor a cobrar nesse cartão</mat-label>
             <input matInput [(ngModel)]="card.cardPayValue">
         </mat-form-field> -->
-        <div class="installment-options">
-            <mat-form-field  style="margin-top: 5px; width: 250px;" appearance="fill">
-                <mat-label>Opções de parcelamento</mat-label>
-                <mat-select required (selectionChange)="setInstallments(card.cardInstallments)"
-                    [(ngModel)]="card.cardInstallments">
-                    <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-    </mat-card>
+            <div class="installment-options">
+                <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
+                    <mat-label>Opções de parcelamento</mat-label>
+                    <mat-select name="card-installments" required
+                        (selectionChange)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments">
+                        <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-card>
+        <button id="hiddenFormbutton" [disabled]="!f.valid">click</button>
     <div *ngIf="!orderInfoService.compraFinalizada" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
         OOPS! Algo deu errado com o pagamento.
     </div>

@@ -55,19 +55,16 @@ export class InstallmentsComponent implements OnInit {
   moreThanOneCard = false
   notMoreThanOneCard = true
   qtdCard: number = 1
-  fillCardsInfo = 'Mastercard **** 8300'
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   @Output() asideInstallments = new EventEmitter()
 
-
-
   formCards: Array<formCardClass> = []
 
   cartItems = []
 
-  idDoComprador = 'fc5479b8-b19e-4a2f-967a-9ef451788c2d'
+  idDoComprador = 'e5c0881d-4a40-49b3-841c-d374adfb463f'
   options = []
 
   constructor(private apiService: ApiService, public orderInfoService: OrderInfoService, private _snackBar: MatSnackBar) {
@@ -91,18 +88,7 @@ export class InstallmentsComponent implements OnInit {
       }
     })
   }
-
-  cardQty() {
-    this.qtdCard++
-    for (let index = 0; this.formCards.length < this.qtdCard; index++) {
-      this.formCards.push(new formCardClass())
-    }
-    this.formCards.forEach((card, index) => {
-      card.accordionOpen = index === this.formCards.length - 1 ? true : false
-    })
-
-  }
-
+  
   removeCard(index) {
     console.log(index)
     if (this.qtdCard > 1) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderInfoService } from 'src/app/services/order-info.service';
 
 @Component({
   selector: 'app-payment-config',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentConfigComponent implements OnInit {
 
-  constructor() { }
+  constructor(public orderInfoService: OrderInfoService) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(form){
+    console.log(form)
   }
 
 }

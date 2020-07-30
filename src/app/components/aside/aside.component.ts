@@ -63,6 +63,6 @@ export class AsideComponent implements OnInit {
       setTimeout(navigate => {
         navigate = this.router.navigate((['/finish']))
       }, 3000);
-    } 
+    }
   }
 }

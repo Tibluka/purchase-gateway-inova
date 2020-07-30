@@ -25,18 +25,38 @@ class obterInformacoesPedido {
   chave: string;
 }
 
+class cardData {
+  cardBin: string;
+  cardNumber: number;
+  cvv: number;
+  expirationMonth: string;
+  expirationYear: string;
+  userFullName: string;
+  userCPF: string;
+  cardValidityPeriod: string;
+  installments: number;
+  brand: {
+    name: string;
+    bin: string;
+    cvvSize: number;
+    expirable: boolean;
+    validationAlgorithm: string;
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class OrderInfoService {
 
-
-  idDoComprador = 'fc5479b8-b19e-4a2f-967a-9ef451788c2d'
+  idDoComprador = 'e5c0881d-4a40-49b3-841c-d374adfb463f'
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
+  cardData: cardData = new cardData()
+
   compraFinalizada = true
   installments: number
   progressBarInit = false
-
+  isFormValid: boolean = true
 
   constructor(private apiService: ApiService) {
     this.getInfo()
@@ -50,4 +70,23 @@ export class OrderInfoService {
       PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
     }
   }
+
+   getBrand() {
+    if (this.cardData.cardNumber.toString().length == 6) {
+      PagSeguroDirectPayment.getBrand({
+        cardBin: this.cardData.cardNumber,
+        success: (response) => {
+          this.cardData.brand = response.brand          
+        },
+        error: (response) => {
+          //tratamento do erro
+        },
+        complete: (response) => {
+          //tratamento comum para todas chamadas
+        }
+      });
+    }
+  }
+
+
 }
