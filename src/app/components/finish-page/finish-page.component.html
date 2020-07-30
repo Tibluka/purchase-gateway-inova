@@ -10,7 +10,7 @@
     Pagamento finalizado com sucesso!
   </h4>
   <p *ngFor="let d of orderInfoService.obterInformacoesPedido.items; let i = index">{{d.descricao}}</p>
-  <p class="card-text">Total da compra: R${{orderInfoService.obterInformacoesPedido.valor_total_pedido}},00</p>
+  <p class="card-text">Total da compra: {{orderInfoService.obterInformacoesPedido.valor_total_pedido | currency: 'BRL'}}</p>
   <p>27/07/2020 15:54:00</p>
 </mat-card>
 

@@ -1,4 +1,4 @@
-<main *ngIf="showCardsInfo">
+<form #formInstallments="ngForm" id="formInstallments">
         <mat-card style="min-height: 462px; display: flex; flex-direction: column; justify-content: center;"
             *ngFor="let card of formCards; let i = index">
             {{orderInfoService.cardData.brand?.name}}
@@ -28,7 +28,7 @@
                 </mat-form-field>
                 <mat-form-field class="item" appearance="fill">
                     <mat-label>Validade</mat-label>
-                    <input name="card-validity" type="text" required="required" maxlength="10" name="date"
+                    <input name="card-validity" type="text" placeholder="MM/AAAA"required="required" maxlength="10" name="date"
                         mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
                 </mat-form-field>
             </div>
@@ -46,8 +46,7 @@
                 </mat-form-field>
             </div>
         </mat-card>
-        <button id="hiddenFormbutton">click</button>
     <div *ngIf="!orderInfoService.compraFinalizada" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
         OOPS! Algo deu errado com o pagamento.
     </div>
-</main>
+</form>

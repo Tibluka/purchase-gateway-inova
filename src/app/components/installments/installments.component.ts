@@ -1,11 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-import {
-  MatSnackBar,
-  MatSnackBarHorizontalPosition,
-  MatSnackBarVerticalPosition,
-} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { OrderInfoService } from 'src/app/services/order-info.service';
+import { NgForm } from '@angular/forms';
 
 
 class formCardClass {
@@ -45,15 +42,13 @@ interface obterInformacoesPedido {
   templateUrl: './installments.component.html',
   styleUrls: ['./installments.component.scss']
 })
-export class InstallmentsComponent implements OnInit {
+export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   /* @Input() count = 0 */
-  
 
-  panelOpenState = true
+  @ViewChild('formInstallments', { read: NgForm }) formValid: any //permite visualizar o html e o formulario dentro dele com o id especificado.
+
   showCardsInfo = true
-  moreThanOneCard = false
-  notMoreThanOneCard = true
   qtdCard: number = 1
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -64,19 +59,27 @@ export class InstallmentsComponent implements OnInit {
 
   cartItems = []
 
-  idDoComprador = 'e5c0881d-4a40-49b3-841c-d374adfb463f'
+  idDoComprador = 'c3160b67-8b4e-498f-8824-b79b47ace6e2'
   options = []
 
-  constructor(private apiService: ApiService, public orderInfoService: OrderInfoService, private _snackBar: MatSnackBar) {
-
+  constructor(private apiService: ApiService,
+    public orderInfoService: OrderInfoService,
+    private _snackBar: MatSnackBar) {
   }
-
 
   ngOnInit(): void {
     this.formCards.push(new formCardClass())
     this.formCards[0].accordionOpen = true
     this.asideInstallments.emit(1)
     this.getCartInfo()
+  }
+
+  //ngAfterViewInit só aparece quando renderizar HTML na tela. Essa é a diferença entre ele e o ngOnInit
+  //só da pra usar o ViewChild com ele
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.orderInfoService.disableButton = this.formValid
+    }, 1);
   }
 
   getCartInfo() {
@@ -88,7 +91,7 @@ export class InstallmentsComponent implements OnInit {
       }
     })
   }
-  
+
   removeCard(index) {
     console.log(index)
     if (this.qtdCard > 1) {
@@ -99,17 +102,6 @@ export class InstallmentsComponent implements OnInit {
 
   setInstallments(cardInstallments) {
     this.orderInfoService.installments = cardInstallments
-    console.log(cardInstallments)
-  }
-
-  isMoreThanOneCard() {
-    this.moreThanOneCard = !this.moreThanOneCard
-    this.showCardsInfo = !this.showCardsInfo
-  }
-
-  isNotMoreThanOneCard() {
-    this.notMoreThanOneCard = !this.notMoreThanOneCard
-    this.showCardsInfo = !this.showCardsInfo
   }
 
   openSnackBar() {
@@ -127,5 +119,7 @@ export class InstallmentsComponent implements OnInit {
       });
     }
   }
+
+
 
 }

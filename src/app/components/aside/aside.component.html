@@ -27,8 +27,12 @@
                     <p>Você pagará {{orderInfoService.obterInformacoesPedido.valor_total_pedido | currency:'BRL'}}</p>
                 </span>
             </div>
+          <!--   <div class="btn">
+                <button id="finishButton" [disabled]="!orderInfoService?.disableButton?.valid" (click)="finish()">Finalizar</button>
+            </div> -->
+
             <div class="btn">
-                <button id="finishButton" (click)="finish()">Finalizar</button>
+                <button [disabled]="!orderInfoService?.disableButton?.valid" (click)="orderInfoService.createCardToken()">Finalizar</button>
             </div>
             <div class="load-bar">
                 <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin" [color]="color" [mode]="mode" [value]="value"

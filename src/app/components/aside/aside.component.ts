@@ -54,6 +54,7 @@ export class AsideComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.orderInfoService.progressBarInit = false
   }
 
   finish() {
@@ -65,4 +66,6 @@ export class AsideComponent implements OnInit {
       }, 3000);
     }
   }
+
+
 }
