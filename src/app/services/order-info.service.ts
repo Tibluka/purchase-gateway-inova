@@ -59,7 +59,7 @@ export class OrderInfoService {
   cardData: cardData = new cardData()
   disableButton //recebe um verdadeiro ou falso para habilitar ou desabilitar o botão finalizar do componente aside
   compraFinalizada = true
-  installments = []
+  installments: number
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   color: ThemePalette = 'primary';

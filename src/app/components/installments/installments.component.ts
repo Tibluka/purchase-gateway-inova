@@ -48,7 +48,6 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('formInstallments', { read: NgForm }) formValid: any //permite visualizar o html e o formulario dentro dele com o id especificado.
 
-  showCardsInfo = true
   qtdCard: number = 1
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -85,7 +84,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   getCartInfo() {
     this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/' + this.idDoComprador).subscribe(cartorio => {
       this.cartItems.push(cartorio)
-      const installments = cartorio.qtd_max_parcelamento
+      const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
       for (let index = 1; index <= installments; index++) {
         this.options.push(index + 'x')
       }

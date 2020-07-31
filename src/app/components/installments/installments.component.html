@@ -1,7 +1,7 @@
 <form #formInstallments="ngForm" id="formInstallments">
         <mat-card style="min-height: 462px; display: flex; flex-direction: column; justify-content: center;"
             *ngFor="let card of formCards; let i = index">
-            {{orderInfoService.cardData.brand?.name}}
+            <p>{{orderInfoService.cardData.brand?.name}}</p>
             <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
 
                 <mat-label>Número do cartão</mat-label>
@@ -36,13 +36,16 @@
             <mat-label>Valor a cobrar nesse cartão</mat-label>
             <input matInput [(ngModel)]="card.cardPayValue">
         </mat-form-field> -->
+
             <div class="installment-options">
                 <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
                     <mat-label>Opções de parcelamento</mat-label>
+               
                     <mat-select name="card-installments" required
                         (selectionChange)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments">
                         <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
                     </mat-select>
+                  
                 </mat-form-field>
             </div>
         </mat-card>
