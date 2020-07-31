@@ -1,6 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
+import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { ThemePalette } from '@angular/material/core';
+import { ProgressBarMode } from '@angular/material/progress-bar';
 declare let PagSeguroDirectPayment: any;
 declare var success: any
 declare var error: any
@@ -57,9 +60,16 @@ export class OrderInfoService {
   disableButton //recebe um verdadeiro ou falso para habilitar ou desabilitar o botão finalizar do componente aside
   compraFinalizada = true
   installments = []
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  color: ThemePalette = 'primary';
+  mode: ProgressBarMode = 'determinate';
+  value = 0;
+  bufferValue = 75;
   progressBarInit = false
 
-  constructor(private apiService: ApiService, private router: Router) {
+
+  constructor(private apiService: ApiService, private router: Router, private ngZone: NgZone) {
     this.getInfo()
   }
 
@@ -68,10 +78,9 @@ export class OrderInfoService {
     if (this.obterInformacoesPedido.nome_cartorio != '') {
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
       PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
+      console.log(this.obterInformacoesPedido.pagseguro_session)
     }
   }
-
-
 
   getBrand() {
     if (this.cardData.cardNumber.length == 6) {
@@ -91,6 +100,8 @@ export class OrderInfoService {
   }
 
   createCardToken() {
+    this.progressBarInit = true
+    this.mode = 'indeterminate';
     let expirationMonth = this.cardData.cardValidityPeriod.substring(0, 2)
     let expirationYear = this.cardData.cardValidityPeriod.substring(2, 6)
     PagSeguroDirectPayment.createCardToken({
@@ -101,9 +112,9 @@ export class OrderInfoService {
       expirationYear: expirationYear, // Ano da expiração do cartão, é necessário os 4 dígitos.
       success: (response) => {
         // Retorna o cartão tokenizado.
-        console.log(response.card)
-        setTimeout(navigate => {
-          navigate = this.router.navigate((['/finish']))
+        this.getSenderHash()
+        setTimeout(() => {
+          this.ngZone.run(() => this.router.navigate(['/finish']))
         }, 3000);
       },
       error: (response) => {
@@ -119,6 +130,14 @@ export class OrderInfoService {
     });
   }
 
-
-
+  getSenderHash(){
+    PagSeguroDirectPayment.onSenderHashReady(function(response){
+      if(response.status == 'error') {
+          console.log(response.message);
+          return false;
+      }
+      var hash = response.senderHash;
+      console.log(hash) //Hash estará disponível nesta variável.
+  });
+  }
 }

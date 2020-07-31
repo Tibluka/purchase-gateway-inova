@@ -35,8 +35,8 @@
                 <button [disabled]="!orderInfoService?.disableButton?.valid" (click)="orderInfoService.createCardToken()">Finalizar</button>
             </div>
             <div class="load-bar">
-                <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin" [color]="color" [mode]="mode" [value]="value"
-                    [bufferValue]="bufferValue">
+                <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin" [color]="orderInfoService.color" [mode]="orderInfoService.mode" [value]="orderInfoService.value"
+                    [bufferValue]="orderInfoService.bufferValue">
                 </mat-progress-bar>
             </div>
         </div>
