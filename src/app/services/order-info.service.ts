@@ -54,7 +54,7 @@ class cardData {
 })
 export class OrderInfoService {
 
-  idDoComprador = 'c3160b67-8b4e-498f-8824-b79b47ace6e2'
+  idDoComprador = ''
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
   cardData: cardData = new cardData()
   disableButton //recebe um verdadeiro ou falso para habilitar ou desabilitar o botão finalizar do componente aside
@@ -67,18 +67,18 @@ export class OrderInfoService {
   value = 0;
   bufferValue = 75;
   progressBarInit = false
+  cardBrandImage = ''
 
 
   constructor(private apiService: ApiService, private router: Router, private ngZone: NgZone) {
-    this.getInfo()
   }
 
-  async getInfo() {
+  async getInfo(chavePedido) {
 
-    if (this.obterInformacoesPedido.nome_cartorio != '') {
+    if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
+      this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
       PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
-      console.log(this.obterInformacoesPedido.pagseguro_session)
     }
   }
 
@@ -88,6 +88,7 @@ export class OrderInfoService {
         cardBin: this.cardData.cardNumber,
         success: (response) => {
           this.cardData.brand = response.brand
+          this.cardBrandImage = response.brand.name
         },
         error: (response) => {
           //tratamento do erro
@@ -119,6 +120,7 @@ export class OrderInfoService {
       },
       error: (response) => {
         // Callback para chamadas que falharam.
+        this.mode = 'determinate';
         alert('Ocorreu um erro ao processar as informações digitadas')
         console.log(response)
 

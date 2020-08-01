@@ -1,7 +1,7 @@
 mat-card {
     margin-left: 30px;
     border-bottom: none;
-    min-height: 462px;
+    min-height: 401px;
 }
 
 .page-aside {
@@ -16,6 +16,9 @@ mat-card {
     flex-direction: column;
     align-items: center;
     line-height: 30px;
+    p{
+        margin-top: 2px;
+    }
     hr {
         width: 70%;
         opacity: 0.3;
@@ -62,7 +65,8 @@ mat-card {
         justify-content: center;
         span {
             p {
-                font-size: 15pt;
+                font-size: 13pt;
+                margin: 0;
             }
         }
     }
@@ -91,7 +95,7 @@ mat-card {
 }
 
 p{
-    font-size: 14pt;
+    font-size: 12pt;
 }
 
 // Progressbar //

@@ -2,10 +2,10 @@
     <div class="page-aside ">
         <div class="asblock1">
             <header>
-                <p style="margin-top: 38px !important; ">Lucas Gomes</p>
+                <p style="margin-top: 25px !important; margin-bottom: 0; ">Lucas Gomes</p>
                 <div class="item-description"
                 *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
-                <p>{{item.descricao}} </p>
+                <p style="margin-bottom: 0">{{item.descricao}} </p>
             </div>
                 <hr>
             </header>
@@ -15,7 +15,7 @@
                         <p>Crédito</p>
                     </div>
                     <div class="installments-qty">
-                        <p>Parcelado em {{orderInfoService.installments}}</p>
+                        <p style="margin-bottom: 0">Parcelado em {{orderInfoService.installments}}</p>
                     </div>
                 </div>
                 <hr>

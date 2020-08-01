@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { OrderInfoService } from 'src/app/services/order-info.service';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 class formCardClass {
@@ -58,17 +59,19 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   cartItems = []
 
-  idDoComprador = 'c3160b67-8b4e-498f-8824-b79b47ace6e2'
   options = []
 
   constructor(private apiService: ApiService,
     public orderInfoService: OrderInfoService,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit(): void {
+    const idDoComprador = this.activatedRoute.snapshot.paramMap.get("id")
+    this.orderInfoService.getInfo(idDoComprador)
     this.formCards.push(new formCardClass())
-    this.formCards[0].accordionOpen = true
     this.asideInstallments.emit(1)
     this.getCartInfo()
   }
@@ -82,13 +85,15 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   }
 
   getCartInfo() {
-    this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/' + this.idDoComprador).subscribe(cartorio => {
+    this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/' + this.orderInfoService.idDoComprador).subscribe(cartorio => {
       this.cartItems.push(cartorio)
       const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
       for (let index = 1; index <= installments; index++) {
         this.options.push(index + 'x')
       }
-    })
+    },error =>{
+      this.router.navigate(['/finish'])
+    })    
   }
 
   removeCard(index) {

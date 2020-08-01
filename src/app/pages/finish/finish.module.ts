@@ -13,7 +13,8 @@ import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     FinishComponent,
-    FinishPageComponent],
+    FinishPageComponent
+  ],
 
   imports: [
     CommonModule,
