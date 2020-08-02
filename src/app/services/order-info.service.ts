@@ -79,6 +79,7 @@ export class OrderInfoService {
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
       PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
+      console.log(this.obterInformacoesPedido.pagseguro_session)
     }
   }
 
@@ -126,7 +127,6 @@ export class OrderInfoService {
       },
       complete: (response) => {
         // Callback para todas chamadas.
-        console.log(response)
       }
     });
   }
@@ -145,6 +145,7 @@ export class OrderInfoService {
 
   async executePayment(token, dadosCartao, hash) {
     const data = {
+      qtd_parcela: 4,
       token_cartao: token,
       forma_pagamento: "creditCard",
       sender_hash: hash,
@@ -161,5 +162,24 @@ export class OrderInfoService {
     })
     console.log(dadosCartao, token)
   }
+
+  /* calculateInstallments(parcela) {
+    const data = {
+      token_cartao: "{{cardToken}}",
+      forma_pagamento: "creditCard",
+      qtd_parcela: 4,
+      holder: {
+        nome_impresso_cartao: "Jose S Oliveira",
+        documento: {
+          tipo: "CPF",
+          valor: "93835260090"
+        }
+      }
+
+    }
+    this.apiService.postApi<any>('resumopagamento/', parcela).subscribe(resumo => {
+      console.log('teste')
+    })
+  }  */
 
 }

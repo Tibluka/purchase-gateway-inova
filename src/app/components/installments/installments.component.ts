@@ -4,6 +4,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { OrderInfoService } from 'src/app/services/order-info.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 
 class formCardClass {
@@ -52,13 +53,10 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   qtdCard: number = 1
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-
   @Output() asideInstallments = new EventEmitter()
-
+  horaPedido = this.orderInfoService.obterInformacoesPedido
   formCards: Array<formCardClass> = []
-
   cartItems = []
-
   options = []
 
   constructor(private apiService: ApiService,
@@ -69,6 +67,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    
     const idDoComprador = this.activatedRoute.snapshot.paramMap.get("id")
     this.orderInfoService.getInfo(idDoComprador)
     this.formCards.push(new formCardClass())
@@ -87,6 +86,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   getCartInfo() {
     this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/' + this.orderInfoService.idDoComprador).subscribe(cartorio => {
       this.cartItems.push(cartorio)
+      console.log(cartorio)
       const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
       for (let index = 1; index <= installments; index++) {
         this.options.push(index + 'x')
@@ -96,16 +96,12 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
     })    
   }
 
-  removeCard(index) {
-    console.log(index)
-    if (this.qtdCard > 1) {
-      this.formCards.splice(index, 1)
-      this.qtdCard--
-    }
-  }
 
   setInstallments(cardInstallments) {
     this.orderInfoService.installments = cardInstallments
+    const parcela = cardInstallments.substring(0,1)
+    
+    console.log(parcela)
   }
 
   openSnackBar() {
