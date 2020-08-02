@@ -54,7 +54,6 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   @Output() asideInstallments = new EventEmitter()
-  horaPedido = this.orderInfoService.obterInformacoesPedido
   formCards: Array<formCardClass> = []
   cartItems = []
   options = []
@@ -99,9 +98,8 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   setInstallments(cardInstallments) {
     this.orderInfoService.installments = cardInstallments
-    const parcela = cardInstallments.substring(0,1)
+    const parcela = cardInstallments.replace('x', '')
     
-    console.log(parcela)
   }
 
   openSnackBar() {

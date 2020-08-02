@@ -45,8 +45,7 @@
         <div class="installment-options">
             <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
                 <mat-label>Parcelar em</mat-label>
-
-                <mat-select name="card-installments" required (selectionChange)="setInstallments(card.cardInstallments)"
+                <mat-select [disabled]="!formInstallments.valid" name="cardInstallments" (selectionChange)="setInstallments(card.cardInstallments)"
                     [(ngModel)]="card.cardInstallments">
                     <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
                 </mat-select>
