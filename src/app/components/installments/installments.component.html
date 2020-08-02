@@ -6,7 +6,7 @@
             <img *ngIf="orderInfoService.cardBrandImage == 'visa'" src="../../../assets/images/visa.png" alt="Bandeira do cartão">
             <img *ngIf="orderInfoService.cardBrandImage == 'elo'" style="height: 25px !important; width: 45px; margin-top: 17px;" src="../../../assets/images/elo.png" alt="Bandeira do cartão">
 
-            <p style="padding: 0 0 0 5px !important; margin: 20px 0 -10px 0 !important;">{{orderInfoService.cardData.brand?.name}}</p>
+            <p style="padding: 0 0 0 5px !important; margin: 20px 0 -10px 0 !important;"></p>
         </div>
         <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
 
@@ -44,7 +44,7 @@
 
         <div class="installment-options">
             <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
-                <mat-label>Opções de parcelamento</mat-label>
+                <mat-label>Parcelar em</mat-label>
 
                 <mat-select name="card-installments" required (selectionChange)="setInstallments(card.cardInstallments)"
                     [(ngModel)]="card.cardInstallments">

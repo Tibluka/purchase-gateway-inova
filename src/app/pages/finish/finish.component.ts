@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderInfoService } from 'src/app/services/order-info.service';
 
 @Component({
   selector: 'app-finish',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinishComponent implements OnInit {
 
-  constructor() { }
+  constructor(public orderInfoService: OrderInfoService) { }
 
   ngOnInit(): void {
   }

@@ -1,0 +1,21 @@
+.error-route {
+    margin: 10% 25%;
+}
+
+@media (max-width: 1470px) {
+    .error-route {
+        margin: 10% 10%;
+    }
+}
+
+@media (max-width: 900px) {
+    .error-route {
+        margin: 10% auto;
+    }
+}
+
+@media (max-width: 550px) {
+    .error-route {
+        margin: 10% auto;
+    }
+}

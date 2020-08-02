@@ -2,16 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ErrorRoutingModule } from './error-routing.module';
-import { ErrorPageComponent } from './error-page.component';
+import { ErrorRouteComponent } from './error-route.component';
+import { MatCardModule } from '@angular/material/card';
+import { FinishPageModule } from 'src/app/components/finish-page/finish-page.module';
 
 
 @NgModule({
   declarations: [
-    ErrorPageComponent,
+    ErrorRouteComponent
   ],
   imports: [
     CommonModule,
-    ErrorRoutingModule
+    ErrorRoutingModule,
+    MatCardModule,
+    FinishPageModule
   ]
 })
 export class ErrorModule { }

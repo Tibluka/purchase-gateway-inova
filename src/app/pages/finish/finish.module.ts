@@ -8,12 +8,13 @@ import { FinishRoutingModule } from './finish-routing.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { FinishPageModule } from 'src/app/components/finish-page/finish-page.module';
 
 
 @NgModule({
   declarations: [
-    FinishComponent,
-    FinishPageComponent
+    FinishComponent
+    
   ],
 
   imports: [
@@ -22,7 +23,8 @@ import { MatCardModule } from '@angular/material/card';
     FinishRoutingModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    FinishPageModule
   ]
 })
 export class FinishModule { }

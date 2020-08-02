@@ -102,21 +102,20 @@ export class OrderInfoService {
 
   createCardToken() {
     this.progressBarInit = true
+    const dadosCartao = {
+      ...this.cardData,
+      brand: this.cardData.brand.name,
+      expirationMonth: this.cardData.cardValidityPeriod.substring(0, 2),
+      expirationYear: this.cardData.cardValidityPeriod.substring(2, 6)
+    }
     this.mode = 'indeterminate';
-    let expirationMonth = this.cardData.cardValidityPeriod.substring(0, 2)
-    let expirationYear = this.cardData.cardValidityPeriod.substring(2, 6)
+    console.log(dadosCartao)
     PagSeguroDirectPayment.createCardToken({
-      cardNumber: this.cardData.cardNumber, // Número do cartão de crédito
-      brand: this.cardData.brand.name, // Bandeira do cartão
-      cvv: this.cardData.cvv, // CVV do cartão
-      expirationMonth: expirationMonth, // Mês da expiração do cartão
-      expirationYear: expirationYear, // Ano da expiração do cartão, é necessário os 4 dígitos.
+      ...dadosCartao,
       success: (response) => {
         // Retorna o cartão tokenizado.
-        this.getSenderHash()
-        setTimeout(() => {
-          this.ngZone.run(() => this.router.navigate(['/finish']))
-        }, 3000);
+        this.getSenderHash(response.card.token, dadosCartao)
+        console.log(response)
       },
       error: (response) => {
         // Callback para chamadas que falharam.
@@ -132,14 +131,35 @@ export class OrderInfoService {
     });
   }
 
-  getSenderHash(){
-    PagSeguroDirectPayment.onSenderHashReady(function(response){
-      if(response.status == 'error') {
-          console.log(response.message);
-          return false;
+  getSenderHash(token, dadosCartao) {
+    PagSeguroDirectPayment.onSenderHashReady((response) => {
+      if (response.status == 'error') {
+        console.log(response.message);
+        return false;
       }
-      var hash = response.senderHash;
+      const hash = response.senderHash
+      this.executePayment(token, dadosCartao, hash)
       console.log(hash) //Hash estará disponível nesta variável.
-  });
+    });
   }
+
+  async executePayment(token, dadosCartao, hash) {
+    const data = {
+      token_cartao: token,
+      forma_pagamento: "creditCard",
+      sender_hash: hash,
+      holder: {
+        nome_impresso_cartao: dadosCartao.userFullName,
+        documento: {
+          tipo: "CPF",
+          valor: dadosCartao.userCPF
+        }
+      }
+    }
+    this.apiService.postApi('efetuarpagamento/' + this.idDoComprador, data).subscribe(response => {
+      this.ngZone.run(() => this.router.navigate(['/finish']))
+    })
+    console.log(dadosCartao, token)
+  }
+
 }

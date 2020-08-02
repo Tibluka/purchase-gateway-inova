@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { PaymentConfigModule } from './pages/payment-config/payment-config.module';
 import { FinishModule } from './pages/finish/finish.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorModule } from './pages/error/error.module';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     FinishModule,
     PaymentConfigModule,
+    ErrorModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatSliderModule

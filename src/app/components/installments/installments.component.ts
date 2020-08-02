@@ -92,7 +92,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
         this.options.push(index + 'x')
       }
     },error =>{
-      this.router.navigate(['/finish'])
+      this.router.navigate(['/error'])
     })    
   }
 

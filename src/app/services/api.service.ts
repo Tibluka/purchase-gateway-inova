@@ -22,6 +22,13 @@ export class ApiService {
     return this.http.post<T>(environment.url + params, body)
   }
 
+  //deletar depois
+  getApiToBeDeleted<T>(params): Observable<T>{
+    console.log(params)
+    return this.http.get<T>('http://localhost:3000/users/' + params)
+    
+  }
+
 }
 
 
