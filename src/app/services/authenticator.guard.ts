@@ -28,7 +28,7 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
         if (resp['status'] === 1) { //em aberto
           return true
         } else if (resp['status'] === 2) {// pagamento solicitado
-          this.route.navigate(['/finish'])
+          this.route.navigate(['/requested-pay'])
           return false
         } else if (resp['status'] === 3) {// pago parcialmente
           this.route.navigate(['/error'])
@@ -41,7 +41,6 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
         return of(false)
       })
     )
-
   }
 
 

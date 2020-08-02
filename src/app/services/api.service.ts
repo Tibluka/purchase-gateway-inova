@@ -22,7 +22,7 @@ export class ApiService {
     return this.http.post<T>(environment.url + params, body)
   }
 
-  //deletar depois
+  //alterar depois. Essa chamada é para buscar o status do pedido
   getApiToBeDeleted<T>(params): Observable<T>{
     console.log(params)
     return this.http.get<T>('http://localhost:3000/users/' + params)

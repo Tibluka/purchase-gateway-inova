@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ErrorRoutingModule } from './error-routing.module';
-import { ErrorRouteComponent } from './error-route.component';
+import { RequestedPayRoutingModule } from './requested-pay-routing.module';
+import { RequestedPayComponent } from './requested-pay.component';
 import { FinishPageModule } from 'src/app/components/finish-page/finish-page.module';
 
 
 @NgModule({
   declarations: [
-    ErrorRouteComponent
+    RequestedPayComponent
   ],
   imports: [
     CommonModule,
-    ErrorRoutingModule,
+    RequestedPayRoutingModule,
     FinishPageModule
   ]
 })
-export class ErrorModule { }
+export class RequestedPayModule { }

@@ -11,6 +11,7 @@ import { PaymentConfigModule } from './pages/payment-config/payment-config.modul
 import { FinishModule } from './pages/finish/finish.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorModule } from './pages/error/error.module';
+import { RequestedPayModule } from './pages/requested-pay/requested-pay.module';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ErrorModule } from './pages/error/error.module';
     FinishModule,
     PaymentConfigModule,
     ErrorModule,
+    RequestedPayModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatSliderModule

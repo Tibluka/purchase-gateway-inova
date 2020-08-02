@@ -5,6 +5,8 @@ import { AuthenticatorGuard } from './services/authenticator.guard';
 const routes: Routes = [
   { path: '', loadChildren: './pages/error/error.module#ErrorModule' },
   { path: 'error', loadChildren: './pages/error/error.module#ErrorModule' },
+  { path: 'requested-pay', loadChildren: './pages/requested-pay/requested-pay.module#RequestedPayModule' },
+
   {
     path: 'payment', loadChildren: './pages/payment-config/payment-config.module#PaymentConfigModule',
     canActivateChild: [AuthenticatorGuard]

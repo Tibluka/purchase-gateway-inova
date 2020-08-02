@@ -14,6 +14,9 @@ mat-card {
 
 .installment-options {
     width: 100% !important;
+    mat-form-field{
+        width: 50% !important;
+    }
 }
 
 h5 {
