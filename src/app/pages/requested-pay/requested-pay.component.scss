@@ -1,5 +1,15 @@
 .requested-pay {
     margin: 10% 25%;
+    .refresh{
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        p{
+            font-size: 10pt;
+            margin: 0 0 0 5px;
+        }
+    }
 }
 
 @media (max-width: 1470px) {

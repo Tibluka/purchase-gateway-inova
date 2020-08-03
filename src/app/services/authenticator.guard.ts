@@ -23,10 +23,10 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.apiService.getApi('gateway/obterinformacoespedido/' + next.params.id).pipe(
       map(resp => {
-        console.log(resp)
         if (!resp['payment_status']) { //em aberto
           return true
         } else if (resp['payment_status']['code'] === 2) {// pagamento solicitado
+          localStorage.setItem('previousUrl', state.url)
           this.route.navigate(['/requested-pay'])
           return false
         } else if (resp['payment_status']['code'] === 3) {// pago parcialmente
@@ -37,6 +37,7 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
           return false
         }
       }), catchError((error) => {
+        this.route.navigate(['/error'])
         return of(false)
       })
     )
