@@ -59,6 +59,7 @@ export class OrderInfoService {
   cardData: cardData = new cardData()
   disableButton //recebe um verdadeiro ou falso para habilitar ou desabilitar o botão finalizar do componente aside
   compraFinalizada = true
+  dataHoraPagamento = ''
   installments: number
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -68,13 +69,17 @@ export class OrderInfoService {
   bufferValue = 75;
   progressBarInit = false
   cardBrandImage = ''
+  errors = {
+    invalid_card: false,
+    error: false
+  }
 
 
   constructor(private apiService: ApiService, private router: Router, private ngZone: NgZone) {
   }
 
   async getInfo(chavePedido) {
-    
+
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
@@ -88,11 +93,13 @@ export class OrderInfoService {
       PagSeguroDirectPayment.getBrand({
         cardBin: this.cardData.cardNumber,
         success: (response) => {
+          this.errors.invalid_card = false
           this.cardData.brand = response.brand
           this.cardBrandImage = response.brand.name
         },
         error: (response) => {
           //tratamento do erro
+          this.errors.invalid_card = true
         },
         complete: (response) => {
           //tratamento comum para todas chamadas
@@ -102,7 +109,6 @@ export class OrderInfoService {
   }
 
   createCardToken(parcela) {
-    
     const dadosCartao = {
       ...this.cardData,
       brand: this.cardData.brand.name,
@@ -116,13 +122,12 @@ export class OrderInfoService {
         this.cardData.token = response.card.token
         this.calculateInstallments(parcela, response.card.token, dadosCartao)
         console.log(response.card.token)
-        
+
       },
       error: (response) => {
         // Callback para chamadas que falharam.
         this.mode = 'determinate';
-        this.compraFinalizada = !this.compraFinalizada
-
+        this.errors.error = true
       },
       complete: (response) => {
         // Callback para todas chamadas.
@@ -142,13 +147,15 @@ export class OrderInfoService {
     });
   }
 
-  executePayment(hash) {
+  async executePayment(hash) {
     const data = {
-      token_cartao: this.cardData.token,   
-      sender_hash: hash   
+      token_cartao: this.cardData.token,
+      sender_hash: hash
     }
-    this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
+    await this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
       console.log('funfou', finish)
+      this.dataHoraPagamento = finish.payment_date
+      this.router.navigate(['/requested-pay'])
     })
   }
 

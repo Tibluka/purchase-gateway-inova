@@ -22,11 +22,22 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.apiService.getApi('gateway/obterinformacoespedido/' + next.params.id).pipe(
-      map(resp =>{
-        console.log('esse é o resp', resp)
-        return true
-      }), catchError((error) =>{
-        return of (false)
+      map(resp => {
+        console.log(resp)
+        if (!resp['payment_status']) { //em aberto
+          return true
+        } else if (resp['payment_status']['code'] === 2) {// pagamento solicitado
+          this.route.navigate(['/requested-pay'])
+          return false
+        } else if (resp['payment_status']['code'] === 3) {// pago parcialmente
+          this.route.navigate(['/error'])
+          return false
+        } else if (resp['payment_status']['code'] === 4) {//pagamento aprovado
+          this.route.navigate(['/finish'])
+          return false
+        }
+      }), catchError((error) => {
+        return of(false)
       })
     )
   }

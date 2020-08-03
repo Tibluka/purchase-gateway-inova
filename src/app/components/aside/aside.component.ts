@@ -58,6 +58,8 @@ export class AsideComponent implements OnInit {
   }
 
   finish() {
+    this.orderInfoService.progressBarInit = true
+    this.orderInfoService.mode = 'indeterminate'
      this.orderInfoService.getSenderHash()
   }
 

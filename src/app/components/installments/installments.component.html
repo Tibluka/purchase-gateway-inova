@@ -53,7 +53,10 @@
             </mat-form-field>
         </div>
     </mat-card>
-    <div *ngIf="!orderInfoService.compraFinalizada" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
+    <div *ngIf="orderInfoService.errors.invalid_card" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
+        OOPS! Cartão inválido. Por favor, confira as informações digitadas
+    </div>
+    <div *ngIf="orderInfoService.errors.error" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
         OOPS! Algo deu errado.
     </div>
 </form>
