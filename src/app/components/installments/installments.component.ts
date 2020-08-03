@@ -99,7 +99,8 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   setInstallments(cardInstallments) {
     this.orderInfoService.installments = cardInstallments
     const parcela = cardInstallments.replace('x', '')
-    
+    this.orderInfoService.createCardToken(parcela)
+    console.log(parcela)
   }
 
   openSnackBar() {

@@ -74,7 +74,7 @@ export class OrderInfoService {
   }
 
   async getInfo(chavePedido) {
-
+    
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
@@ -101,28 +101,27 @@ export class OrderInfoService {
     }
   }
 
-  createCardToken() {
-    this.progressBarInit = true
+  createCardToken(parcela) {
+    
     const dadosCartao = {
       ...this.cardData,
       brand: this.cardData.brand.name,
       expirationMonth: this.cardData.cardValidityPeriod.substring(0, 2),
       expirationYear: this.cardData.cardValidityPeriod.substring(2, 6)
     }
-    this.mode = 'indeterminate';
-    console.log(dadosCartao)
     PagSeguroDirectPayment.createCardToken({
       ...dadosCartao,
       success: (response) => {
         // Retorna o cartão tokenizado.
-        this.getSenderHash(response.card.token, dadosCartao)
-        console.log(response)
+        this.cardData.token = response.card.token
+        this.calculateInstallments(parcela, response.card.token, dadosCartao)
+        console.log(response.card.token)
+        
       },
       error: (response) => {
         // Callback para chamadas que falharam.
         this.mode = 'determinate';
-        alert('Ocorreu um erro ao processar as informações digitadas')
-        console.log(response)
+        this.compraFinalizada = !this.compraFinalizada
 
       },
       complete: (response) => {
@@ -131,24 +130,33 @@ export class OrderInfoService {
     });
   }
 
-  getSenderHash(token, dadosCartao) {
+  getSenderHash() {
     PagSeguroDirectPayment.onSenderHashReady((response) => {
       if (response.status == 'error') {
         console.log(response.message);
         return false;
       }
       const hash = response.senderHash
-      this.executePayment(token, dadosCartao, hash)
       console.log(hash) //Hash estará disponível nesta variável.
+      this.executePayment(hash)
     });
   }
 
-  async executePayment(token, dadosCartao, hash) {
+  executePayment(hash) {
     const data = {
-      qtd_parcela: 4,
+      token_cartao: this.cardData.token,   
+      sender_hash: hash   
+    }
+    this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
+      console.log('funfou', finish)
+    })
+  }
+
+  calculateInstallments(parcela, token, dadosCartao) {
+    const data = {
       token_cartao: token,
       forma_pagamento: "creditCard",
-      sender_hash: hash,
+      qtd_parcela: parcela,
       holder: {
         nome_impresso_cartao: dadosCartao.userFullName,
         documento: {
@@ -157,29 +165,10 @@ export class OrderInfoService {
         }
       }
     }
-    this.apiService.postApi('efetuarpagamento/' + this.idDoComprador, data).subscribe(response => {
-      this.ngZone.run(() => this.router.navigate(['/finish']))
+    this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
+      console.log('deucerto', resumo)
+      this.obterInformacoesPedido.valor_total_pedido = resumo.total_value
     })
-    console.log(dadosCartao, token)
   }
-
-  /* calculateInstallments(parcela) {
-    const data = {
-      token_cartao: "{{cardToken}}",
-      forma_pagamento: "creditCard",
-      qtd_parcela: 4,
-      holder: {
-        nome_impresso_cartao: "Jose S Oliveira",
-        documento: {
-          tipo: "CPF",
-          valor: "93835260090"
-        }
-      }
-
-    }
-    this.apiService.postApi<any>('resumopagamento/', parcela).subscribe(resumo => {
-      console.log('teste')
-    })
-  }  */
 
 }

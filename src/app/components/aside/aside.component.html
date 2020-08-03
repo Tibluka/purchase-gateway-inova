@@ -32,7 +32,7 @@
             </div> -->
 
             <div class="btn">
-                <button [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments" (click)="orderInfoService.createCardToken()">Finalizar</button>
+                <button [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments" (click)="finish()">Finalizar</button>
             </div>
             <div class="load-bar">
                 <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin" [color]="orderInfoService.color" [mode]="orderInfoService.mode" [value]="orderInfoService.value"

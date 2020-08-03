@@ -21,10 +21,21 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    /*     return this.apiService.getApiToBeDeleted(next.params.id).pipe(
-     */
-    return this.apiService.getApiToBeDeleted('2').pipe(
-      map(resp => {
+    return this.apiService.getApi('gateway/obterinformacoespedido/' + next.params.id).pipe(
+      map(resp =>{
+        console.log('esse é o resp', resp)
+        return true
+      }), catchError((error) =>{
+        return of (false)
+      })
+    )
+  }
+
+
+
+}
+/*   map(resp => {
+        console.log(resp)
         if (resp['status'] === 1) { //em aberto
           return true
         } else if (resp['status'] === 2) {// pagamento solicitado
@@ -39,10 +50,4 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
         }
       }), catchError((error) => {
         return of(false)
-      })
-    )
-  }
-
-
-
-}
+      }) */
