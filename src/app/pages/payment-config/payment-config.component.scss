@@ -1,12 +1,15 @@
 .title{
     margin-top: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     font-size: 14pt;
     font-weight: normal;
 }
 
 .payment-config{
     display: flex;
+}
+h5{
+    font-weight: normal;
 }
 
 app-installments{

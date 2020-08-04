@@ -17,7 +17,7 @@
 
         <mat-form-field class="item" appearance="fill">
             <mat-label>Nome no cartão</mat-label>
-            <input name="card-name" type="text" required pattern="[a-z\s]+$" matInput
+            <input name="card-name" type="text" required pattern="[a-z-A-Z\s]+$" matInput
                 [(ngModel)]="orderInfoService.cardData.userFullName">
         </mat-form-field>
         <mat-form-field class="item" appearance="fill">

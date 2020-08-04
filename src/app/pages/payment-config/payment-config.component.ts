@@ -13,8 +13,5 @@ export class PaymentConfigComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(form){
-    console.log(form)
-  }
 
 }

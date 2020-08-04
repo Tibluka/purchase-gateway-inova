@@ -66,12 +66,10 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    
     const idDoComprador = this.activatedRoute.snapshot.paramMap.get("id")
-    this.orderInfoService.getInfo(idDoComprador)
     this.formCards.push(new formCardClass())
     this.asideInstallments.emit(1)
-    this.getCartInfo()
+    this.getCartInfo(idDoComprador)
   }
 
   //ngAfterViewInit só aparece quando renderizar HTML na tela. Essa é a diferença entre ele e o ngOnInit
@@ -82,19 +80,17 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
     }, 1);
   }
 
-  getCartInfo() {
-    this.apiService.getApi<obterInformacoesPedido>('gateway/obterinformacoespedido/' + this.orderInfoService.idDoComprador).subscribe(cartorio => {
-      this.cartItems.push(cartorio)
-      console.log(cartorio)
-      const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
-      for (let index = 1; index <= installments; index++) {
-        this.options.push(index + 'x')
-      }
-    },error =>{
-      this.router.navigate(['/error'])
-    })    
+  async getCartInfo(idDoComprador) {
+    debugger
+    const cartorio = await this.orderInfoService.getInfo(idDoComprador)
+    debugger
+    this.cartItems.push(cartorio)
+    console.log(cartorio)
+    const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
+    for (let index = 1; index <= installments; index++) {
+      this.options.push(index + 'x')
+    }
   }
-
 
   setInstallments(cardInstallments) {
     this.orderInfoService.installments = cardInstallments

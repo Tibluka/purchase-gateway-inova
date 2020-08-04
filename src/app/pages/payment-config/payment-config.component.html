@@ -1,7 +1,14 @@
-<h5 class="title">Olá! Essa ordem de pagamento foi gerada às 12:12, no dia 27/07/2020 e refere-se a Escritura.
+<h5 class="title" style="display: flex;">
+    <div>
+        Olá! Essa ordem de pagamento foi gerada no dia
+        {{orderInfoService?.obterInformacoesPedido?.payment_date_emit}}e refere-se ao(s) item(ns):
+    </div>
+    <div class="items" style="margin-left: 5px;" *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
+        {{i.descricao}}
+    </div>
     <br>
-    Por favor, insira os dados para pagamento e finalize a compra
 </h5>
+<h5> Por favor, insira os dados para pagamento e finalize a compra</h5>
 <div class="payment-config">
     <app-installments></app-installments>
     <app-aside></app-aside>

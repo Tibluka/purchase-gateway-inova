@@ -79,13 +79,18 @@ export class OrderInfoService {
   }
 
   async getInfo(chavePedido) {
-
+    debugger
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
+      debugger
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
       PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
       console.log(this.obterInformacoesPedido.pagseguro_session)
+      debugger
+      return this.obterInformacoesPedido
     }
+    debugger
+    return this.obterInformacoesPedido
   }
 
   getBrand() {
