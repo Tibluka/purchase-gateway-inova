@@ -1,13 +1,12 @@
-<h5 class="title" style="display: flex;">
-    <div>
-        Olá! Essa ordem de pagamento foi gerada no dia
-        {{orderInfoService?.obterInformacoesPedido?.payment_date_emit}}e refere-se ao(s) item(ns):
-    </div>
-    <div class="items" style="margin-left: 5px;" *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
+<div class="title">
+    <p>Olá! Essa ordem de pagamento foi gerada em: {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
+        referente ao(s) item(ns) abaixo:
+    </p>
+    <div style="margin: 0 5px 8px 0;" *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
         {{i.descricao}}
     </div>
-    <br>
-</h5>
+</div>
+
 <h5> Por favor, insira os dados para pagamento e finalize a compra</h5>
 <div class="payment-config">
     <app-installments></app-installments>

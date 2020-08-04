@@ -79,17 +79,16 @@ export class OrderInfoService {
   }
 
   async getInfo(chavePedido) {
-    debugger
+    
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
-      debugger
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
       PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
       console.log(this.obterInformacoesPedido.pagseguro_session)
-      debugger
+      
       return this.obterInformacoesPedido
     }
-    debugger
+    
     return this.obterInformacoesPedido
   }
 
@@ -158,7 +157,7 @@ export class OrderInfoService {
       sender_hash: hash
     }
     await this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
-      console.log('funfou', finish)
+      console.log(finish)
       this.dataHoraPagamento = finish.payment_date
       this.router.navigate(['/requested-pay'])
     })
@@ -178,7 +177,7 @@ export class OrderInfoService {
       }
     }
     this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
-      console.log('deucerto', resumo)
+      console.log(resumo)
       this.obterInformacoesPedido.valor_total_pedido = resumo.total_value
     })
   }

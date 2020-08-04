@@ -11,7 +11,7 @@
         <h5 style="text-align: center; margin-top: 15px;">
             Solicitação de pagamento efetuada com sucesso!
         </h5>
-        <p>Data da solicitação: {{orderInfoService.dataHoraPagamento}}</p>
+        <p>Data da solicitação: {{data[0]?.payment_date}}</p>
         <p>Por favor aguarde a confirmação do pagamento</p>
         <div class="refresh" (click)="click()">
            

@@ -81,11 +81,8 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   }
 
   async getCartInfo(idDoComprador) {
-    debugger
     const cartorio = await this.orderInfoService.getInfo(idDoComprador)
-    debugger
     this.cartItems.push(cartorio)
-    console.log(cartorio)
     const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
     for (let index = 1; index <= installments; index++) {
       this.options.push(index + 'x')
