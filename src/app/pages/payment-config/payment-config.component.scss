@@ -1,22 +1,9 @@
-.title{
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
-    font-size: 14pt;
-    font-weight: normal;
-    p{
-        margin: 0;
-    }
-}
+
 
 .payment-config{
     display: flex;
 }
-h5{
-    font-weight: normal;
-    font-size: 14pt;
 
-}
 
 app-installments{
     flex: 1 1;

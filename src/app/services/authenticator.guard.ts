@@ -3,14 +3,14 @@ import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnaps
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
 import { map, catchError } from 'rxjs/operators';
+import { OrderInfoService } from './order-info.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticatorGuard implements CanActivate, CanActivateChild {
 
-  constructor(private apiService: ApiService, private route: Router) {
-
+  constructor(private apiService: ApiService, private route: Router, private orderInfoService: OrderInfoService) {
   }
 
   canActivate(
@@ -24,6 +24,9 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
     return this.apiService.getApi('gateway/obterinformacoespedido/' + next.params.id).pipe(
       map(resp => {
         console.log(next.params.id);
+        this.orderInfoService.obterInformacoesPedido = resp as any
+        this.orderInfoService.idDoComprador = next.params.id
+        this.orderInfoService.setSessionID()
         if (!resp['payment_status']) { //em aberto
           localStorage.setItem('previousUrl', state.url)
           return true

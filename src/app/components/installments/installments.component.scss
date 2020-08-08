@@ -2,6 +2,23 @@
     width: 100% !important;
 }
 
+.title{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    font-size: 13pt;
+    font-weight: 100;
+    p{
+        margin: 0;
+    }
+   
+}
+
+h5{
+    font-weight: 100 !important;
+    font-size: 13pt;
+}
+
 mat-card {
     padding: 0px 16px 0 16px !important;
     img {

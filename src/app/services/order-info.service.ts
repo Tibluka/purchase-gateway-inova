@@ -78,14 +78,17 @@ export class OrderInfoService {
   constructor(private apiService: ApiService, private router: Router, private ngZone: NgZone) {
   }
 
+  setSessionID() {
+    PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
+  }
+
   async getInfo(chavePedido) {
 
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
-      PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
+      this.setSessionID()
       console.log(this.obterInformacoesPedido.pagseguro_session)
-
       return this.obterInformacoesPedido
     }
 
@@ -153,15 +156,21 @@ export class OrderInfoService {
     });
   }
 
-  async executePayment(hash) {
+  executePayment(hash) {
     const data = {
       token_cartao: this.cardData.token,
       sender_hash: hash
     }
-    await this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
+    this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
       console.log(finish)
+
       this.dataHoraPagamento = finish.payment_date
       this.router.navigate(['/requested-pay'])
+    }, err => {
+      console.log('isso é o erro', err)
+      this.disableAfterFinish = false
+      this.progressBarInit = false
+      this.errors.error = true
     })
   }
 

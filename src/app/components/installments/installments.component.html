@@ -1,3 +1,15 @@
+<mat-card style="margin-bottom: 15px;">
+    <div class="title">
+        <p>Olá! Essa ordem de pagamento foi gerada em: {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
+            referente a:
+        </p>
+        <div style="margin: 5px 10px 8px 0; font-style: italic;"
+            *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
+            {{i.descricao}}
+        </div>
+    </div>
+    <h5> Por favor, insira os dados para pagamento e finalize a compra</h5>
+</mat-card>
 <form #formInstallments="ngForm" id="formInstallments">
     <mat-card style="display: flex; flex-direction: column; justify-content: center;"
         *ngFor="let card of formCards; let i = index">
@@ -17,7 +29,7 @@
 
         <mat-form-field class="item" appearance="fill">
             <mat-label>Nome no cartão</mat-label>
-            <input name="card-name" onpaste="return false" type="text" required pattern="[a-z-A-Z\s]+$" matInput
+            <input name="card-name" onpaste="return false" type="text" required pattern="[a-z-A-Z\s]* [a-z-A-Z\s]*" matInput
                 [(ngModel)]="orderInfoService.cardData.userFullName">
         </mat-form-field>
         <mat-form-field class="item" appearance="fill">
@@ -49,7 +61,6 @@
                     [(ngModel)]="card.cardInstallments">
                     <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
                 </mat-select>
-
             </mat-form-field>
         </div>
     </mat-card>

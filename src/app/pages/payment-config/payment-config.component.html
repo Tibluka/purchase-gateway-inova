@@ -1,14 +1,4 @@
-<div class="title">
-    <p>Olá! Essa ordem de pagamento foi gerada em: {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
-        referente ao(s) item(ns) abaixo:
-    </p>
-    <div style="margin: 0 5px 8px 0;" *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
-        {{i.descricao}}
-    </div>
-</div>
-
-<h5> Por favor, insira os dados para pagamento e finalize a compra</h5>
 <div class="payment-config">
     <app-installments></app-installments>
-    <app-aside></app-aside>
+    <app-aside style="margin-top: 98px;"></app-aside>
 </div>

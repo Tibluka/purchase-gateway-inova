@@ -19,7 +19,6 @@ export class RequestedPayComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
     console.log(this.previousUrl);
     
     this.previousUrl = localStorage.getItem('previousUrl')
