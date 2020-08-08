@@ -58,7 +58,7 @@ export class OrderInfoService {
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
   cardData: cardData = new cardData()
   disableButton //recebe um verdadeiro ou falso para habilitar ou desabilitar o botão finalizar do componente aside
-  compraFinalizada = true
+  disableAfterFinish = false
   dataHoraPagamento = ''
   installments: number
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
@@ -79,16 +79,16 @@ export class OrderInfoService {
   }
 
   async getInfo(chavePedido) {
-    
+
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
       PagSeguroDirectPayment.setSessionId(this.obterInformacoesPedido.pagseguro_session);
       console.log(this.obterInformacoesPedido.pagseguro_session)
-      
+
       return this.obterInformacoesPedido
     }
-    
+
     return this.obterInformacoesPedido
   }
 
@@ -123,6 +123,7 @@ export class OrderInfoService {
       ...dadosCartao,
       success: (response) => {
         // Retorna o cartão tokenizado.
+        this.disableAfterFinish = false
         this.cardData.token = response.card.token
         this.calculateInstallments(parcela, response.card.token, dadosCartao)
         console.log(response.card.token)
@@ -132,6 +133,7 @@ export class OrderInfoService {
         // Callback para chamadas que falharam.
         this.mode = 'determinate';
         this.errors.error = true
+        this.disableAfterFinish = false
       },
       complete: (response) => {
         // Callback para todas chamadas.
@@ -179,7 +181,9 @@ export class OrderInfoService {
     this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
       console.log(resumo)
       this.obterInformacoesPedido.valor_total_pedido = resumo.total_value
-    })
+    }), err => {
+      console.log(err)
+    }
   }
 
 }

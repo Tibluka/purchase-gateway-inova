@@ -11,29 +11,29 @@
         <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
 
             <mat-label>Número do cartão</mat-label>
-            <input name="card-number" mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$"
+            <input name="card-number" onpaste="return false" mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$"
                 matInput [(ngModel)]="orderInfoService.cardData.cardNumber" (keyup)="orderInfoService.getBrand()">
         </mat-form-field>
 
         <mat-form-field class="item" appearance="fill">
             <mat-label>Nome no cartão</mat-label>
-            <input name="card-name" type="text" required pattern="[a-z-A-Z\s]+$" matInput
+            <input name="card-name" onpaste="return false" type="text" required pattern="[a-z-A-Z\s]+$" matInput
                 [(ngModel)]="orderInfoService.cardData.userFullName">
         </mat-form-field>
         <mat-form-field class="item" appearance="fill">
             <mat-label>CPF/CNPJ do titular</mat-label>
-            <input name="card-CPF" required pattern="[0-9]+$" mask="000.000.000-00" matInput
+            <input name="card-CPF" onpaste="return false" required pattern="[0-9]+$" mask="000.000.000-00" matInput
                 [(ngModel)]="orderInfoService.cardData.userCPF">
         </mat-form-field>
         <div class="cvv" style="display: flex;">
-            <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
+            <mat-form-field class="item"  appearance="fill" style="margin-right: 5px;">
                 <mat-label>CVV</mat-label>
-                <input name="card-cvv" mask="000" maxlength="3" type="text" required pattern="[0-9]+$" matInput
+                <input name="card-cvv" onpaste="return false" mask="000" maxlength="3" type="text" required pattern="[0-9]+$" matInput
                     [(ngModel)]="orderInfoService.cardData.cvv">
             </mat-form-field>
             <mat-form-field class="item" appearance="fill">
                 <mat-label>Validade</mat-label>
-                <input name="card-validity" type="text" placeholder="MM/AAAA" required="required" maxlength="10"
+                <input name="card-validity" onpaste="return false" type="text" placeholder="MM/AAAA" required="required" maxlength="10"
                     name="date" mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
             </mat-form-field>
         </div>
@@ -54,9 +54,9 @@
         </div>
     </mat-card>
     <div *ngIf="orderInfoService.errors.invalid_card" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
-        OOPS! Cartão inválido. Por favor, confira as informações digitadas
+        Cartão inválido. Por favor, confira as informações digitadas
     </div>
     <div *ngIf="orderInfoService.errors.error" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
-        OOPS! Algo deu errado.
+        Algo deu errado.
     </div>
 </form>

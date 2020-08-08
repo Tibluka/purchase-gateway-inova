@@ -23,7 +23,9 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return this.apiService.getApi('gateway/obterinformacoespedido/' + next.params.id).pipe(
       map(resp => {
+        console.log(next.params.id);
         if (!resp['payment_status']) { //em aberto
+          localStorage.setItem('previousUrl', state.url)
           return true
         } else if (resp['payment_status']['code'] === 2) {// pagamento solicitado
           localStorage.setItem('previousUrl', state.url)

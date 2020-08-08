@@ -20,12 +20,15 @@ export class RequestedPayComponent implements OnInit {
 
   ngOnInit(): void {
     
+    console.log(this.previousUrl);
+    
     this.previousUrl = localStorage.getItem('previousUrl')
+    console.log(this.previousUrl);
+    
     this.getDate()
   }
 
   getDate() {
-    
     const chave = this.previousUrl.replace('payment/', '')
     return this.apiService.getApi('gateway/obterinformacoespedido' + chave).subscribe(dateInfo => {
       this.data.push(dateInfo)

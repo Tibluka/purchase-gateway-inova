@@ -90,28 +90,11 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   }
 
   setInstallments(cardInstallments) {
+    this.orderInfoService.disableAfterFinish = true
     this.orderInfoService.installments = cardInstallments
     const parcela = cardInstallments.replace('x', '')
     this.orderInfoService.createCardToken(parcela)
     console.log(parcela)
   }
-
-  openSnackBar() {
-    if (this.orderInfoService.compraFinalizada) {
-      this._snackBar.open('Eba!! Deu tudo certo', 'Fechar', {
-        duration: 10000,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    } else {
-      this._snackBar.open('OOPS!! Algo deu errado', 'Fechar', {
-        duration: 10000,
-        horizontalPosition: this.horizontalPosition,
-        verticalPosition: this.verticalPosition,
-      });
-    }
-  }
-
-
 
 }
