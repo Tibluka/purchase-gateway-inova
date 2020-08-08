@@ -2,6 +2,7 @@ mat-card {
     margin-left: 30px;
     border-bottom: none;
     min-height: 401px;
+    margin-top: 98px;
 }
 
 .page-aside {
@@ -16,7 +17,7 @@ mat-card {
     flex-direction: column;
     align-items: center;
     line-height: 30px;
-    p{
+    p {
         margin-top: 2px;
     }
     hr {
@@ -53,7 +54,6 @@ mat-card {
     .installments-qty,
     .cards-qty,
     .paid-amount {
-      
         margin: 5px 20px;
     }
 }
@@ -94,23 +94,23 @@ mat-card {
     }
 }
 
-p{
+p {
     font-size: 12pt;
 }
 
 // Progressbar //
 
-.load-bar{
+.load-bar {
     display: flex;
     justify-content: center;
     margin-top: 12px;
-    mat-progress-bar{
-       margin: 0 13px;
+    mat-progress-bar {
+        margin: 0 13px;
     }
 }
 
-@media(max-width: 1475px){
-    mat-card{
+@media (max-width: 1475px) {
+    mat-card {
         margin: 16px 0 0 0;
     }
 }
