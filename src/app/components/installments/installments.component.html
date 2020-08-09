@@ -1,4 +1,4 @@
-<mat-card style="margin-bottom: 15px;">
+<mat-card class="initial-message">
     <div class="title">
         <p style="text-align: left !important;">Olá! Essa ordem de pagamento foi gerada em: {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
             referente a:
@@ -33,21 +33,22 @@
                 [(ngModel)]="orderInfoService.cardData.userFullName">
         </mat-form-field>
         <mat-form-field class="item" appearance="fill">
-            <mat-label>CPF/CNPJ do titular</mat-label>
-            <input name="card-CPF" onpaste="return false" required pattern="[0-9]+$" mask="000.000.000-00" matInput
+            <mat-label>CPF</mat-label>
+            <input name="card-CPF" onpaste="return false" inputmode="numeric" required pattern="[0-9]+$" mask="000.000.000-00" matInput
                 [(ngModel)]="orderInfoService.cardData.userCPF">
         </mat-form-field>
         <div class="cvv" style="display: flex;">
             <mat-form-field class="item"  appearance="fill" style="margin-right: 5px;">
                 <mat-label>CVV</mat-label>
-                <input name="card-cvv" onpaste="return false" mask="000" maxlength="3" type="text" required pattern="[0-9]+$" matInput
+                <input name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3" type="password" required pattern="[0-9]+$" matInput
                     [(ngModel)]="orderInfoService.cardData.cvv">
             </mat-form-field>
             <mat-form-field class="item" appearance="fill">
                 <mat-label>Validade</mat-label>
-                <input name="card-validity" onpaste="return false" type="text" placeholder="MM/AAAA" required="required" maxlength="10"
+                <input name="card-validity" onpaste="return false" type="text" inputmode="numeric" placeholder="MM/AAAA" required="required" maxlength="10"
                     name="date" mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
             </mat-form-field>
+            
         </div>
         <!--   <mat-form-field *ngIf="moreThanOneCard" appearance="fill" style="width: 100%;">
             <mat-label>Valor a cobrar nesse cartão</mat-label>

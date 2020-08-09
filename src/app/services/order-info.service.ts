@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 declare let PagSeguroDirectPayment: any;
 declare var success: any
 declare var error: any
@@ -61,6 +62,10 @@ export class OrderInfoService {
   disableAfterFinish = false
   dataHoraPagamento = ''
   installments: number
+  SpinColor: ThemePalette = 'primary';
+  SpinMode: ProgressSpinnerMode = 'indeterminate';
+  SpinValue = 50;
+  
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   color: ThemePalette = 'primary';
@@ -68,6 +73,7 @@ export class OrderInfoService {
   value = 0;
   bufferValue = 75;
   progressBarInit = false
+  progressSpinnerInit = false
   cardBrandImage = ''
   errors = {
     invalid_card: false,
@@ -127,6 +133,8 @@ export class OrderInfoService {
       success: (response) => {
         // Retorna o cartão tokenizado.
         this.disableAfterFinish = false
+        this.SpinMode = 'indeterminate'
+        this.progressSpinnerInit = false
         this.cardData.token = response.card.token
         this.calculateInstallments(parcela, response.card.token, dadosCartao)
         console.log(response.card.token)
@@ -174,7 +182,7 @@ export class OrderInfoService {
     })
   }
 
-  calculateInstallments(parcela, token, dadosCartao) {
+  async calculateInstallments(parcela, token, dadosCartao) {
     const data = {
       token_cartao: token,
       forma_pagamento: "creditCard",
@@ -187,7 +195,7 @@ export class OrderInfoService {
         }
       }
     }
-    this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
+    await this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
       console.log(resumo)
       this.obterInformacoesPedido.valor_total_pedido = resumo.total_value
     }), err => {

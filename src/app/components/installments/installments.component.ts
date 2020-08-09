@@ -90,6 +90,8 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   }
 
   setInstallments(cardInstallments) {
+    this.orderInfoService.progressSpinnerInit = true
+    this.orderInfoService.SpinMode = 'indeterminate'
     this.orderInfoService.disableAfterFinish = true
     this.orderInfoService.installments = cardInstallments
     const parcela = cardInstallments.replace('x', '')

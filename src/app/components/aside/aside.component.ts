@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
+
 
 interface obterInformacoesPedido {
   pagseguro_session: string;
@@ -38,23 +40,21 @@ export class AsideComponent implements OnInit {
 
   @Input() qtdCard: number;
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 0;
   bufferValue = 75;
 
-
   constructor(
     private apiService: ApiService,
     public orderInfoService: OrderInfoService,
-    private router: Router,
-    private _snackBar: MatSnackBar) {
+    private router: Router) {
   }
 
   ngOnInit(): void {
     this.orderInfoService.progressBarInit = false
+    this.orderInfoService.progressSpinnerInit = false
   }
 
   finish() {

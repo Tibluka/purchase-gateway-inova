@@ -4,9 +4,9 @@
             <header>
                 <p style="margin-top: 25px !important; margin-bottom: 0; ">Lucas Gomes</p>
                 <div class="item-description"
-                *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
-                <p style="margin-bottom: 0">{{item.descricao}} </p>
-            </div>
+                    *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
+                    <p style="margin-bottom: 0">{{item.descricao}} </p>
+                </div>
                 <hr>
             </header>
             <main>
@@ -23,19 +23,26 @@
         </div>
         <div class="asblock2">
             <div class="price">
-                <span>
+                <span *ngIf="!orderInfoService.progressSpinnerInit ">
                     <p>Você pagará {{orderInfoService.obterInformacoesPedido.valor_total_pedido | currency:'BRL'}}</p>
                 </span>
+                <span *ngIf="orderInfoService.progressSpinnerInit">
+                    <mat-progress-spinner diameter="30" [color]="orderInfoService.color" [mode]="orderInfoService.SpinMode" [value]="orderInfoService.SpinValue">
+                    </mat-progress-spinner>
+                </span>
             </div>
-          <!--   <div class="btn">
+            <!--   <div class="btn">
                 <button id="finishButton" [disabled]="!orderInfoService?.disableButton?.valid" (click)="finish()">Finalizar</button>
             </div> -->
 
             <div class="btn">
-                <button [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || orderInfoService.disableAfterFinish" (click)="finish()">Finalizar</button>
+                <button
+                    [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || orderInfoService.disableAfterFinish"
+                    (click)="finish()">Finalizar</button>
             </div>
             <div class="load-bar">
-                <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin" [color]="orderInfoService.color" [mode]="orderInfoService.mode" [value]="orderInfoService.value"
+                <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin"
+                    [color]="orderInfoService.color" [mode]="orderInfoService.mode" [value]="orderInfoService.value"
                     [bufferValue]="orderInfoService.bufferValue">
                 </mat-progress-bar>
             </div>

@@ -30,7 +30,12 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
         if (!resp['payment_status']) { //em aberto
           localStorage.setItem('previousUrl', state.url)
           return true
-        } else if (resp['payment_status']['code'] === 2) {// pagamento solicitado
+        } 
+        else if (resp['payment_status']['code'] === 1) {// outro em aberto
+          localStorage.setItem('previousUrl', state.url)
+          return true
+        }
+        else if (resp['payment_status']['code'] === 2) {// pagamento solicitado
           localStorage.setItem('previousUrl', state.url)
           this.route.navigate(['/requested-pay'])
           return false
@@ -39,6 +44,10 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
           return false
         } else if (resp['payment_status']['code'] === 4) {//pagamento aprovado
           this.route.navigate(['/finish'])
+          return false
+        }
+        else{
+          this.route.navigate(['/error'])
           return false
         }
       }), catchError((error) => {

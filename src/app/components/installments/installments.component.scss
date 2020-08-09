@@ -2,19 +2,23 @@
     width: 100% !important;
 }
 
-.title{
+.initial-message {
+    margin-bottom: 15px !important;
+    padding: 15px 10px !important;
+}
+
+.title {
     display: flex;
     flex-direction: column;
     margin-top: 30px;
     font-size: 13pt;
     font-weight: 100;
-    p{
+    p {
         margin: 0;
     }
-   
 }
 
-h5{
+h5 {
     font-weight: 100 !important;
     font-size: 13pt;
 }
@@ -31,7 +35,7 @@ mat-card {
 
 .installment-options {
     width: 100% !important;
-    mat-form-field{
+    mat-form-field {
         width: 50% !important;
     }
 }
