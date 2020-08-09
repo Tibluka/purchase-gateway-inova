@@ -62,7 +62,7 @@ export class OrderInfoService {
   disableAfterFinish = false
   dataHoraPagamento = ''
   installments: number
-  SpinColor: ThemePalette = 'primary';
+  SpinColor: ThemePalette = 'warn';
   SpinMode: ProgressSpinnerMode = 'indeterminate';
   SpinValue = 50;
   
@@ -142,6 +142,7 @@ export class OrderInfoService {
       },
       error: (response) => {
         // Callback para chamadas que falharam.
+        this.progressSpinnerInit = false
         this.mode = 'determinate';
         this.errors.error = true
         this.disableAfterFinish = false

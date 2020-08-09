@@ -27,7 +27,7 @@
                     <p>Você pagará {{orderInfoService.obterInformacoesPedido.valor_total_pedido | currency:'BRL'}}</p>
                 </span>
                 <span *ngIf="orderInfoService.progressSpinnerInit">
-                    <mat-progress-spinner diameter="30" [color]="orderInfoService.color" [mode]="orderInfoService.SpinMode" [value]="orderInfoService.SpinValue">
+                    <mat-progress-spinner diameter="30" [color]="orderInfoService.SpinColor" [mode]="orderInfoService.SpinMode" [value]="orderInfoService.SpinValue">
                     </mat-progress-spinner>
                 </span>
             </div>
