@@ -23,7 +23,7 @@
         <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
 
             <mat-label>Número do cartão</mat-label>
-            <input name="card-number" onpaste="return false" mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$"
+            <input name="card-number" onpaste="return false" inputmode="numeric"inputmode="numeric" mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$"
                 matInput [(ngModel)]="orderInfoService.cardData.cardNumber" (keyup)="orderInfoService.getBrand()">
         </mat-form-field>
 
