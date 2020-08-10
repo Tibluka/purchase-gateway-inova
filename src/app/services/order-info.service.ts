@@ -198,6 +198,9 @@ export class OrderInfoService {
     }
     await this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
       console.log(resumo)
+      setTimeout(() => {
+        document.getElementById("finishPurchase").focus();
+      }, 500);
       this.obterInformacoesPedido.valor_total_pedido = resumo.total_value
     }), err => {
       console.log(err)

@@ -43,9 +43,10 @@
                 <input name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3" type="password" required pattern="[0-9]+$" matInput
                     [(ngModel)]="orderInfoService.cardData.cvv">
             </mat-form-field>
+        
             <mat-form-field class="item" appearance="fill">
                 <mat-label>Validade</mat-label>
-                <input name="card-validity" onpaste="return false" type="text" inputmode="numeric" placeholder="MM/AAAA" required="required" maxlength="10"
+                <input id="finishPurchase" name="card-validity" onpaste="return false" type="text" inputmode="numeric" placeholder="MM/AAAA" required="required" maxlength="10"
                     name="date" mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
             </mat-form-field>
             
