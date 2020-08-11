@@ -40,14 +40,14 @@
         <div class="cvv" style="display: flex;">
             <mat-form-field class="item"  appearance="fill" style="margin-right: 5px;">
                 <mat-label>CVV</mat-label>
-                <input name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3" type="password" required pattern="[0-9]+$" matInput
-                    [(ngModel)]="orderInfoService.cardData.cvv">
+                <input name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3" type="password" 
+                required pattern="[0-9]+$" matInput [(ngModel)]="orderInfoService.cardData.cvv">
             </mat-form-field>
         
             <mat-form-field class="item" appearance="fill">
                 <mat-label>Validade</mat-label>
-                <input id="finishPurchase" name="card-validity" onpaste="return false" type="text" inputmode="numeric" placeholder="MM/AAAA" required="required" maxlength="10"
-                    name="date" mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
+                <input id="finishPurchase" name="card-validity" onpaste="return false" type="text" inputmode="numeric" 
+                placeholder="MM/AAAA" required="required" maxlength="10" (keyup)="orderInfoService.validate()" mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
             </mat-form-field>
             
         </div>
@@ -59,17 +59,18 @@
         <div class="installment-options">
             <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
                 <mat-label>Parcelar em</mat-label>
-                <mat-select [disabled]="!formInstallments.valid" name="cardInstallments" (selectionChange)="setInstallments(card.cardInstallments)"
+                <mat-select [disabled]="!formInstallments.valid || 
+                !orderInfoService.dateIsValid" name="cardInstallments" (selectionChange)="setInstallments(card.cardInstallments)"
                     [(ngModel)]="card.cardInstallments">
                     <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
     </mat-card>
-    <div *ngIf="orderInfoService.errors.invalid_card" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
+    <div *ngIf="orderInfoService.errors.invalid_card && !orderInfoService.errors.error" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
         Cartão inválido. Por favor, confira as informações digitadas
     </div>
     <div *ngIf="orderInfoService.errors.error" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
-        Algo deu errado.
+        A data de validade do cartão é inválida.
     </div>
 </form>

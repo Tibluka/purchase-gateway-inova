@@ -27,7 +27,8 @@
                     <p>Você pagará {{orderInfoService.obterInformacoesPedido.valor_total_pedido | currency:'BRL'}}</p>
                 </span>
                 <span *ngIf="orderInfoService.progressSpinnerInit">
-                    <mat-progress-spinner diameter="30" [color]="orderInfoService.SpinColor" [mode]="orderInfoService.SpinMode" [value]="orderInfoService.SpinValue">
+                    <mat-progress-spinner diameter="30" [color]="orderInfoService.SpinColor"
+                        [mode]="orderInfoService.SpinMode" [value]="orderInfoService.SpinValue">
                     </mat-progress-spinner>
                 </span>
             </div>
@@ -37,8 +38,12 @@
 
             <div class="btn">
                 <button
-                    [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || orderInfoService.disableAfterFinish"
-                    (click)="finish()">Finalizar</button>
+                    [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || 
+                    orderInfoService.disableAfterFinish || 
+                    !orderInfoService.dateIsValid ||
+                    orderInfoService.errors.error || 
+                    orderInfoService.errors.invalid_card"
+                    (click)="finish()" id="finishButton">Finalizar</button>
             </div>
             <div class="load-bar">
                 <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin"

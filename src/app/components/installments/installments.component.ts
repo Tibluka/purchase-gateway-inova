@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 
+
 class formCardClass {
   cardNumber: number;
   cardName: string;
@@ -39,17 +40,20 @@ interface obterInformacoesPedido {
   chave: string;
 }
 
+
 @Component({
   selector: 'app-installments',
   templateUrl: './installments.component.html',
   styleUrls: ['./installments.component.scss']
 })
+
 export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   /* @Input() count = 0 */
 
   @ViewChild('formInstallments', { read: NgForm }) formValid: any //permite visualizar o html e o formulario dentro dele com o id especificado.
 
+  
   qtdCard: number = 1
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -58,9 +62,9 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   cartItems = []
   options = []
 
+
   constructor(private apiService: ApiService,
     public orderInfoService: OrderInfoService,
-    private _snackBar: MatSnackBar,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
   }
@@ -95,8 +99,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
     this.orderInfoService.disableAfterFinish = true
     this.orderInfoService.installments = cardInstallments
     const parcela = cardInstallments.replace('x', '')
-    this.orderInfoService.createCardToken(parcela)
-    console.log(parcela)
+    this.orderInfoService.createCardToken(parcela, this)
   }
 
 }

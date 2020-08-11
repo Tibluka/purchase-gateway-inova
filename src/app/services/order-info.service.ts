@@ -5,6 +5,7 @@ import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@ang
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { DatePipe } from '@angular/common';
 declare let PagSeguroDirectPayment: any;
 declare var success: any
 declare var error: any
@@ -38,7 +39,7 @@ class cardData {
   cvv: string;
   userFullName: string;
   userCPF: string;
-  cardValidityPeriod: string;
+  cardValidityPeriod: string = '';
   installments: number;
   brand: {
     name: string;
@@ -55,6 +56,8 @@ class cardData {
 })
 export class OrderInfoService {
 
+  today = Date()
+  dateIsValid = true
   idDoComprador = ''
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
   cardData: cardData = new cardData()
@@ -65,7 +68,7 @@ export class OrderInfoService {
   SpinColor: ThemePalette = 'warn';
   SpinMode: ProgressSpinnerMode = 'indeterminate';
   SpinValue = 50;
-  
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   color: ThemePalette = 'primary';
@@ -82,6 +85,7 @@ export class OrderInfoService {
 
 
   constructor(private apiService: ApiService, private router: Router, private ngZone: NgZone) {
+
   }
 
   setSessionID() {
@@ -121,7 +125,26 @@ export class OrderInfoService {
     }
   }
 
-  createCardToken(parcela) {
+  validate() {
+    if (this.cardData.cardValidityPeriod.length == 6) {
+      var mes = this.cardData.cardValidityPeriod.substring(0, 2)
+      var ano = this.cardData.cardValidityPeriod.substring(2, 6)
+      this.today = new Date().toLocaleDateString().slice(3, 10).replace('/', '')
+      const compareMonth = this.today.substring(0, 2)
+      const compareYear = this.today.substring(2, 6)
+      if ((parseInt(mes) < parseInt(compareMonth) &&
+        parseInt(ano) <= parseInt(compareYear)) || parseInt(ano) < parseInt(compareYear)) {
+        this.dateIsValid = false
+        this.errors.error
+        return false;
+      } else {
+        this.dateIsValid = true
+        return true;
+      }
+    }
+  }
+
+  createCardToken(parcela, teste) {
     const dadosCartao = {
       ...this.cardData,
       brand: this.cardData.brand.name,
@@ -146,6 +169,11 @@ export class OrderInfoService {
         this.mode = 'determinate';
         this.errors.error = true
         this.disableAfterFinish = false
+        this.errors.error = true
+        setTimeout(() => {
+          teste.formCards[0].cardInstallments = null
+          console.log(teste, 'lucas')
+        }, 1);
       },
       complete: (response) => {
         // Callback para todas chamadas.
@@ -183,7 +211,7 @@ export class OrderInfoService {
     })
   }
 
-  async calculateInstallments(parcela, token, dadosCartao) {
+  calculateInstallments(parcela, token, dadosCartao) {
     const data = {
       token_cartao: token,
       forma_pagamento: "creditCard",
@@ -196,15 +224,15 @@ export class OrderInfoService {
         }
       }
     }
-    await this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
+    this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
       console.log(resumo)
       setTimeout(() => {
         document.getElementById("finishPurchase").focus();
-      }, 500);
+      }, 1);
       this.obterInformacoesPedido.valor_total_pedido = resumo.total_value
+      this.errors.error = false
     }), err => {
       console.log(err)
     }
   }
-
 }
