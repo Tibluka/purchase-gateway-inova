@@ -60,6 +60,7 @@
             <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
                 <mat-label>Parcelar em</mat-label>
                 <mat-select [disabled]="!formInstallments.valid || 
+                orderInfoService.errors.invalid_card ||
                 !orderInfoService.dateIsValid" name="cardInstallments" (selectionChange)="setInstallments(card.cardInstallments)"
                     [(ngModel)]="card.cardInstallments">
                     <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
