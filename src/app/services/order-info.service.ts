@@ -56,6 +56,17 @@ class cardData {
 })
 export class OrderInfoService {
 
+  address = {
+    street: 'Avenida Paulista',
+    number: '1116',
+    complement: '',
+    neighbourhood: 'Centro',
+    city: 'São Paulo',
+    state: 'SP',
+    country: 'Brasil',
+    zip_code: '02220-070'
+  }
+
   today = Date()
   dateIsValid = true
   idDoComprador = ''
@@ -137,10 +148,11 @@ export class OrderInfoService {
         parseInt(ano) <= parseInt(compareYear)) || 
         parseInt(ano) < parseInt(compareYear) || parseInt(ano) > 2099) {
         this.dateIsValid = false
-        this.errors.error
+        this.errors.error = true
         return false;
       } else {
         this.dateIsValid = true
+        this.errors.error = false
         return true;
       }
     }
