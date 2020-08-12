@@ -1,15 +1,3 @@
-<mat-card class="initial-message">
-    <div class="title">
-        <p style="text-align: left !important;">Olá! Essa ordem de pagamento foi gerada em: {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
-            referente a:
-        </p>
-        <div style="margin: 5px 10px 8px 0; font-style: italic;"
-            *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
-            {{i.descricao}}
-        </div>
-    </div>
-    <h5> Por favor, insira os dados para pagamento e finalize a compra</h5>
-</mat-card>
 <form #formInstallments="ngForm" id="formInstallments">
     <mat-card style="display: flex; flex-direction: column; justify-content: center;"
         *ngFor="let card of formCards; let i = index">

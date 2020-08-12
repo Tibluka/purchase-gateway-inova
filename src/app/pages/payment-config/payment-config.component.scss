@@ -1,3 +1,14 @@
+.card-top{
+    display: flex;
+    margin-bottom: 15px;
+    .initial-message{
+        width: 66.7%;
+    }
+}
+mat-card{
+    width: 100%;
+}
+
 .payment-config {
     display: flex;
 }
@@ -13,5 +24,10 @@ app-aside {
     .payment-config {
         flex-direction: column;
         justify-content: center;
+    }
+    .card-top{
+        .initial-message{
+            width: 100%;
+        }
     }
 }

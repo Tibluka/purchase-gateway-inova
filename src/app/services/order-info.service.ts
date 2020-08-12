@@ -69,6 +69,9 @@ export class OrderInfoService {
   SpinMode: ProgressSpinnerMode = 'indeterminate';
   SpinValue = 50;
 
+  navBarColor = 'rgb(218, 218, 218)'
+  buttonColor = 'none'
+
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   color: ThemePalette = 'primary';
@@ -93,12 +96,10 @@ export class OrderInfoService {
   }
 
   async getInfo(chavePedido) {
-
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
       this.setSessionID()
-      console.log(this.obterInformacoesPedido.pagseguro_session)
       return this.obterInformacoesPedido
     }
 
@@ -133,7 +134,8 @@ export class OrderInfoService {
       const compareMonth = this.today.substring(0, 2)
       const compareYear = this.today.substring(2, 6)
       if ((parseInt(mes) < parseInt(compareMonth) &&
-        parseInt(ano) <= parseInt(compareYear)) || parseInt(ano) < parseInt(compareYear)) {
+        parseInt(ano) <= parseInt(compareYear)) || 
+        parseInt(ano) < parseInt(compareYear) || parseInt(ano) > 2099) {
         this.dateIsValid = false
         this.errors.error
         return false;
@@ -160,7 +162,6 @@ export class OrderInfoService {
         this.progressSpinnerInit = false
         this.cardData.token = response.card.token
         this.calculateInstallments(parcela, response.card.token, dadosCartao)
-        console.log(response.card.token)
 
       },
       error: (response) => {
@@ -172,7 +173,6 @@ export class OrderInfoService {
         this.errors.error = true
         setTimeout(() => {
           teste.formCards[0].cardInstallments = null
-          console.log(teste, 'lucas')
         }, 1);
       },
       complete: (response) => {
@@ -188,7 +188,6 @@ export class OrderInfoService {
         return false;
       }
       const hash = response.senderHash
-      console.log(hash) //Hash estará disponível nesta variável.
       this.executePayment(hash)
     });
   }
@@ -200,11 +199,9 @@ export class OrderInfoService {
     }
     this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
       console.log(finish)
-
       this.dataHoraPagamento = finish.payment_date
       this.router.navigate(['/requested-pay'])
     }, err => {
-      console.log('isso é o erro', err)
       this.disableAfterFinish = false
       this.progressBarInit = false
       this.errors.error = true

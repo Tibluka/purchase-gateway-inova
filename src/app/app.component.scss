@@ -11,6 +11,9 @@
     min-height: 90vh;
 }
 nav {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
     height: 90px;
     box-shadow: 1px 1px 1px 1px black;
     h1,
@@ -62,6 +65,7 @@ footer {
         }
     }
 }
+
 @media (max-width: 970px) {
     .routes {
         margin: 2% 15%;

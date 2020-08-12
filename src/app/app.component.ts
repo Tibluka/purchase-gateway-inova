@@ -30,10 +30,9 @@ interface obterInformacoesPedido {
 })
 export class AppComponent {
   title = 'purchase-gateway-inova';
+ 
 
   constructor(private apiService: ApiService, public orderInfoService: OrderInfoService) {
   }
-
- 
   
 }

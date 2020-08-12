@@ -37,13 +37,13 @@
             </div> -->
 
             <div class="btn">
-                <button
+                <button [style.background]="orderInfoService.buttonColor"
                     [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || 
                     orderInfoService.disableAfterFinish || 
                     !orderInfoService.dateIsValid ||
                     orderInfoService.errors.error || 
                     orderInfoService.errors.invalid_card"
-                    (click)="finish()" id="finishButton">Finalizar</button>
+                    (click)="finish()" id="finalButton">Finalizar</button>
             </div>
             <div class="load-bar">
                 <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin"

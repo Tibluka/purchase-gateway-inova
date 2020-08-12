@@ -78,15 +78,19 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   //ngAfterViewInit só aparece quando renderizar HTML na tela. Essa é a diferença entre ele e o ngOnInit
   //só da pra usar o ViewChild com ele
-  ngAfterViewInit() {
+  ngAfterViewInit() {   
     setTimeout(() => {
       this.orderInfoService.disableButton = this.formValid
     }, 1);
   }
 
+ 
+
   async getCartInfo(idDoComprador) {
     const cartorio = await this.orderInfoService.getInfo(idDoComprador)
     this.cartItems.push(cartorio)
+    this.orderInfoService.navBarColor = cartorio.cor_cartorio
+    this.orderInfoService.buttonColor = cartorio.cor_cartorio
     const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
     for (let index = 1; index <= installments; index++) {
       this.options.push(index + 'x')
