@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'http://54.245.245.5/'
+  url: 'https://ren05hl31c.execute-api.us-west-2.amazonaws.com/v1/'
 };

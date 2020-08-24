@@ -82,6 +82,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.orderInfoService.disableButton = this.formValid
     }, 1);
+   
   }
 
  
