@@ -21,7 +21,7 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.apiService.getApi('gateway/obterinformacoespedido/' + next.params.id).pipe(
+    return this.apiService.getApi('obterinformacoespedido/?chave=' + next.params.id).pipe(
       map(resp => {
         this.orderInfoService.obterInformacoesPedido = resp as any
         this.orderInfoService.idDoComprador = next.params.id

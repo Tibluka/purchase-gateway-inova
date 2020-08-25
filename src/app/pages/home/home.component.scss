@@ -1,0 +1,52 @@
+.card-top {
+    display: flex;
+    margin-bottom: 15px;
+    .initial-message {
+        width: 66.7%;
+    }
+}
+
+.content {
+    display: flex;
+
+    .payment-method {
+        flex: 1 1;
+        mat-radio-group {
+            mat-radio-button {
+                background: white;
+                border-radius: 6px;
+                border: 1px solid white;
+
+            }
+            mat-radio-button:hover {
+                transition: 500ms;
+                background: rgb(240, 239, 239);
+            }
+        }
+        h3 {
+            color: var(--font-color);
+            font-weight: 300;
+        }
+    }
+    app-aside {
+        flex: 0.5 0.5;
+    }
+}
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+::ng-deep .mat-radio-label{
+    height: 80px;
+    margin: 0 0 0 20px;
+}
+::ng-deep .mat-radio-container{
+    margin-right: 10px !important;
+}
+
+.example-radio-button {
+    margin-bottom: 15px;
+}

@@ -97,7 +97,6 @@ export class OrderInfoService {
     error: false
   }
 
-
   constructor(private apiService: ApiService, private router: Router, private ngZone: NgZone) {
 
   }
@@ -109,7 +108,7 @@ export class OrderInfoService {
   async getInfo(chavePedido) {
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
-      this.obterInformacoesPedido = await this.apiService.getApi<any>('gateway/obterinformacoespedido/' + this.idDoComprador).toPromise()
+      this.obterInformacoesPedido = await this.apiService.getApi<any>('obterinformacoespedido/?chave=' + this.idDoComprador).toPromise()
       this.setSessionID()
       return this.obterInformacoesPedido
     }
@@ -209,7 +208,7 @@ export class OrderInfoService {
       token_cartao: this.cardData.token,
       sender_hash: hash
     }
-    this.apiService.postApi<any>('gateway/efetuarpagamento/' + this.idDoComprador, data).subscribe(finish => {
+    this.apiService.postApi<any>('efetuarpagamento?chave=' + this.idDoComprador, data).subscribe(finish => {
       console.log(finish)
       this.dataHoraPagamento = finish.payment_date
       this.router.navigate(['/requested-pay'])
@@ -233,7 +232,7 @@ export class OrderInfoService {
         }
       }
     }
-    this.apiService.postApi<any>('gateway/resumopagamento/' + this.idDoComprador, data).subscribe(resumo => {
+    this.apiService.postApi<any>('resumopagamento?chave=' + this.idDoComprador, data).subscribe(resumo => {
       console.log(resumo)
       setTimeout(() => {
         document.getElementById("finishPurchase").focus();

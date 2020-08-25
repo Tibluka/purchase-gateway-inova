@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost/'
+  url: 'https://ren05hl31c.execute-api.us-west-2.amazonaws.com/v1/'
 };
 
 /*

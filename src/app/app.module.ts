@@ -12,12 +12,12 @@ import { FinishModule } from './pages/finish/finish.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorModule } from './pages/error/error.module';
 import { RequestedPayModule } from './pages/requested-pay/requested-pay.module';
+import { HomeModule } from './pages/home/home.module';
 
 
 @NgModule({
   declarations: [
     AppComponent
-       
   ],
   imports: [
     BrowserModule,
@@ -29,7 +29,8 @@ import { RequestedPayModule } from './pages/requested-pay/requested-pay.module';
     RequestedPayModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatSliderModule
+    MatSliderModule,
+    HomeModule
 
   ],
   providers: [],

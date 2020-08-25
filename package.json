@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~9.1.11",
     "@angular/router": "~9.1.11",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
+    "@nguniversal/module-map-ngfactory-loader": "^8.2.6",
     "bootstrap": "^4.4.0",
     "ngx-mask": "^9.1.2",
     "rxjs": "~6.5.4",
