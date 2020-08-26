@@ -1,30 +1,36 @@
 <div class="card-top">
     <mat-card class="initial-message">
         <div class="title">
-            <p style="text-align: left !important; margin-bottom: 0;">Olá! Essa ordem de pagamento foi gerada em:
-                 {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
+            <p style="text-align: left !important; margin-bottom: 0;">Olá! <br> Essa ordem de pagamento foi gerada em
+                {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
                 referente a:
             </p>
-            <div style="margin: 5px 10px 8px 0; font-weight: 500;"
+            <hr>
+
+            <div style="margin: 5px 10px 8px 0; font-weight: 300;"
                 *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
                 {{i.descricao}}
             </div>
+            <hr>
         </div>
-        <p style="text-align: left;"> Por favor, insira os dados para pagamento e finalize a compra</p>
+        <p style="text-align: left;"> Por favor, insira os dados para pagamento e finalize a compra.</p>
     </mat-card>
 </div>
 <div class="content">
     <div class="payment-method">
+
         <h3>Como deseja efetuar o pagamento?</h3>
+
         <div class="radio">
             <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
                 [(ngModel)]="this.orderInfoService.paymentMethod">
-                <mat-radio-button class="example-radio-button" *ngFor="let method of this.orderInfoService.methods" [value]="method">
+                <mat-radio-button class="example-radio-button" *ngFor="let method of this.orderInfoService.methods"
+                    [value]="method">
                     {{method}}
                 </mat-radio-button>
             </mat-radio-group>
             <div class="proceed">
-                <button [disabled]="!orderInfoService.paymentMethod" (click)="proceed()" [style.background]="orderInfoService.obterInformacoesPedido.cor_cartorio" class="btn">
+                <button [disabled]="!orderInfoService.paymentMethod" (click)="proceed()" class="btn">
                     Continuar
                 </button>
             </div>

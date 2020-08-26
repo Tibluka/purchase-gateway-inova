@@ -1,7 +1,6 @@
 <div class="global">
     <div class="page">
-        <nav style="box-shadow: 3px 3px 3px 3px rgb(207, 205, 205); margin: 0;" class="m-250"
-            [ngStyle]="{'background': orderInfoService.obterInformacoesPedido.cor_cartorio}">
+        <nav style="box-shadow: 3px 3px 3px 3px rgb(207, 205, 205); margin: 0;" class="m-250">
             <a class="navbar-brand" href="#" style="display: flex; align-items: center; padding-left: 5px;">
                 <img *ngIf="orderInfoService.obterInformacoesPedido.logo_url"
                     src="{{orderInfoService?.obterInformacoesPedido?.logo_url}}" alt="img"
@@ -22,13 +21,13 @@
     <footer>
         <nav class="navbar navbar-light bg-light footer">
             <a *ngIf="orderInfoService.obterInformacoesPedido" class="navbar-brand" style="display: flex;">
-                <p style="text-align: left; font-size: 12pt; margin-right: 5px;">Endereço:
-                    {{orderInfoService.address.street}}, número
-                    {{orderInfoService.address.number}}
+                <p style="text-align: left; font-size: 12pt; margin-right: 5px; color: white;">Endereço:
+                    {{orderInfoService?.obterInformacoesPedido?.comprador?.endereco?.logradouro}}, número
+                    {{orderInfoService?.obterInformacoesPedido?.comprador?.endereco?.numero}}
                 </p>
-                <p style="text-align: left; font-size: 12pt;">CEP: {{orderInfoService.address.zip_code}} -
-                    {{orderInfoService.address.neighbourhood}} -
-                    {{orderInfoService.address.city}} - {{orderInfoService.address.state}}
+                <p style="text-align: left; font-size: 12pt; color: white;">CEP: {{orderInfoService?.obterInformacoesPedido?.comprador?.endereco?.cep}} -
+                    {{orderInfoService?.obterInformacoesPedido?.comprador?.endereco?.bairro}} -
+                    {{orderInfoService?.obterInformacoesPedido?.comprador?.endereco?.cidade}} - {{orderInfoService?.obterInformacoesPedido?.comprador?.endereco?.uf}}
                 </p>
             </a>
         </nav>

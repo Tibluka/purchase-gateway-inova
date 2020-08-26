@@ -14,20 +14,25 @@
   }
 
 .page {
-    margin: 10px;
     min-height: 90vh;
 }
 nav {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-left: 10px;
+    font-size: 14pt;
+
+    background-color: #009cde;
+    background-image: radial-gradient(circle farthest-side at center bottom,#009cde,#003087 125%);
+
     height: 50px;
     box-shadow: 1px 1px 1px 1px black;
     h1,
     h2,
     h3,
     h4 {
-        font-weight: normal;
+        font-weight: 300;
         color: white;
     }
     a {

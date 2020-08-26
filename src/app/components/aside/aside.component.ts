@@ -19,7 +19,7 @@ interface obterInformacoesPedido {
   };
   items: [{
     descricao: string;
-    qtd: number;
+    quantidade: number;
     valor_unitario: number;
   }];
   qtd_max_parcelamento: number;
@@ -27,6 +27,25 @@ interface obterInformacoesPedido {
   valor_total_pedido: number;
   url_callback: string;
   chave: string;
+  comprador: {
+    id: number;
+    nome: string;
+    email: string;
+    ddd: number;
+    telefone: number;
+    documento: {
+      tipo: string;
+      valor: string;
+    };
+    endereco: string;
+    numero: number;
+    complemento: string;
+    bairro: string;
+    cidade: string;
+    uf: string;
+    pais: string;
+    cep: string;
+  }
 }
 
 @Component({

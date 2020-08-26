@@ -2,10 +2,11 @@
     <div class="page-aside ">
         <div class="asblock1">
             <header>
-                <p style="margin-top: 25px !important; margin-bottom: 0; ">Lucas Gomes</p>
+                <p style="margin-top: 25px !important; margin-bottom: 0; ">{{orderInfoService?.obterInformacoesPedido?.comprador?.nome}}</p>
+                <hr>
                 <div class="item-description"
                     *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
-                    <p style="margin-bottom: 0">{{item.descricao}} </p>
+                    <p style="margin-bottom: 0">{{item.descricao}} - {{item.quantidade}} unidade(s) </p>
                 </div>
                 <hr>
             </header>
@@ -37,8 +38,7 @@
             </div> -->
 
             <div class="btn">
-                <button [style.background]="orderInfoService.buttonColor"
-                    [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || 
+                <button [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || 
                     orderInfoService.disableAfterFinish || 
                     !orderInfoService.dateIsValid ||
                     orderInfoService.errors.error || 

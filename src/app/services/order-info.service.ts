@@ -113,8 +113,6 @@ export class OrderInfoService {
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
       this.obterInformacoesPedido = await this.apiService.getApi<any>('obterinformacoespedido?chave=' + this.idDoComprador).toPromise()
-      this.buttonColor = this.obterInformacoesPedido.cor_cartorio
-      this.navBarColor = this.obterInformacoesPedido.cor_cartorio
       this.setSessionID()
       return this.obterInformacoesPedido
     }

@@ -1,16 +1,19 @@
 <div class="card-top">
     <mat-card class="initial-message">
         <div class="title">
-            <p style="text-align: left !important; margin-bottom: 0;">Olá! Essa ordem de pagamento foi gerada em:
+            <p style="text-align: left !important; margin-bottom: 0;">Olá! <br> Essa ordem de pagamento foi gerada em
                 {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
                 referente a:
             </p>
-            <div style="margin: 5px 10px 8px 0; font-weight: 500;"
+            <hr>
+
+            <div style="margin: 5px 10px 8px 0; font-weight: 300;"
                 *ngFor="let i of orderInfoService.obterInformacoesPedido.items; let index = index">
                 {{i.descricao}}
             </div>
+            <hr>
         </div>
-        <p style="text-align: left;"> Por favor, insira os dados para pagamento e finalize a compra</p>
+        <p style="text-align: left;"> Por favor, insira os dados para pagamento e finalize a compra.</p>
     </mat-card>
 </div>
 <div class="payment-config">
