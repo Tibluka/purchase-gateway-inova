@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { OrderInfoService } from 'src/app/services/order-info.service';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 
 class formCardClass {
   cardNumber: number;
@@ -39,6 +38,7 @@ interface obterInformacoesPedido {
 
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-installments',
   templateUrl: './installments.component.html',
   styleUrls: ['./installments.component.scss']
@@ -60,17 +60,17 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   options = []
 
 
-  constructor(private apiService: ApiService,
-    public orderInfoService: OrderInfoService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router) {
+  constructor(public orderInfoService: OrderInfoService) {
   }
 
   ngOnInit(): void {
-    const idDoComprador = this.activatedRoute.snapshot.paramMap.get("id")
+    setTimeout(() => {
+      this.orderInfoService.progressNavBarInit = false  
+    }, 1);
+    
     this.formCards.push(new formCardClass())
     this.asideInstallments.emit(1)
-    this.getCartInfo(idDoComprador)
+    this.getMaxInstallments()
   }
 
   //ngAfterViewInit só aparece quando renderizar HTML na tela. Essa é a diferença entre ele e o ngOnInit
@@ -84,11 +84,8 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
 
  
 
-  async getCartInfo(idDoComprador) {
-    const cartorio = await this.orderInfoService.getInfo(idDoComprador)
-    this.cartItems.push(cartorio)
-    this.orderInfoService.navBarColor = cartorio.cor_cartorio
-    this.orderInfoService.buttonColor = cartorio.cor_cartorio
+  getMaxInstallments() {
+  
     const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
     for (let index = 1; index <= installments; index++) {
       this.options.push(index + 'x')

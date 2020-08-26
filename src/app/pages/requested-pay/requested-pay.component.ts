@@ -19,13 +19,15 @@ export class RequestedPayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.previousUrl = localStorage.getItem('previousUrl')
     this.getDate()
   }
 
   getDate() {
-    const chave = this.previousUrl.replace('payment/', '')
-    return this.apiService.getApi('gateway/obterinformacoespedido' + chave).subscribe(dateInfo => {
+    
+    const chave = this.previousUrl.replace('/payment/', '')
+    return this.apiService.getApi('obterinformacoespedido?chave=' + chave).subscribe(dateInfo => {
       this.data.push(dateInfo)
       this.orderInfoService.navBarColor = this.data[0].cor_cartorio
     })

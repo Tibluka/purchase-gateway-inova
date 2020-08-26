@@ -1,15 +1,11 @@
 import { Injectable, NgZone } from '@angular/core';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
-import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
-import { DatePipe } from '@angular/common';
 declare let PagSeguroDirectPayment: any;
-declare var success: any
-declare var error: any
-declare var expirationDateSplit: any
+
 
 
 class obterInformacoesPedido {
@@ -80,15 +76,20 @@ export class OrderInfoService {
   SpinMode: ProgressSpinnerMode = 'indeterminate';
   SpinValue = 50;
 
-  navBarColor = 'rgb(218, 218, 218)'
-  buttonColor = 'none'
+  navColor: ThemePalette = 'primary';
+  navMode: ProgressBarMode = 'indeterminate';
+  navValue = 50;
+  navBufferValue = 75;
 
-  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
-  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  navBarColor = 'rgb(218, 218, 218)'
+  buttonColor = 'rgb(218, 218, 218)'
+
+  
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 0;
   bufferValue = 75;
+  progressNavBarInit = false
   progressBarInit = false
   progressSpinnerInit = false
   cardBrandImage = ''
@@ -96,6 +97,9 @@ export class OrderInfoService {
     invalid_card: false,
     error: false
   }
+
+  paymentMethod: string = "Cartão de crédito";
+  methods: string[] = ['Cartão de crédito', 'Boleto'];
 
   constructor(private apiService: ApiService, private router: Router, private ngZone: NgZone) {
 
@@ -108,7 +112,9 @@ export class OrderInfoService {
   async getInfo(chavePedido) {
     if (this.obterInformacoesPedido.nome_cartorio != '' && this.idDoComprador !== chavePedido) {
       this.idDoComprador = chavePedido
-      this.obterInformacoesPedido = await this.apiService.getApi<any>('obterinformacoespedido/?chave=' + this.idDoComprador).toPromise()
+      this.obterInformacoesPedido = await this.apiService.getApi<any>('obterinformacoespedido?chave=' + this.idDoComprador).toPromise()
+      this.buttonColor = this.obterInformacoesPedido.cor_cartorio
+      this.navBarColor = this.obterInformacoesPedido.cor_cartorio
       this.setSessionID()
       return this.obterInformacoesPedido
     }
@@ -199,6 +205,7 @@ export class OrderInfoService {
         return false;
       }
       const hash = response.senderHash
+      console.log(hash)
       this.executePayment(hash)
     });
   }

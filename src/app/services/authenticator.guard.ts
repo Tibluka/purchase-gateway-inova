@@ -21,11 +21,14 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.apiService.getApi('obterinformacoespedido/?chave=' + next.params.id).pipe(
+    return this.apiService.getApi('obterinformacoespedido?chave=' + next.params.id).pipe(
+      
+      
       map(resp => {
         this.orderInfoService.obterInformacoesPedido = resp as any
         this.orderInfoService.idDoComprador = next.params.id
         this.orderInfoService.setSessionID()
+        
         if (!resp['payment_status']) { //em aberto
           localStorage.setItem('previousUrl', state.url)
           return true
@@ -50,6 +53,7 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
           return false
         }
       }), catchError((error) => {
+        
         this.route.navigate(['/error'])
         return of(false)
       })

@@ -3,9 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthenticatorGuard } from './services/authenticator.guard';
 
 const routes: Routes = [
-  /*   { path: '', loadChildren: './pages/error/error.module#ErrorModule' },
-   */
-  { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule) },
+  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule), canActivateChild: [AuthenticatorGuard]},
   { path: 'error', loadChildren: './pages/error/error.module#ErrorModule' },
   { path: 'requested-pay', loadChildren: './pages/requested-pay/requested-pay.module#RequestedPayModule' },
   {

@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorModule } from './pages/error/error.module';
 import { RequestedPayModule } from './pages/requested-pay/requested-pay.module';
 import { HomeModule } from './pages/home/home.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { HomeModule } from './pages/home/home.module';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSliderModule,
-    HomeModule
+    HomeModule,
+    MatProgressBarModule
 
   ],
   providers: [],

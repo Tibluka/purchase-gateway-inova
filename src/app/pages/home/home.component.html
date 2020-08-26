@@ -2,12 +2,7 @@
     <mat-card class="initial-message">
         <div class="title">
             <p style="text-align: left !important; margin-bottom: 0;">Olá! Essa ordem de pagamento foi gerada em:
-                <!-- {{orderInfoService?.obterInformacoesPedido?.data_pedido}} -->
-                <br>
-                <span> notebook dell</span>
-                <br>
-                <span> mouse s/ fio</span>
-                ,
+                 {{orderInfoService?.obterInformacoesPedido?.data_pedido}},
                 referente a:
             </p>
             <div style="margin: 5px 10px 8px 0; font-weight: 500;"
@@ -22,17 +17,14 @@
     <div class="payment-method">
         <h3>Como deseja efetuar o pagamento?</h3>
         <div class="radio">
-            <mat-radio-group
-              aria-labelledby="example-radio-group-label"
-              class="example-radio-group"
-              [(ngModel)]="paymentMethod">
-              <mat-radio-button class="example-radio-button" *ngFor="let method of methods" [value]="method">
-                {{method}}
-              </mat-radio-button>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                [(ngModel)]="this.orderInfoService.paymentMethod">
+                <mat-radio-button class="example-radio-button" *ngFor="let method of this.orderInfoService.methods" [value]="method">
+                    {{method}}
+                </mat-radio-button>
             </mat-radio-group>
-            <div>Meio de pagamento escolhido: {{paymentMethod}}</div>
             <div class="proceed">
-                <button class="btn">
+                <button [disabled]="!orderInfoService.paymentMethod" (click)="proceed()" [style.background]="orderInfoService.obterInformacoesPedido.cor_cartorio" class="btn">
                     Continuar
                 </button>
             </div>

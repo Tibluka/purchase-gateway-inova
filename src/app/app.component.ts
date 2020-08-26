@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { OrderInfoService } from './services/order-info.service';
 
+
 interface obterInformacoesPedido {
   pagseguro_session: string;
   nome_cartorio: string;
@@ -31,7 +32,6 @@ interface obterInformacoesPedido {
 export class AppComponent {
   title = 'purchase-gateway-inova';
  
-
   constructor(private apiService: ApiService, public orderInfoService: OrderInfoService) {
     
   }

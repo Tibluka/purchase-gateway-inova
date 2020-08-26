@@ -23,7 +23,7 @@ export class FinishComponent implements OnInit {
 
   getDate() {
     const chave = this.previousUrl.replace('payment/', '')
-    this.apiService.getApi('gateway/obterinformacoespedido' + chave).subscribe(cartorio => {
+    this.apiService.getApi('obterinformacoespedido?chave=' + chave).subscribe(cartorio => {
       this.data.push(cartorio)
       this.orderInfoService.navBarColor = this.data[0].cor_cartorio
       console.log(this.data[0].cor_cartorio)
