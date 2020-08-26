@@ -1,9 +1,12 @@
 .card-top{
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     .initial-message{
         width: 66.7%;
     }
+}
+p{
+    font-weight: 300;
 }
 mat-card{
     width: 100%;
