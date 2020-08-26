@@ -99,6 +99,7 @@ footer {
     }
     footer{
         nav{
+            min-height: 70px;
             padding: 0 !important;
             a{
                 display: flex;
@@ -111,13 +112,14 @@ footer {
 }
 @media (max-width: 375px) {
     .routes {
-        margin: 2% auto;
+        margin: 2% 5%;
     }
     .page{
         nav{
+            margin: 0 !important;
             a{
-                h4{
-                    font-size: 14pt;
+                p{
+                    font-size: 9pt;
                 }
             }
         }

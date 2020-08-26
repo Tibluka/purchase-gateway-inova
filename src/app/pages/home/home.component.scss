@@ -1,17 +1,16 @@
 .card-top {
     display: flex;
-    margin-bottom: 30px;
-    p{
+    p {
         font-weight: 300;
     }
     .initial-message {
         width: 66.7%;
+        margin-bottom: 30px;
     }
 }
 
 .content {
     display: flex;
-
     .payment-method {
         flex: 1 1;
         h3 {
@@ -79,4 +78,51 @@
 
 .example-radio-button {
     margin-bottom: 15px;
+}
+
+@media (max-width: 1475px) {
+    .card-top {
+        width: 100%;
+        margin: 0;
+        .initial-message {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    }
+    .content {
+        flex-direction: column;
+        .payment-method {
+            .radio{
+                mat-radio-group {
+                    margin: 15px 0 0 0 !important;
+                }
+            }
+            h3 {
+                margin-top: 5px;
+            }
+        }
+    }
+}
+
+@media (max-width: 950px) {
+
+    .content {
+     
+        flex-direction: column;
+        .payment-method {
+            margin-bottom: 15px;
+            margin-right: 0;
+            .radio {
+              
+                .proceed {
+                    button {
+                        width: 100%;
+                    }
+                }
+            }
+            h3 {
+                margin-top: 5px !important;
+            }
+        }
+    }
 }
