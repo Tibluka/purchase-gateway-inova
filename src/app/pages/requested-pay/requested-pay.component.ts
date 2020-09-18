@@ -13,24 +13,39 @@ import { ApiService } from 'src/app/services/api.service';
 export class RequestedPayComponent implements OnInit {
 
   previousUrl: string
+  chave = ''
   data = []
 
   constructor(public router: Router, public orderInfoService: OrderInfoService, private apiService: ApiService) {
   }
 
   ngOnInit(): void {
-    
     this.previousUrl = localStorage.getItem('previousUrl')
+    this.findIndex()
+
     this.getDate()
   }
 
   getDate() {
-    
-    const chave = this.previousUrl.replace('/payment/', '')
-    return this.apiService.getApi('obterinformacoespedido?chave=' + chave).subscribe(dateInfo => {
+    if (this.findIndex()){
+      this.chave = this.previousUrl.replace('/home/', '')
+    }else{
+      this.chave = this.previousUrl.replace('/payment/', '')
+    }
+    return this.apiService.getApi('obterinformacoespedido?chave=' + this.chave).subscribe(dateInfo => {
       this.data.push(dateInfo)
       this.orderInfoService.navBarColor = this.data[0].cor_cartorio
     })
+  }
+
+  findIndex() {
+    const str = this.previousUrl
+    const index = str.indexOf('home')
+    if (index === 1) {
+      return true
+    }else{
+      return false
+    }
   }
 
   click() {

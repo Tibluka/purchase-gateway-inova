@@ -75,6 +75,7 @@ export class OrderInfoService {
   SpinColor: ThemePalette = 'warn';
   SpinMode: ProgressSpinnerMode = 'indeterminate';
   SpinValue = 50;
+  isCreditCard = false
 
   navColor: ThemePalette = 'primary';
   navMode: ProgressBarMode = 'indeterminate';
@@ -197,6 +198,8 @@ export class OrderInfoService {
   }
 
   getSenderHash() {
+    console.log(this.isCreditCard);
+    
     PagSeguroDirectPayment.onSenderHashReady((response) => {
       if (response.status == 'error') {
         console.log(response.message);
@@ -204,8 +207,29 @@ export class OrderInfoService {
       }
       const hash = response.senderHash
       console.log(hash)
-      this.executePayment(hash)
+      debugger
+      if(this.isCreditCard){
+        this.executePayment(hash)
+      }else{
+        this.executePaymentForBankBill(hash)
+      }
+      
     });
+  }
+
+  executePaymentForBankBill(hash) {
+    const data = {
+      sender_hash: hash
+    }
+    this.apiService.postApi<any>('efetuarpagamento?chave=' + this.idDoComprador, data).subscribe(finish => {
+      console.log(finish)
+      this.dataHoraPagamento = finish.payment_date
+      this.router.navigate(['/requested-pay'])
+    }, err => {
+      this.disableAfterFinish = false
+      this.progressBarInit = false
+      this.errors.error = true
+    })
   }
 
   executePayment(hash) {

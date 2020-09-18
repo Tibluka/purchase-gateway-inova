@@ -64,6 +64,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.orderInfoService.errors.error = false
     setTimeout(() => {
       this.orderInfoService.progressNavBarInit = false  
     }, 1);

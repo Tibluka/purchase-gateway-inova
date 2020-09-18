@@ -8,9 +8,9 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  
+
   idDoComprador = ''
-  
+
   constructor(public orderInfoService: OrderInfoService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -19,14 +19,16 @@ export class HomeComponent implements OnInit {
     this.orderInfoService.getInfo(idDoComprador)
   }
 
- proceed(){  
+  proceed() {
     this.orderInfoService.progressNavBarInit = true
-    if(this.orderInfoService.paymentMethod === 'Cartão de crédito'){
+    if (this.orderInfoService.paymentMethod === 'Cartão de crédito') {
       this.router.navigate(['/payment/' + this.idDoComprador])
-    }else{
-      alert('FUNCIONALIDADE EM DESENVOLVIMENTO...')
-      this.orderInfoService.progressNavBarInit = false
+      this.orderInfoService.isCreditCard = true
+    } else {
+    /*   alert('FUNCIONALIDADE EM DESENVOLVIMENTO...')
+      this.orderInfoService.progressNavBarInit = false */
+      this.orderInfoService.getSenderHash()
     }
   }
-  
+
 }
