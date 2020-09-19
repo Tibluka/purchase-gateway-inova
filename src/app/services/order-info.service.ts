@@ -37,6 +37,7 @@ class cardData {
   userCPF: string;
   cardValidityPeriod: string = '';
   installments: number;
+  birthDate: string;
   brand: {
     name: string;
     bin: string;
@@ -246,6 +247,8 @@ export class OrderInfoService {
       this.progressBarInit = false
       this.errors.error = true
     })
+    console.log(data);
+    
   }
 
   calculateInstallments(parcela, token, dadosCartao) {
@@ -254,6 +257,7 @@ export class OrderInfoService {
       forma_pagamento: "creditCard",
       qtd_parcela: parcela,
       holder: {
+        birth_date: this.cardData.birthDate,
         nome_impresso_cartao: dadosCartao.userFullName,
         documento: {
           tipo: "CPF",
@@ -261,6 +265,9 @@ export class OrderInfoService {
         }
       }
     }
+
+    console.log(data);
+    
     this.apiService.postApi<any>('resumopagamento?chave=' + this.idDoComprador, data).subscribe(resumo => {
       console.log(resumo)
       setTimeout(() => {

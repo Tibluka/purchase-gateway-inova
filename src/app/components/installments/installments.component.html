@@ -45,10 +45,14 @@
         </mat-form-field> -->
 
         <div class="installment-options">
-            <mat-form-field style="margin-top: 5px; width: 250px;" appearance="fill">
+            <mat-form-field class="item" style="margin-top: 5px;" appearance="fill">
+                <mat-label>Data de nascimento</mat-label>
+                <input matInput type="text" mask="00/00/0000" name="birth-date" [(ngModel)]="card.birthDate" (keyup)="getBirth()">
+            </mat-form-field>
+            <mat-form-field class="item" style="margin-top: 5px;" appearance="fill">
                 <mat-label>Parcelar em</mat-label>
-                <mat-select [disabled]="!formInstallments.valid || 
-                orderInfoService.errors.invalid_card ||
+                <mat-select [disabled]="!formInstallments.valid || card?.birthDate?.length < 8 ||
+                orderInfoService.errors.invalid_card || 
                 !orderInfoService.dateIsValid" name="cardInstallments" (selectionChange)="setInstallments(card.cardInstallments)"
                     [(ngModel)]="card.cardInstallments">
                     <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>

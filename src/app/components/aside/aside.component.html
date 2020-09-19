@@ -15,7 +15,7 @@
                     <div class="payment-type">
                         <p>{{orderInfoService.paymentMethod}}</p>
                     </div>
-                    <div class="installments-qty">
+                    <div class="installments-qty" *ngIf="orderInfoService?.paymentMethod == 'Cartão de crédito'">
                         <p style="margin-bottom: 0">Parcelado em {{orderInfoService.installments}}</p>
                     </div>
                 </div>

@@ -34,6 +34,8 @@ export class RequestedPayComponent implements OnInit {
     }
     return this.apiService.getApi('obterinformacoespedido?chave=' + this.chave).subscribe(dateInfo => {
       this.data.push(dateInfo)
+      console.log(dateInfo);
+      
       this.orderInfoService.navBarColor = this.data[0].cor_cartorio
     })
   }

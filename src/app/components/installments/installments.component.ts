@@ -13,6 +13,7 @@ class formCardClass {
   cardInstallments: number = null;
   cardPayValue: number;
   accordionOpen: boolean;
+  birthDate: string = '';
 }
 
 interface obterInformacoesPedido {
@@ -50,7 +51,7 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   @ViewChild('formInstallments', { read: NgForm }) formValid: any //permite visualizar o html e o formulario dentro dele com o id especificado.
 
-  
+
   qtdCard: number = 1
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -66,9 +67,9 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.orderInfoService.errors.error = false
     setTimeout(() => {
-      this.orderInfoService.progressNavBarInit = false  
+      this.orderInfoService.progressNavBarInit = false
     }, 1);
-    
+
     this.formCards.push(new formCardClass())
     this.asideInstallments.emit(1)
     this.getMaxInstallments()
@@ -76,17 +77,29 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
 
   //ngAfterViewInit só aparece quando renderizar HTML na tela. Essa é a diferença entre ele e o ngOnInit
   //só da pra usar o ViewChild com ele
-  ngAfterViewInit() {   
+  ngAfterViewInit() {
     setTimeout(() => {
       this.orderInfoService.disableButton = this.formValid
     }, 1);
-   
+
   }
 
- 
+  getBirth() {
+    if (this.formCards[0].birthDate.length == 8) {
+      let origString = this.formCards[0].birthDate
+      let stringToAdd = "/";
+      let indexPosition = 2;
 
+      let newString = origString.slice(0, indexPosition)
+        + stringToAdd
+        + origString.slice(2, 4)
+        + stringToAdd
+        + origString.slice(4, 8)
+      this.orderInfoService.cardData.birthDate = newString
+    }
+
+  }
   getMaxInstallments() {
-  
     const installments = this.orderInfoService.obterInformacoesPedido.qtd_max_parcelamento
     for (let index = 1; index <= installments; index++) {
       this.options.push(index + 'x')
