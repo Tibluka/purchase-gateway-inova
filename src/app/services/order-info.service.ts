@@ -224,8 +224,9 @@ export class OrderInfoService {
     }
     this.apiService.postApi<any>('efetuarpagamento?chave=' + this.idDoComprador, data).subscribe(finish => {
       console.log(finish)
-      this.dataHoraPagamento = finish.payment_date
-      this.router.navigate(['/requested-pay'])
+      window.location.assign(finish.payment_link)
+      this.progressBarInit = false
+      this.disableAfterFinish = false
     }, err => {
       this.disableAfterFinish = false
       this.progressBarInit = false
