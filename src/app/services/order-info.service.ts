@@ -242,14 +242,14 @@ export class OrderInfoService {
     this.apiService.postApi<any>('efetuarpagamento?chave=' + this.idDoComprador, data).subscribe(finish => {
       console.log(finish)
       this.dataHoraPagamento = finish.payment_date
+      this.progressBarInit = false
       this.router.navigate(['/requested-pay'])
     }, err => {
       this.disableAfterFinish = false
       this.progressBarInit = false
       this.errors.error = true
     })
-    console.log(data);
-    
+     
   }
 
   calculateInstallments(parcela, token, dadosCartao) {
