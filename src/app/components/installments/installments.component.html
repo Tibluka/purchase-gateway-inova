@@ -2,65 +2,74 @@
     <mat-card style="display: flex; flex-direction: column; justify-content: center;"
         *ngFor="let card of formCards; let i = index">
         <div style="min-height: 46px; display: flex;">
-            <img *ngIf="orderInfoService.cardBrandImage == 'mastercard'" src="../../../assets/images/mastercard.png" alt="Bandeira do cartão">
-            <img *ngIf="orderInfoService.cardBrandImage == 'visa'" src="../../../assets/images/visa.png" alt="Bandeira do cartão">
-            <img *ngIf="orderInfoService.cardBrandImage == 'elo'" style="height: 25px !important; width: 45px; margin-top: 17px;" src="../../../assets/images/elo.png" alt="Bandeira do cartão">
+            <img *ngIf="orderInfoService.cardBrandImage == 'mastercard'" src="../../../assets/images/mastercard.png"
+                alt="Bandeira do cartão">
+            <img *ngIf="orderInfoService.cardBrandImage == 'visa'" src="../../../assets/images/visa.png"
+                alt="Bandeira do cartão">
+            <img *ngIf="orderInfoService.cardBrandImage == 'elo'"
+                style="height: 25px !important; width: 45px; margin-top: 17px;" src="../../../assets/images/elo.png"
+                alt="Bandeira do cartão">
 
             <p style="padding: 0 0 0 5px !important; margin: 20px 0 -10px 0 !important;"></p>
         </div>
         <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
 
             <mat-label>Número do cartão</mat-label>
-            <input name="card-number" onpaste="return false" inputmode="numeric"inputmode="numeric" mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$"
-                matInput [(ngModel)]="orderInfoService.cardData.cardNumber" (keyup)="orderInfoService.getBrand()">
+            <input name="card-number" onpaste="return false" inputmode="numeric" inputmode="numeric"
+                mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$" matInput
+                [(ngModel)]="orderInfoService.cardData.cardNumber" (keyup)="orderInfoService.getBrand()">
         </mat-form-field>
 
         <mat-form-field class="item" appearance="fill">
             <mat-label>Nome no cartão</mat-label>
-            <input name="card-name" onpaste="return false" type="text" required pattern="[a-z-A-Z\s]* [a-z-A-Z\s]*" matInput
-                [(ngModel)]="orderInfoService.cardData.userFullName">
+            <input name="card-name" onpaste="return false" type="text" required pattern="[a-z-A-Z\s]* [a-z-A-Z\s]*"
+                matInput [(ngModel)]="orderInfoService.cardData.userFullName">
         </mat-form-field>
         <mat-form-field class="item" appearance="fill">
             <mat-label>CPF</mat-label>
-            <input name="card-CPF" onpaste="return false" inputmode="numeric" required pattern="[0-9]+$" mask="000.000.000-00" matInput
-                [(ngModel)]="orderInfoService.cardData.userCPF">
+            <input name="card-CPF" onpaste="return false" inputmode="numeric" required pattern="[0-9]+$"
+                mask="000.000.000-00" matInput [(ngModel)]="orderInfoService.cardData.userCPF">
         </mat-form-field>
         <div class="cvv" style="display: flex;">
-            <mat-form-field class="item"  appearance="fill" style="margin-right: 5px;">
+            <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
                 <mat-label>CVV</mat-label>
-                <input name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3" type="password" 
-                required pattern="[0-9]+$" matInput [(ngModel)]="orderInfoService.cardData.cvv">
+                <input name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3"
+                    type="password" required pattern="[0-9]+$" matInput [(ngModel)]="orderInfoService.cardData.cvv">
             </mat-form-field>
-        
+
             <mat-form-field class="item" appearance="fill">
                 <mat-label>Validade</mat-label>
-                <input id="finishPurchase" name="card-validity" onpaste="return false" type="text" inputmode="numeric" 
-                placeholder="MM/AAAA" required="required" maxlength="10" (keyup)="orderInfoService.validate()" mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
+                <input id="finishPurchase" name="card-validity" onpaste="return false" type="text" inputmode="numeric"
+                    placeholder="MM/AAAA" required="required" maxlength="10" (keyup)="orderInfoService.validate()"
+                    mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
             </mat-form-field>
-            
+
         </div>
         <!--   <mat-form-field *ngIf="moreThanOneCard" appearance="fill" style="width: 100%;">
             <mat-label>Valor a cobrar nesse cartão</mat-label>
             <input matInput [(ngModel)]="card.cardPayValue">
         </mat-form-field> -->
 
-        <div class="installment-options">
-            <mat-form-field class="item" style="margin-top: 5px;" appearance="fill">
+        <div class="installment-options" style="display: flex;">
+            <mat-form-field class="item" appearance="fill" style="margin-right: 5px;">
                 <mat-label>Data de nascimento</mat-label>
-                <input matInput type="text" mask="00/00/0000" name="birth-date" [(ngModel)]="card.birthDate" (keyup)="getBirth()">
+                <input matInput type="text" mask="00/00/0000" name="birth-date" [(ngModel)]="card.birthDate"
+                    (keyup)="getBirth()">
             </mat-form-field>
-            <mat-form-field class="item" style="margin-top: 5px;" appearance="fill">
+
+            <mat-form-field class="item" appearance="fill">
                 <mat-label>Parcelar em</mat-label>
                 <mat-select [disabled]="!formInstallments.valid || card?.birthDate?.length < 8 ||
                 orderInfoService.errors.invalid_card || 
-                !orderInfoService.dateIsValid" name="cardInstallments" (selectionChange)="setInstallments(card.cardInstallments)"
-                    [(ngModel)]="card.cardInstallments">
+                !orderInfoService.dateIsValid" name="cardInstallments"
+                    (selectionChange)="setInstallments(card.cardInstallments)" [(ngModel)]="card.cardInstallments">
                     <mat-option [value]="o" *ngFor="let o of options">{{o}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
     </mat-card>
-    <div *ngIf="orderInfoService.errors.invalid_card && !orderInfoService.errors.error" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
+    <div *ngIf="orderInfoService.errors.invalid_card && !orderInfoService.errors.error" class="alert alert-danger"
+        role="alert" style="margin: 16px 0 0 0;">
         Cartão inválido. Por favor, confira as informações digitadas
     </div>
     <div *ngIf="orderInfoService.errors.error" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">

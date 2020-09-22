@@ -12,7 +12,7 @@
             Solicitação de pagamento efetuada com sucesso!
         </h5>
         <p>Data da solicitação: {{data[0]?.data_pedido}}</p>
-        <p>Código da transação: {{data[0]?.payment}}</p>
+        <p>Código da transação: <i>{{data[0]?.payment_code}}</i></p>
         <p>Por favor aguarde a confirmação do pagamento</p>
         <div class="refresh" (click)="click()">
            
