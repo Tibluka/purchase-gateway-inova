@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
     } else {
     /*   alert('FUNCIONALIDADE EM DESENVOLVIMENTO...')
       this.orderInfoService.progressNavBarInit = false */
+      this.orderInfoService.isCreditCard = false
       this.orderInfoService.getSenderHash()
     }
   }

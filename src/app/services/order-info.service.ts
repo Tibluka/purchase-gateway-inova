@@ -76,7 +76,7 @@ export class OrderInfoService {
   SpinColor: ThemePalette = 'warn';
   SpinMode: ProgressSpinnerMode = 'indeterminate';
   SpinValue = 50;
-  isCreditCard = false
+  isCreditCard = true
 
   navColor: ThemePalette = 'primary';
   navMode: ProgressBarMode = 'indeterminate';
@@ -210,11 +210,12 @@ export class OrderInfoService {
       console.log(hash)
       debugger
       if(this.isCreditCard){
+        debugger
         this.executePayment(hash)
-      }else{
+      }else if (!this.isCreditCard){
+        debugger
         this.executePaymentForBankBill(hash)
       }
-      
     });
   }
 
@@ -256,7 +257,7 @@ export class OrderInfoService {
     const data = {
       token_cartao: token,
       forma_pagamento: "creditCard",
-      qtd_parcela: parcela,
+      qtd_parcela: Number(parcela),
       holder: {
         birth_date: this.cardData.birthDate,
         nome_impresso_cartao: dadosCartao.userFullName,
