@@ -14,7 +14,6 @@ import { FinishPageModule } from 'src/app/components/finish-page/finish-page.mod
 @NgModule({
   declarations: [
     FinishComponent
-    
   ],
 
   imports: [

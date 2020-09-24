@@ -41,11 +41,16 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
           localStorage.setItem('previousUrl', state.url)
           this.route.navigate(['/requested-pay'])
           return false
-        } else if (resp['payment_status']['code'] === 3) {// pago parcialmente
+        } else if (resp['payment_status']['code'] === 3) {// erro ou não encontrado
           this.route.navigate(['/error'])
           return false
         } else if (resp['payment_status']['code'] === 4) {//pagamento aprovado
           this.route.navigate(['/finish'])
+          return false
+        }
+        else if (resp['payment_status']['code'] === 7) {//pagamento negado ou cancelado
+          console.log(resp);
+          this.route.navigate(['/canceled'])
           return false
         }
         else{
