@@ -15,7 +15,7 @@
         <mat-form-field class="item" style="margin-top: 10px;" appearance="fill">
 
             <mat-label>Número do cartão</mat-label>
-            <input name="card-number" onpaste="return false" inputmode="numeric" inputmode="numeric"
+            <input name="card-number" onpaste="return true" inputmode="numeric"
                 mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$" matInput
                 [(ngModel)]="orderInfoService.cardData.cardNumber" (keyup)="orderInfoService.getBrand()">
         </mat-form-field>
@@ -74,5 +74,8 @@
     </div>
     <div *ngIf="orderInfoService.errors.error" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
         Houve um erro ao processar as informações. Tente novamente
+    </div>
+    <div *ngIf="orderInfoService.errors.minimunInstallmentValue" id="errInstValue" class="alert alert-danger" role="alert" style="margin: 16px 0 0 0;">
+        Parcelamento inválido. O valor da parcela precisa ser maior que R$5,00.
     </div>
 </form>

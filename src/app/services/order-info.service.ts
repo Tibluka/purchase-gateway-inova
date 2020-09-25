@@ -86,7 +86,7 @@ export class OrderInfoService {
   navBarColor = 'rgb(218, 218, 218)'
   buttonColor = 'rgb(218, 218, 218)'
 
-  
+
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 0;
@@ -97,7 +97,8 @@ export class OrderInfoService {
   cardBrandImage = ''
   errors = {
     invalid_card: false,
-    error: false
+    error: false,
+    minimunInstallmentValue: false,
   }
 
   paymentMethod: string = "Cartão de crédito";
@@ -150,7 +151,7 @@ export class OrderInfoService {
       const compareMonth = this.today.substring(0, 2)
       const compareYear = this.today.substring(2, 6)
       if ((parseInt(mes) < parseInt(compareMonth) &&
-        parseInt(ano) <= parseInt(compareYear)) || 
+        parseInt(ano) <= parseInt(compareYear)) ||
         parseInt(ano) < parseInt(compareYear) || parseInt(ano) > 2099) {
         this.dateIsValid = false
         this.errors.error = true
@@ -179,7 +180,6 @@ export class OrderInfoService {
         this.progressSpinnerInit = false
         this.cardData.token = response.card.token
         this.calculateInstallments(parcela, response.card.token, dadosCartao)
-
       },
       error: (response) => {
         // Callback para chamadas que falharam.
@@ -200,7 +200,7 @@ export class OrderInfoService {
 
   getSenderHash() {
     console.log(this.isCreditCard);
-    
+
     PagSeguroDirectPayment.onSenderHashReady((response) => {
       if (response.status == 'error') {
         console.log(response.message);
@@ -208,12 +208,11 @@ export class OrderInfoService {
       }
       const hash = response.senderHash
       console.log(hash)
-      debugger
-      if(this.isCreditCard){
-        debugger
+
+      if (this.isCreditCard) {
         this.executePayment(hash)
-      }else if (!this.isCreditCard){
-        debugger
+      } else if (!this.isCreditCard) {
+
         this.executePaymentForBankBill(hash)
       }
     });
@@ -245,19 +244,28 @@ export class OrderInfoService {
       this.dataHoraPagamento = finish.payment_date
       this.progressBarInit = false
       this.router.navigate(['/requested-pay'])
+      this.errors.minimunInstallmentValue = false
     }, err => {
-      this.disableAfterFinish = false
+      let errorCode = err.error.search('53039')
+      console.log(errorCode)
+      if (errorCode > 0){
+        this.errors.minimunInstallmentValue = true
+        document.getElementById("finishPurchase").focus();
+      }else{
+        this.errors.error = true
+      }
+        this.disableAfterFinish = false
       this.progressBarInit = false
-      this.errors.error = true
-    })
      
+    })
+
   }
 
   calculateInstallments(parcela, token, dadosCartao) {
     const data = {
       token_cartao: token,
       forma_pagamento: "creditCard",
-      qtd_parcela: Number(parcela),
+      qtd_parcela: parcela,
       holder: {
         birth_date: this.cardData.birthDate,
         nome_impresso_cartao: dadosCartao.userFullName,
@@ -269,7 +277,7 @@ export class OrderInfoService {
     }
 
     console.log(data);
-    
+
     this.apiService.postApi<any>('resumopagamento?chave=' + this.idDoComprador, data).subscribe(resumo => {
       console.log(resumo)
       setTimeout(() => {
@@ -277,6 +285,7 @@ export class OrderInfoService {
       }, 1);
       this.obterInformacoesPedido.valor_total_pedido = resumo.total_value
       this.errors.error = false
+      this.errors.minimunInstallmentValue = false
     }), err => {
       console.log(err)
     }

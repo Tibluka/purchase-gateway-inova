@@ -10,6 +10,8 @@ import { ApiService } from 'src/app/services/api.service';
 export class FinishComponent implements OnInit {
 
   previousUrl: string
+  chave = ''
+
   data = []
 
   constructor(public orderInfoService: OrderInfoService, public apiService: ApiService) {
@@ -22,12 +24,26 @@ export class FinishComponent implements OnInit {
   }
 
   getDate() {
-    const chave = this.previousUrl.replace('/home/', '')
-    this.apiService.getApi('obterinformacoespedido?chave=' + chave).subscribe(cartorio => {
+    if (this.findIndex()){
+      this.chave = this.previousUrl.replace('/home/', '')
+    }else{
+      this.chave = this.previousUrl.replace('/payment/', '')
+    }
+    this.apiService.getApi('obterinformacoespedido?chave=' + this.chave).subscribe(cartorio => {
       this.data.push(cartorio)
       this.orderInfoService.navBarColor = this.data[0].cor_cartorio
       console.log(this.data[0].cor_cartorio)
     })
+  }
+  
+  findIndex() {
+    const str = this.previousUrl
+    const index = str.indexOf('home')
+    if (index === 1) {
+      return true
+    }else{
+      return false
+    }
   }
 
 }
