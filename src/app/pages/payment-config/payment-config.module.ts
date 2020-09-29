@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskModule } from 'ngx-mask';
+import { CardComponent } from 'src/app/components/card/card.component';
 
 
 
@@ -18,7 +19,8 @@ import { NgxMaskModule } from 'ngx-mask';
 @NgModule({
   declarations: [
     PaymentConfigComponent,
-    InstallmentsComponent
+    InstallmentsComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
