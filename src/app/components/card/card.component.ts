@@ -8,19 +8,14 @@ import { OrderInfoService } from 'src/app/services/order-info.service';
 })
 export class CardComponent implements OnInit {
 
+  flipped = false
+
   constructor(public orderInfoService: OrderInfoService) {
   }
   ngOnInit(): void {
-    document.querySelector('.preload').classList.remove('preload');
-    document.querySelector('.creditcard').addEventListener('click', function () {
-      if (this.classList.contains('flipped')) {
-        this.classList.remove('flipped');
-      } else {
-        this.classList.add('flipped');
-      }
-    })
   }
 
-
-
+  flip(){
+    this.flipped = !this.flipped
+  }
 }
