@@ -16,14 +16,14 @@
             <mat-form-field class="item" style="margin-top: 10px;">
     
                 <mat-label>Número do cartão</mat-label>
-                <input name="card-number" onpaste="return true" inputmode="numeric"
+                <input (focus)="this.orderInfoService.flipped = false" name="card-number" onpaste="return true" inputmode="numeric"
                     mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$" matInput
                     [(ngModel)]="orderInfoService.cardData.cardNumber" (keyup)="orderInfoService.getBrand()">
             </mat-form-field>
     
             <mat-form-field class="item">
                 <mat-label>Nome no cartão</mat-label>
-                <input name="card-name" onpaste="return false" type="text" required pattern="[a-z-A-Z\s]* [a-z-A-Z\s]*"
+                <input (focus)="this.orderInfoService.flipped = false" name="card-name" onpaste="return false" type="text" required pattern="[a-z-A-Z\s]* [a-z-A-Z\s]*"
                     matInput [(ngModel)]="orderInfoService.cardData.userFullName">
             </mat-form-field>
             <mat-form-field class="item">
@@ -34,13 +34,13 @@
             <div class="installment-options" style="display: flex;">
                 <mat-form-field class="item" style="margin-right: 5px;">
                     <mat-label>CVV</mat-label>
-                    <input name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3"
+                    <input (focus)="this.orderInfoService.flipped = true" name="card-cvv" onpaste="return false" inputmode="numeric" mask="000" maxlength="3"
                         type="password" required pattern="[0-9]+$" matInput [(ngModel)]="orderInfoService.cardData.cvv">
                 </mat-form-field>
     
                 <mat-form-field class="item">
                     <mat-label>Validade</mat-label>
-                    <input id="finishPurchase" name="card-validity" onpaste="return false" type="text" inputmode="numeric"
+                    <input (focus)="this.orderInfoService.flipped = false" id="finishPurchase" name="card-validity" onpaste="return false" type="text" inputmode="numeric"
                         placeholder="MM/AAAA" required="required" maxlength="10" (keyup)="orderInfoService.validate()"
                         mask="M0/0000" matInput [(ngModel)]="orderInfoService.cardData.cardValidityPeriod">
                 </mat-form-field>

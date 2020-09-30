@@ -8,14 +8,12 @@ import { OrderInfoService } from 'src/app/services/order-info.service';
 })
 export class CardComponent implements OnInit {
 
-  flipped = false
-
   constructor(public orderInfoService: OrderInfoService) {
   }
   ngOnInit(): void {
   }
 
   flip(){
-    this.flipped = !this.flipped
+    this.orderInfoService.flipped = !this.orderInfoService.flipped
   }
 }

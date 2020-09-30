@@ -96,14 +96,12 @@ input {
 }
 
 #generatecard{
-    cursor: pointer;
     float: right;
     font-size: 12px;
     color: #fff;
     padding: 2px 4px;
     background-color: #909090;
     border-radius: 4px;
-    cursor: pointer;
     float:right;
 }
 
@@ -247,7 +245,6 @@ input {
     -webkit-transition: -webkit-transform 0.6s;
     transition: transform 0.6s;
     transition: transform 0.6s, -webkit-transform 0.6s;
-    cursor: pointer;
 }
 
 .creditcard .front,

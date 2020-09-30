@@ -64,6 +64,7 @@ export class OrderInfoService {
     zip_code: '02220-070'
   }
 
+  flipped = false
   today = Date()
   dateIsValid = true
   idDoComprador = ''
