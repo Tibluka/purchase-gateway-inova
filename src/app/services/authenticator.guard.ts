@@ -48,6 +48,10 @@ export class AuthenticatorGuard implements CanActivate, CanActivateChild {
           this.route.navigate(['/finish'])
           return false
         }
+        else if (resp['payment_status']['code'] === 6) {//pagamento estornado
+          this.route.navigate(['/refunded'])
+          return false
+        }
         else if (resp['payment_status']['code'] === 7) {//pagamento negado ou cancelado
           console.log(resp);
           this.route.navigate(['/canceled'])
