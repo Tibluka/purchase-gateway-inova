@@ -1,0 +1,52 @@
+<div class="content">
+    <mat-card class="billing">
+        <h5>Endereço de cobrança</h5>
+        <form #formInstallments="ngForm" [formGroup]="profileForm">
+            <div class="line1" style="display: flex;">
+                <mat-form-field>
+                    <mat-label>CEP</mat-label>
+                    <input mask="00000-000" formControlName="cep" onpaste="return false" (keyup)="buscaCep(profileForm.get('cep').value)" inputmode="numeric" type="text" required
+                        matInput>
+                </mat-form-field>
+                <mat-form-field class="ml">
+                    <mat-label>Logradouro</mat-label>
+                    <input formControlName="logradouro" onpaste="return false" type="text" required
+                        matInput>
+                </mat-form-field>
+                <mat-form-field class="ml">
+                    <mat-label>Número</mat-label>
+                    <input formControlName="numero" onpaste="return false" inputmode="numeric" type="text" required
+                        matInput>
+                </mat-form-field>
+            </div>
+            <div class="line2" style="display: flex;">
+                <mat-form-field>
+                    <mat-label>Complemento</mat-label>
+                    <input formControlName="complemento" onpaste="return false" type="text"
+                        matInput>
+                </mat-form-field>
+                <mat-form-field class="ml">
+                    <mat-label>Bairro</mat-label>
+                    <input formControlName="bairro" onpaste="return false" type="text" required
+                        matInput>
+                </mat-form-field>
+            </div>
+            <div class="line3" style="display: flex;">
+                <mat-form-field>
+                    <mat-label>Cidade</mat-label>
+                    <input formControlName="cidade" onpaste="return false" type="text" required
+                        matInput>
+                </mat-form-field>
+                <mat-form-field class="ml">
+                    <mat-label>UF</mat-label>
+                    <input formControlName="uf" onpaste="return false" type="text" required matInput>
+                </mat-form-field>
+                <mat-form-field class="ml">
+                    <mat-label>País</mat-label>
+                    <input formControlName="pais" onpaste="return false" type="text" required matInput>
+                </mat-form-field>
+            </div>
+
+        </form>
+    </mat-card>
+</div>
