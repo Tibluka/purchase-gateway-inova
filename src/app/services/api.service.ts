@@ -14,11 +14,16 @@ export class ApiService {
 
   }
 
+  getCepApi<T>(params): Observable<T> {
+    return this.http.get<T>(params)
+  }
+
+
   getApi<T>(params): Observable<T> {
     return this.http.get<T>(environment.url + params)
   }
-  
-  postApi<T>(params, body): Observable<T>{
+
+  postApi<T>(params, body): Observable<T> {
     return this.http.post<T>(environment.url + params, body)
   }
 

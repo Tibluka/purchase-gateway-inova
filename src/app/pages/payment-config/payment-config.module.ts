@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PaymentConfigRoutingModule } from './payment-config-routing.module';
 import { PaymentConfigComponent } from './payment-config.component';
 import { InstallmentsComponent } from 'src/app/components/installments/installments.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AsideModule } from 'src/app/components/aside/aside.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { NgxMaskModule } from 'ngx-mask';
 import { CardComponent } from 'src/app/components/card/card.component';
+import { AddressComponent } from 'src/app/components/address/address.component';
 
 
 
@@ -20,7 +21,8 @@ import { CardComponent } from 'src/app/components/card/card.component';
   declarations: [
     PaymentConfigComponent,
     InstallmentsComponent,
-    CardComponent
+    CardComponent,
+    AddressComponent
   ],
   imports: [
     CommonModule,
@@ -28,12 +30,12 @@ import { CardComponent } from 'src/app/components/card/card.component';
     FormsModule,
     AsideModule,
     MatExpansionModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatCardModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    ReactiveFormsModule
   ]
 })
 export class PaymentConfigModule { }

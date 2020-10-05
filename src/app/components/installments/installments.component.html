@@ -1,3 +1,4 @@
+<app-address></app-address>
 <div class="content">
     <form #formInstallments="ngForm" id="formInstallments">
         <mat-card style="display: flex; flex-direction: column; justify-content: center;"
@@ -16,7 +17,7 @@
             <mat-form-field class="item" style="margin-top: 10px;">
     
                 <mat-label>Número do cartão</mat-label>
-                <input (focus)="this.orderInfoService.flipped = false" name="card-number" onpaste="return true" inputmode="numeric"
+                <input (focus)="this.orderInfoService.flipped = false" name="card-number" onpaste="return false" inputmode="numeric"
                     mask="0000 0000 0000 0000" maxlength="20" type="text" required pattern="[0-9]+$" matInput
                     [(ngModel)]="orderInfoService.cardData.cardNumber" (keyup)="orderInfoService.getBrand()">
             </mat-form-field>
@@ -80,7 +81,7 @@
             Parcelamento inválido. O valor da parcela precisa ser maior que R$5,00.
         </div>
     </form>
-    <div class="teste">
+    <div class="app-card">
             <app-card></app-card>
     </div>
 </div>

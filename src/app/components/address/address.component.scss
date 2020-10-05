@@ -1,0 +1,26 @@
+.content {
+    .billing {
+        margin-bottom: 30px;
+        form {
+            .line1,
+            .line2,
+            .line3 {
+                mat-form-field {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+h5{
+    font-weight: 300;
+    margin-bottom: 15px;
+}
+
+.ml{
+    margin-left: 5px;
+}
+.mr{
+    margin-right: 5px;
+}

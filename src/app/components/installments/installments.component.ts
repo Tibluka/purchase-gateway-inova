@@ -47,7 +47,7 @@ interface obterInformacoesPedido {
 
 export class InstallmentsComponent implements OnInit, AfterViewInit {
 
-  /* @Input() count = 0 */
+ 
 
   @ViewChild('formInstallments', { read: NgForm }) formValid: any //permite visualizar o html e o formulario dentro dele com o id especificado.
 
