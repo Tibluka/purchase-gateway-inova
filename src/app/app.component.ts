@@ -8,11 +8,24 @@ interface obterInformacoesPedido {
   nome_cartorio: string;
   logo_url: string;
   cor_cartorio: string;
-  documento: {
-    tipo: string;
-    valor: string;
-  };
-  items:[{
+  comprador: {
+    documento: {
+      tipo: string;
+      valor: string;
+    },
+    endereco: {
+      bairro: string;
+      cep: string;
+      cidade: string;
+      uf: string;
+      complemento: string;
+      logradouro: string;
+      numero: string;
+      pais: string;
+    }
+  },
+
+  items: [{
     descricao: string;
     qtd: number;
     valor_unitario: number;

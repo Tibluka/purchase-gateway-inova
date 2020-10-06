@@ -1,7 +1,7 @@
 <div class="content">
     <mat-card class="billing">
         <h5>Endereço de cobrança</h5>
-        <form #formInstallments="ngForm" [formGroup]="profileForm">
+        <form id="formAddress" #formAddress="ngForm" [formGroup]="profileForm">
             <div class="line1" style="display: flex;">
                 <mat-form-field>
                     <mat-label>CEP</mat-label>
@@ -41,12 +41,15 @@
                     <mat-label>UF</mat-label>
                     <input formControlName="uf" onpaste="return false" type="text" required matInput>
                 </mat-form-field>
-                <mat-form-field class="ml">
+                <mat-form-field hidden class="ml">
                     <mat-label>País</mat-label>
                     <input formControlName="pais" onpaste="return false" type="text" required matInput>
                 </mat-form-field>
             </div>
 
+            <div class="checkbox" (click)="checkAddress()" *ngIf="formAddress.valid">
+                <mat-checkbox>Os dados acima estão corretamente preenchidos?</mat-checkbox>
+            </div>
         </form>
     </mat-card>
 </div>

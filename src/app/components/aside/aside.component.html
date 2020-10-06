@@ -2,7 +2,8 @@
     <div class="page-aside ">
         <div class="asblock1">
             <header>
-                <p style="margin-top: 25px !important; margin-bottom: 0; ">{{orderInfoService?.obterInformacoesPedido?.comprador?.nome}}</p>
+                <p style="margin-top: 25px !important; margin-bottom: 0; ">
+                    {{orderInfoService?.obterInformacoesPedido?.comprador?.nome}}</p>
                 <hr>
                 <div class="item-description"
                     *ngFor="let item of orderInfoService.obterInformacoesPedido.items; let i = index">
@@ -38,12 +39,12 @@
             </div> -->
 
             <div class="btn">
-                <button [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments || 
+                <button [disabled]="!orderInfoService?.disableButton?.form?.value?.cardInstallments ||
+                orderInfoService?.disableButton2 || 
                     orderInfoService.disableAfterFinish || 
                     !orderInfoService.dateIsValid ||
                     orderInfoService.errors.error || 
-                    orderInfoService.errors.invalid_card"
-                    (click)="finish()" id="finalButton">Finalizar</button>
+                    orderInfoService.errors.invalid_card" (click)="finish()" id="finalButton">Finalizar</button>
             </div>
             <div class="load-bar">
                 <mat-progress-bar *ngIf="orderInfoService.progressBarInit" class="example-margin"

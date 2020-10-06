@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, NgForm } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { OrderInfoService } from 'src/app/services/order-info.service';
 
 interface buscaCep {
   cep: string;
@@ -32,14 +33,35 @@ export class AddressComponent implements OnInit {
     pais: ['']
   })
 
-  constructor(private fb: FormBuilder, private apiService: ApiService) { }
-
-  @ViewChild('formInstallments', { read: NgForm }) formValid: any //permite visualizar o html e o formulario dentro dele com o id especificado.
+  constructor(private fb: FormBuilder, private apiService: ApiService, public orderInfoService: OrderInfoService) { }
 
   ngOnInit(): void {
+    const endereco = this.orderInfoService.obterInformacoesPedido.comprador.endereco
+    if (endereco) {
+      this.profileForm = this.fb.group({
+        cep: [endereco.cep],
+        logradouro: [endereco.logradouro],
+        numero: [endereco.numero],
+        complemento: [endereco.complemento],
+        bairro: [endereco.bairro],
+        cidade: [endereco.cidade],
+        uf: [endereco.uf],
+        pais: ['BRA']
+      })
+    } else {
+      this.profileForm = this.fb.group({
+        cep: [],
+        logradouro: [''],
+        numero: [''],
+        complemento: [''],
+        bairro: [''],
+        cidade: [''],
+        uf: [''],
+        pais: ['BRA']
+      })
+    }
   }
-
-  buscaCep(params){
+  buscaCep(params) {
     if (this.profileForm.get('cep').value.length === 8) {
       this.apiService.getCepApi(this.buscaCepUrl + params + '/json').subscribe((res: buscaCep) => {
         this.profileForm.get('logradouro').setValue(res.logradouro)
@@ -48,5 +70,10 @@ export class AddressComponent implements OnInit {
         this.profileForm.get('uf').setValue(res.uf)
       })
     }
+  }
+
+  checkAddress() {
+    this.orderInfoService.address = this.profileForm
+    this.orderInfoService.changeCheckboxValue()
   }
 }

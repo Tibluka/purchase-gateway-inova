@@ -1,5 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
+import { Component, OnInit, Output, EventEmitter, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { OrderInfoService } from 'src/app/services/order-info.service';
 import { NgForm } from '@angular/forms';
@@ -21,10 +20,22 @@ interface obterInformacoesPedido {
   nome_cartorio: string;
   logo_url: string;
   cor_cartorio: string;
-  documento: {
-    tipo: string;
-    valor: string;
-  };
+  comprador: {
+    documento: {
+      tipo: string;
+      valor: string;
+    },
+    endereco: {
+      bairro: string;
+      cep: string;
+      cidade: string;
+      uf: string;
+      complemento: string;
+      logradouro: string;
+      numero: string;
+      pais: string;
+    }
+  },
   items: [{
     descricao: string;
     qtd: number;
@@ -64,14 +75,11 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
   constructor(public orderInfoService: OrderInfoService) {
   }
 
-  ngOnInit(): void {
-    console.log(this.orderInfoService.isCreditCard);
-    
+  ngOnInit(): void {   
     this.orderInfoService.errors.error = false
     setTimeout(() => {
       this.orderInfoService.progressNavBarInit = false
     }, 1);
-
     this.formCards.push(new formCardClass())
     this.asideInstallments.emit(1)
     this.getMaxInstallments()
@@ -83,7 +91,6 @@ export class InstallmentsComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.orderInfoService.disableButton = this.formValid
     }, 1);
-
   }
 
   getBirth() {

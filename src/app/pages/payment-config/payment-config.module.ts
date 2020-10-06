@@ -13,8 +13,7 @@ import { MatCardModule } from '@angular/material/card';
 import { NgxMaskModule } from 'ngx-mask';
 import { CardComponent } from 'src/app/components/card/card.component';
 import { AddressComponent } from 'src/app/components/address/address.component';
-
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -35,7 +34,8 @@ import { AddressComponent } from 'src/app/components/address/address.component';
     MatSelectModule,
     MatCardModule,
     NgxMaskModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCheckboxModule
   ]
 })
 export class PaymentConfigModule { }

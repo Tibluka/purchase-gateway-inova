@@ -7,16 +7,61 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 declare let PagSeguroDirectPayment: any;
 
 
+interface obterInformacoesPedido {
+  pagseguro_session: string;
+  nome_cartorio: string;
+  logo_url: string;
+  cor_cartorio: string;
+  comprador: {
+    documento: {
+      tipo: string;
+      valor: string;
+    },
+    endereco: {
+      bairro: string;
+      cep: string;
+      cidade: string;
+      uf: string;
+      complemento: string;
+      logradouro: string;
+      numero: string;
+      pais: string;
+    }
+  },
+
+  items: [{
+    descricao: string;
+    qtd: number;
+    valor_unitario: number;
+  }];
+  qtd_max_parcelamento: number;
+  permite_multi_cartao: boolean;
+  valor_total_pedido: number;
+  url_callback: string;
+  chave: string;
+}
 
 class obterInformacoesPedido {
   pagseguro_session: string;
   nome_cartorio: string;
   logo_url: string;
   cor_cartorio: string;
-  documento: {
-    tipo: string;
-    valor: string;
-  };
+  comprador: {
+    documento: {
+      tipo: string;
+      valor: string;
+    },
+    endereco: {
+      bairro: string;
+      cep: string;
+      cidade: string;
+      uf: string;
+      complemento: string;
+      logradouro: string;
+      numero: string;
+      pais: string;
+    }
+  }
   items: [{
     descricao: string;
     qtd: number;
@@ -53,16 +98,7 @@ class cardData {
 })
 export class OrderInfoService {
 
-  address = {
-    street: 'Avenida Paulista',
-    number: '1116',
-    complement: '',
-    neighbourhood: 'Centro',
-    city: 'São Paulo',
-    state: 'SP',
-    country: 'Brasil',
-    zip_code: '02220-070'
-  }
+  address
 
   flipped = false
   today = Date()
@@ -71,6 +107,7 @@ export class OrderInfoService {
   obterInformacoesPedido: obterInformacoesPedido = new obterInformacoesPedido()
   cardData: cardData = new cardData()
   disableButton //recebe um verdadeiro ou falso para habilitar ou desabilitar o botão finalizar do componente aside
+  disableButton2 = true
   disableAfterFinish = false
   dataHoraPagamento = ''
   installments: number
@@ -122,6 +159,10 @@ export class OrderInfoService {
     }
 
     return this.obterInformacoesPedido
+  }
+
+  changeCheckboxValue() {
+    this.disableButton2 = !this.disableButton2
   }
 
   getBrand() {
@@ -201,7 +242,6 @@ export class OrderInfoService {
 
   getSenderHash() {
     console.log(this.isCreditCard);
-
     PagSeguroDirectPayment.onSenderHashReady((response) => {
       if (response.status == 'error') {
         console.log(response.message);
@@ -209,11 +249,9 @@ export class OrderInfoService {
       }
       const hash = response.senderHash
       console.log(hash)
-
       if (this.isCreditCard) {
         this.executePayment(hash)
       } else if (!this.isCreditCard) {
-
         this.executePaymentForBankBill(hash)
       }
     });
@@ -238,7 +276,8 @@ export class OrderInfoService {
   executePayment(hash) {
     const data = {
       token_cartao: this.cardData.token,
-      sender_hash: hash
+      sender_hash: hash,
+      endereco: this.address.value
     }
     this.apiService.postApi<any>('efetuarpagamento?chave=' + this.idDoComprador, data).subscribe(finish => {
       console.log(finish)
@@ -249,15 +288,14 @@ export class OrderInfoService {
     }, err => {
       let errorCode = err.error.search('53039')
       console.log(errorCode)
-      if (errorCode > 0){
+      if (errorCode > 0) {
         this.errors.minimunInstallmentValue = true
         document.getElementById("finishPurchase").focus();
-      }else{
+      } else {
         this.errors.error = true
       }
-        this.disableAfterFinish = false
+      this.disableAfterFinish = false
       this.progressBarInit = false
-     
     })
 
   }
