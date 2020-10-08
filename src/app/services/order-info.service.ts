@@ -217,6 +217,7 @@ export class OrderInfoService {
       ...dadosCartao,
       success: (response) => {
         // Retorna o cartão tokenizado.
+        console.log(response.card.token);
         this.disableAfterFinish = false
         this.SpinMode = 'indeterminate'
         this.progressSpinnerInit = false
